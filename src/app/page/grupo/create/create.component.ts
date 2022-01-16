@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+
+import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { Grupo } from 'src/app/_model/grupo';
 import { GrupoService } from 'src/app/_service/grupo.service';
 
@@ -16,7 +17,7 @@ export class CreateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private grupoService : GrupoService,
-    private snackBar : MatSnackBar,
+    private snackBar : NotifierService,
   ) { }
   
   form: FormGroup = new FormGroup({});
@@ -62,11 +63,7 @@ export class CreateComponent implements OnInit {
     this.grupoService.guardar(model).subscribe(data=>{
 
       this.router.navigate(['grupo']);
-      this.snackBar.open(data.message!,'Mensaje',{
-        duration:2000, 
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom',        
-      });
+      this.snackBar.showNotification(data.typeResponse!,'Mensaje',data.message!);
       
     });
   }

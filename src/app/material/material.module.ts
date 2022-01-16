@@ -16,12 +16,15 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatDialogModule} from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   exports:[
     MatTableModule,
@@ -39,7 +42,6 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatCardModule,
     MatSnackBarModule,
     MatButtonToggleModule,
-    MatDialogModule,
   ]
 })
 export class MaterialModule { }

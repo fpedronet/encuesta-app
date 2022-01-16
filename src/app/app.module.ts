@@ -14,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     CreateComponent,
-    ListaComponent
+    ListaComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+
+import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { Grupo } from 'src/app/_model/grupo';
 import { GrupoService } from 'src/app/_service/grupo.service';
 
@@ -16,8 +16,7 @@ export class ListaComponent implements OnInit {
 
   constructor(
     private gruposervice : GrupoService,
-    private router: Router,
-    private snackBar: MatSnackBar,
+    private snackBar : NotifierService,
     ) { }
 
   dataSource : MatTableDataSource<Grupo> = new MatTableDataSource();
@@ -48,12 +47,8 @@ export class ListaComponent implements OnInit {
       this.gruposervice.listar().subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
       });
-      
-      this.snackBar.open(data.message!,'Mensaje',{
-        duration:2000, 
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom',        
-      });
+
+       this.snackBar.showNotification(data.typeResponse!,'Mensaje',data.message!);
 
     });
   }
