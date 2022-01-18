@@ -22,12 +22,13 @@ export class CreateComponent implements OnInit {
   
   form: FormGroup = new FormGroup({});
   id: number = 0;
-  ver: boolean = false;
+  ver: boolean = true;
 
   ngOnInit(): void { 
     this.form = new FormGroup({
-      'nIdGrupo': new FormControl({ value: '###', disabled: true }),
-      'cDescripcion': new FormControl({ value: '', disabled: false })
+      'nIdGrupo': new FormControl({ value: '###' }),
+      'nCodigo': new FormControl({ value: '###', disabled: true }),
+      'cDescripcion': new FormControl({ value: '', disabled: false})
     });
 
     this.route.params.subscribe((data: Params)=>{
@@ -43,9 +44,11 @@ export class CreateComponent implements OnInit {
       this.grupoService.obtener(this.id).subscribe(data=>{
 
         this.form = new FormGroup({
-          'nIdGrupo': new FormControl({ value: data.nIdGrupo, disabled: true }),
-          'cDescripcion': new FormControl({ value: data.cDescripcion, disabled: this.ver })
+          'nIdGrupo': new FormControl({ value: data.nIdGrupo }),
+          'nCodigo': new FormControl({ value: data.nIdGrupo, disabled: true }),
+          'cDescripcion': new FormControl({ value: data.cDescripcion, disabled: this.ver})
         });
+
 
       });      
     }
@@ -54,13 +57,13 @@ export class CreateComponent implements OnInit {
   guardar(){
     let model = new Grupo();
 
-    model.nIdGrupo= this.form.value['nIdGrupo'];
+    model.nIdGrupo= this.form.value['nIdGrupo'].value;
     model.cDescripcion= this.form.value['cDescripcion'];
 
     this.grupoService.guardar(model).subscribe(data=>{
 
-      this.router.navigate(['grupo']);
-      this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
+        this.router.navigate(['grupo']);
+        this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
       
     });
   }

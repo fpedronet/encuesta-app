@@ -1,6 +1,5 @@
 export class Grupo {
-    nIdGrupo!: number;
-    cDescripcion!: string;
-    nEstado!: number;
-    nNombreEstado!: string;
+    nIdGrupo?: number;
+    nCodigo?: string;
+    cDescripcion?: string;
 }
