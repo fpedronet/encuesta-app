@@ -20,13 +20,14 @@ import {ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SpinnerModule } from '../page/component/spinner/spinner.module';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot()    
   ],
   exports:[
     MatTableModule,
@@ -46,6 +47,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatButtonToggleModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    SpinnerModule
   ]
 })
 export class MaterialModule { }

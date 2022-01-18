@@ -10,13 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmComponent } from './page/component/confirm/confirm.component';
+import { SpinnerComponent } from './page/component/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateComponent,
     ListaComponent,
-    ConfirmComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +25,7 @@ import { ConfirmComponent } from './page/component/confirm/confirm.component';
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,6 +5,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { Grupo } from 'src/app/_model/grupo';
 import { GrupoService } from 'src/app/_service/grupo.service';
+import { SpinnerService } from '../../component/spinner/spinner.service';
 
 @Component({
   selector: 'app-create',
@@ -18,6 +19,7 @@ export class CreateComponent implements OnInit {
     private router: Router,
     private grupoService : GrupoService,
     private notifierService : NotifierService,
+    private spinner : SpinnerService 
   ) { }
   
   form: FormGroup = new FormGroup({});
@@ -41,6 +43,7 @@ export class CreateComponent implements OnInit {
   obtener(){
     if(this.id!=0 && this.id!=undefined){
 
+      this.spinner.showLoading();
       this.grupoService.obtener(this.id).subscribe(data=>{
 
         this.form = new FormGroup({
@@ -48,7 +51,7 @@ export class CreateComponent implements OnInit {
           'nCodigo': new FormControl({ value: data.nIdGrupo, disabled: true }),
           'cDescripcion': new FormControl({ value: data.cDescripcion, disabled: this.ver})
         });
-
+        this.spinner.hideLoading();
 
       });      
     }
@@ -60,11 +63,12 @@ export class CreateComponent implements OnInit {
     model.nIdGrupo= this.form.value['nIdGrupo'].value;
     model.cDescripcion= this.form.value['cDescripcion'];
 
+    this.spinner.showLoading();
     this.grupoService.guardar(model).subscribe(data=>{
 
         this.router.navigate(['grupo']);
         this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
-      
+        this.spinner.hideLoading();
     });
   }
 }

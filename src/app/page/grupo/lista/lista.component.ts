@@ -9,6 +9,7 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import { ConfimService } from './../../component/confirm/confim.service';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { GrupoService } from 'src/app/_service/grupo.service';
+import { SpinnerService } from '../../component/spinner/spinner.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class ListaComponent implements OnInit {
     private gruposervice : GrupoService,
     private notifierService : NotifierService,
     private confimService : ConfimService,
+    private spinner : SpinnerService,
     private http: HttpClient
     ) { }
 
@@ -79,15 +81,14 @@ export class ListaComponent implements OnInit {
 
   eliminar(id:number){
 
-    this.confimService.openConfirmDialog("Estás segura de eliminar este registro?")
-    .afterClosed().subscribe(res =>{
-      console.log(res);
+    this.confimService.openConfirmDialog("Estás segura de eliminar este registro?").afterClosed().subscribe(res =>{
       if(res){
+        this.spinner.showLoading();
         this.gruposervice.eliminar(id).subscribe(data=>{
 
             this.ngAfterViewInit("");
             this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
-
+            this.spinner.hideLoading();
         });
       }
     });
