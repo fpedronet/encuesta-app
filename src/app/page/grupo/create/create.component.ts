@@ -17,22 +17,22 @@ export class CreateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private grupoService : GrupoService,
-    private snackBar : NotifierService,
+    private notifierService : NotifierService,
   ) { }
   
   form: FormGroup = new FormGroup({});
   id: number = 0;
+  ver: boolean = false;
 
   ngOnInit(): void { 
     this.form = new FormGroup({
-      'nIdGrupo': new FormControl(0),
-      'cDescripcion': new FormControl(''),
-      'nEstado': new FormControl(0),
-      'nNombreEstado': new FormControl(0)
+      'nIdGrupo': new FormControl({ value: '###', disabled: true }),
+      'cDescripcion': new FormControl({ value: '', disabled: false })
     });
 
     this.route.params.subscribe((data: Params)=>{
-      this.id=data["id"]
+      this.id = data["id"]
+      this.ver = (data["ver"]=='true')? true : false
       this.obtener();
     });
   }
@@ -43,10 +43,8 @@ export class CreateComponent implements OnInit {
       this.grupoService.obtener(this.id).subscribe(data=>{
 
         this.form = new FormGroup({
-          'nIdGrupo': new FormControl(data.nIdGrupo),
-          'cDescripcion': new FormControl(data.cDescripcion),
-          'nEstado': new FormControl(data.nEstado),
-          'nNombreEstado': new FormControl(data.nNombreEstado)
+          'nIdGrupo': new FormControl({ value: data.nIdGrupo, disabled: true }),
+          'cDescripcion': new FormControl({ value: data.cDescripcion, disabled: this.ver })
         });
 
       });      
@@ -58,12 +56,11 @@ export class CreateComponent implements OnInit {
 
     model.nIdGrupo= this.form.value['nIdGrupo'];
     model.cDescripcion= this.form.value['cDescripcion'];
-    model.nEstado= this.form.value['nEstado'];
 
     this.grupoService.guardar(model).subscribe(data=>{
 
       this.router.navigate(['grupo']);
-      this.snackBar.showNotification(data.typeResponse!,'Mensaje',data.message!);
+      this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
       
     });
   }

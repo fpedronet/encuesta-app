@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Grupo } from '../_model/grupo';
 import { environment } from 'src/environments/environment';
 import { Response } from '../_model/response';
+import { SortDirection } from '@angular/material/sort';
+import { dataCollection } from '../_model/dataCollection';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +15,13 @@ export class GrupoService {
 
   constructor(private http: HttpClient) {} 
   
-  listar(){
-    let urls = `${this.url}/GetAllGrupo?data=&page=1&page=10`;
-    return this.http.get<Grupo[]>(urls);
+  listar(data: string, page: number,pages: number, column: string, order: SortDirection ) {
+    column = (column==undefined)?'':column;
+
+    let href = `${this.url}/GetAllGrupo`;
+    let urls = `${href}?data=${data}&page=${page+1}&pages=${pages}&column=${column}&order=${order}`;
+
+    return this.http.get<dataCollection>(urls);
   }
 
   obtener(id: number){

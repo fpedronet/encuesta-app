@@ -1,11 +1,15 @@
+import { Grupo } from './../../../_model/grupo';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { HttpClient } from '@angular/common/http';
+import {merge, of as observableOf} from 'rxjs';
+import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 
+import { ConfimService } from './../../component/confirm/confim.service';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
-import { Grupo } from 'src/app/_model/grupo';
 import { GrupoService } from 'src/app/_service/grupo.service';
+
 
 @Component({
   selector: 'app-lista',
@@ -16,40 +20,76 @@ export class ListaComponent implements OnInit {
 
   constructor(
     private gruposervice : GrupoService,
-    private snackBar : NotifierService,
+    private notifierService : NotifierService,
+    private confimService : ConfimService,
+    private http: HttpClient
     ) { }
 
-  dataSource : MatTableDataSource<Grupo> = new MatTableDataSource();
-  displayedColumns: string[] = ['nIdGrupo', 'cDescripcion', 'nEstado', 'nAccion'];
+
+  dataSource: Grupo[] = [];
+  displayedColumns: string[] = ['nIdGrupo', 'cDescripcion', 'nAccion'];
+  loading = true;
+  existRegistro = false;
+  countRegistro = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
   ngOnInit(): void {
-    this.gruposervice.listar().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-    });
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  ngAfterViewInit(data: string = '') {
+
+    this.gruposervice = new GrupoService(this.http);
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.loading = true;
+          return this.gruposervice!.listar(
+            data,
+            this.paginator.pageIndex,
+            this.paginator.pageSize,
+            this.sort.active,
+            this.sort.direction,
+          ).pipe(catchError(() => observableOf(null)));
+        }),
+        map(res => {
+
+           this.loading = false;
+           this.existRegistro = res === null;
+
+          if (res === null) {
+            return [];
+          }
+
+          this.countRegistro = res.pagination.total;
+          return res.items;
+        }),
+      ).subscribe(data => (this.dataSource = data));
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    let data = (event.target as HTMLInputElement).value;
+    this.ngAfterViewInit(data);
   }
 
   eliminar(id:number){
-    this.gruposervice.eliminar(id).subscribe(data=>{
 
-      this.gruposervice.listar().subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
-      });
+    this.confimService.openConfirmDialog("Estás segura de eliminar este registro?")
+    .afterClosed().subscribe(res =>{
+      console.log(res);
+      if(res){
+        this.gruposervice.eliminar(id).subscribe(data=>{
 
-       this.snackBar.showNotification(data.typeResponse!,'Mensaje',data.message!);
+            this.ngAfterViewInit("");
+            this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
 
+        });
+      }
     });
   }
 }

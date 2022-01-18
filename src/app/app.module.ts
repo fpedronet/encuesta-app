@@ -9,12 +9,14 @@ import { ListaComponent } from './page/grupo/lista/lista.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmComponent } from './page/component/confirm/confirm.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateComponent,
     ListaComponent,
+    ConfirmComponent,
   ],
   imports: [
     BrowserModule,

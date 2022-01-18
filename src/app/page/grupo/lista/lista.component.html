@@ -21,6 +21,13 @@
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
       
+      <div class="example-loading-shade" *ngIf="loading || existRegistro">
+        <mat-spinner *ngIf="loading"></mat-spinner>
+        <div class="example-rate-limit-reached" *ngIf="existRegistro">
+          No se encontraron registros.
+        </div>
+      </div>
+
       <div class="mat-elevation-z0">
         <table mat-table [dataSource]="dataSource" matSort>
       
@@ -33,22 +40,17 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
             <td mat-cell *matCellDef="let element"> {{element.cDescripcion}} </td>
           </ng-container>
-        
-          <ng-container matColumnDef="nEstado">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
-            <td mat-cell *matCellDef="let element"> {{element.nEstado}} </td>
-          </ng-container>
-      
+              
           <ng-container matColumnDef="nAccion">
               <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let element" style="text-align: right;">
-                  <a class="pointer" style="color: #1878b0; padding: 5px;" matTooltip="Ver" [routerLink]="['ver', element.nIdGrupo]">
-                    <mat-icon>search</mat-icon>
+                  <a class="pointer ver" matTooltip="Ver" [routerLink]="['ver', element.nIdGrupo, true]">
+                    <mat-icon>visibility</mat-icon>
                  </a>
-                 <a class="pointer" style="color: #1f516f; padding: 5px;" matTooltip="Editar" [routerLink]="['ver', element.nIdGrupo]">
+                 <a class="pointer edit" matTooltip="Editar" [routerLink]="['edit', element.nIdGrupo]">
                    <mat-icon>edit</mat-icon>
                 </a>
-                <a class="pointer" style="color: #e15639; padding: 5px;" matTooltip="Eliminar" (click)="eliminar(element.nIdGrupo)">
+                <a class="pointer delete" matTooltip="Eliminar" (click)="eliminar(element.nIdGrupo)">
                  <mat-icon>delete</mat-icon>
                </a>
               </td>
@@ -56,11 +58,18 @@
           
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <!-- <tr mat-footer-row *matFooterRowDef="['loading']"></tr> -->
+         
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        <mat-paginator 
+          [length]="countRegistro" 
+          [pageSizeOptions]="[5, 10, 20]" 
+          showFirstLastButtons 
+          aria-label="Select page of users">
+        </mat-paginator>
       </div>
-    </form>
-    
+
+    </form>    
   </mat-card>
 </div>
 

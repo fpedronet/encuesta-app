@@ -11,7 +11,7 @@ const routes: Routes = [
   {path:'grupo', component: ListaComponent},
   {path:'grupo/create', component: CreateComponent},
   {path:'grupo/edit/:id', component: CreateComponent},
-  {path:'grupo/ver/:id', component: CreateComponent},
+  {path:'grupo/ver/:id/:ver', component: CreateComponent},
 ];
 
 @NgModule({

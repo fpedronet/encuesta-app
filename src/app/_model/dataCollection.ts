@@ -1,3 +1,5 @@
+import { pagination } from './pagination';
 export class dataCollection{
-    item?:[]
+    items!: [];
+    pagination!: pagination
 }
