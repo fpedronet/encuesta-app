@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -15,11 +16,12 @@ import { SpinnerService } from '../../component/spinner/spinner.service';
 export class CreateComponent implements OnInit {
 
   constructor(
+    private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private grupoService : GrupoService,
     private notifierService : NotifierService,
-    private spinner : SpinnerService 
+    private spinner : SpinnerService,
+    private grupoService : GrupoService,
   ) { }
   
   form: FormGroup = new FormGroup({});
@@ -66,7 +68,7 @@ export class CreateComponent implements OnInit {
     this.spinner.showLoading();
     this.grupoService.guardar(model).subscribe(data=>{
 
-        this.router.navigate(['grupo']);
+        this.router.navigate(['/page/grupo']);
         this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
         this.spinner.hideLoading();
     });

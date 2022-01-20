@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Grupo } from '../_model/grupo';
 import { environment } from 'src/environments/environment';
 import { Response } from '../_model/response';
@@ -20,7 +20,11 @@ export class GrupoService {
 
     let href = `${this.url}/GetAllGrupo`;
     let urls = `${href}?data=${data}&page=${page+1}&pages=${pages}&column=${column}&order=${order}`;
-
+debugger;
+  // let token = localStorage.getItem(environment.TOKEN_NAME);
+  //   return this.http.get<dataCollection>(urls,{
+  //     headers: new HttpHeaders().set('Authorization', `bearer ${token}`).set('Content-Type', 'application/json')
+  //   });
     return this.http.get<dataCollection>(urls);
   }
 

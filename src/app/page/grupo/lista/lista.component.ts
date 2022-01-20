@@ -10,6 +10,7 @@ import { ConfimService } from './../../component/confirm/confim.service';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { GrupoService } from 'src/app/_service/grupo.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -20,11 +21,14 @@ import { SpinnerService } from '../../component/spinner/spinner.service';
 export class ListaComponent implements OnInit {
 
   constructor(
-    private gruposervice : GrupoService,
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router,
     private notifierService : NotifierService,
     private confimService : ConfimService,
     private spinner : SpinnerService,
-    private http: HttpClient
+    private grupoService : GrupoService,
+
     ) { }
 
 
@@ -42,7 +46,7 @@ export class ListaComponent implements OnInit {
 
   ngAfterViewInit(data: string = '') {
 
-    this.gruposervice = new GrupoService(this.http);
+    this.grupoService = new GrupoService(this.http);
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
     merge(this.sort.sortChange, this.paginator.page)
@@ -50,7 +54,7 @@ export class ListaComponent implements OnInit {
         startWith({}),
         switchMap(() => {
           this.loading = true;
-          return this.gruposervice!.listar(
+          return this.grupoService!.listar(
             data,
             this.paginator.pageIndex,
             this.paginator.pageSize,
@@ -84,7 +88,7 @@ export class ListaComponent implements OnInit {
     this.confimService.openConfirmDialog("Estás segura de eliminar este registro?").afterClosed().subscribe(res =>{
       if(res){
         this.spinner.showLoading();
-        this.gruposervice.eliminar(id).subscribe(data=>{
+        this.grupoService.eliminar(id).subscribe(data=>{
 
             this.ngAfterViewInit("");
             this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);

@@ -1,0 +1,79 @@
+<app-spinner></app-spinner>
+
+<div class="example-container">
+    <mat-toolbar color="primary" class="example-toolbar" >
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+            <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+        </button>
+
+        <h1 class="example-app-name">SISTEMAS ENCUESTA</h1>
+
+        <!-- <img class="example-app-name" src="assets/descarga.png" width="128" style="margin-left: 20px"> -->
+
+        <span class="example-spacer"></span>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/perfil">                
+                <mat-icon>account_box</mat-icon>
+                <span>Mi Perfil</span>
+            </button>
+            <button mat-menu-item (click)="closeLogin()" >
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Cerrar Sesión</span>
+            </button>
+        </mat-menu>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container">
+        <mat-sidenav #sidenav style="width: 200px" mode="over">
+            <img src="assets/logo.jpg" width="128" style="margin-left: 20px">
+            
+            
+            <button mat-menu-item (click)="sidenav.toggle()" routerLink="/page/buscar" style="cursor: pointer">
+                <mat-icon>search</mat-icon>
+                <span>Buscar</span>
+            </button>
+            <mat-divider></mat-divider>
+
+
+            <button mat-menu-item (click)="sidenav.toggle()" routerLink="/page/grupo" style="cursor: pointer">
+                <mat-icon>star_rate</mat-icon>
+                <span>Grupo</span>
+            </button>
+            <button mat-menu-item (click)="sidenav.toggle()" routerLink="/page/pregunta" style="cursor: pointer">
+                <mat-icon>healing</mat-icon>
+                <span>Pregunta</span>
+            </button>
+            <button mat-menu-item (click)="sidenav.toggle()" routerLink="/page/encuesta" style="cursor: pointer">
+                <mat-icon>accessibility</mat-icon>
+                <span>Encuesta</span>
+            </button>
+            <button mat-menu-item (click)="sidenav.toggle()" routerLink="/page/sistema" style="cursor: pointer">
+                <mat-icon>insert_drive_file</mat-icon>
+                <span>Sistema</span>
+            </button>
+            <!-- <mat-divider></mat-divider> -->
+            <button mat-menu-item (click)="sidenav.toggle()" routerLink="/page/cliente" style="cursor: pointer">
+                <mat-icon>insert_drive_file</mat-icon>
+                <span>Cliente</span>
+            </button>
+            <button mat-menu-item (click)="sidenav.toggle()" routerLink="/page/clientesistema" style="cursor: pointer">
+                <mat-icon>insert_drive_file</mat-icon>
+                <span>Cliente Sistema</span>
+            </button>           
+           
+           
+        </mat-sidenav>
+
+        <mat-sidenav-content class="matsidenav">
+           <router-outlet></router-outlet>
+           <!-- <app-lista></app-lista> -->
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+</div>

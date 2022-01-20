@@ -16,18 +16,19 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {ToastrModule } from 'ngx-toastr';
-import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { SpinnerModule } from '../page/component/spinner/spinner.module';
+import {SpinnerModule } from '../page/component/spinner/spinner.module';
+import {MatSelectModule} from '@angular/material/select';
+import {FormsModule} from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import {CustomDateAdapter } from './custom-adapter';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot()    
   ],
   exports:[
     MatTableModule,
@@ -47,7 +48,15 @@ import { SpinnerModule } from '../page/component/spinner/spinner.module';
     MatButtonToggleModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    SpinnerModule
+    SpinnerModule,
+    MatSelectModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  ],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    { provide: DateAdapter, useClass: CustomDateAdapter }
   ]
 })
 export class MaterialModule { }
