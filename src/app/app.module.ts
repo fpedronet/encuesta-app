@@ -1,3 +1,4 @@
+import { InterceptorService } from './_interceptors/interceptor.service';
 import { environment } from 'src/environments/environment';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
@@ -9,7 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -21,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 import { SpinnerModule } from './page/component/spinner/spinner.module';
 import { JwtModule } from "@auth0/angular-jwt";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export function tokenGetter() {
   return localStorage.getItem(environment.TOKEN_NAME);
@@ -48,6 +50,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     MatSelectModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     SpinnerModule,
     HttpClientModule,
     JwtModule.forRoot({
@@ -58,7 +61,13 @@ export function tokenGetter() {
       },
     }),
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -30,7 +30,7 @@ export class CreateComponent implements OnInit {
 
   ngOnInit(): void { 
     this.form = new FormGroup({
-      'nIdGrupo': new FormControl({ value: '###' }),
+      'nIdGrupo': new FormControl({ value: '0' }),
       'nCodigo': new FormControl({ value: '###', disabled: true }),
       'cDescripcion': new FormControl({ value: '', disabled: false})
     });
@@ -44,7 +44,6 @@ export class CreateComponent implements OnInit {
 
   obtener(){
     if(this.id!=0 && this.id!=undefined){
-
       this.spinner.showLoading();
       this.grupoService.obtener(this.id).subscribe(data=>{
 

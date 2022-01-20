@@ -2,7 +2,7 @@ import { environment } from 'src/environments/environment';
 import { Usuario } from './../../../_model/usuario';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/_model/cliente';
 
@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private notifierService : NotifierService,
     private spinner : SpinnerService,
-    private usuarioService : UsuarioService,
-
+    private usuarioService : UsuarioService,  
   ) { }
+
 
   form: FormGroup = new FormGroup({});
   cliente: Cliente[] = [];
@@ -38,10 +38,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      'nIdCliente': new FormControl(''),
+      'nIdCliente': new FormControl(),
       'usuario': new FormControl(''),
       'clave': new FormControl('')
     });
+
+
     this.listarCliente();
   }
 
@@ -54,24 +56,32 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+
     let model = new Usuario();
 
     model.nIdCliente= this.form.value['nIdCliente'];
     model.usuario = this.form.value['usuario'];
     model.cClave= this.form.value['clave'];
 
-    this.spinner.showLoading();
-    this.usuarioService.login(model).subscribe(data=>{
+    if(model.nIdCliente==null || model.cClave==""){
 
-      debugger;
-      if(data.typeResponse==environment.EXITO){
-        localStorage.setItem(environment.TOKEN_NAME, data.access_token!);
-
-        this.router.navigate(['/page/inicio']);
-      }
-            
-      this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
+      this.notifierService.showNotification(2,'Mensaje','Ingresa el cliente y la contraseña');
       this.spinner.hideLoading();
-    });
+
+    }else{
+
+      this.spinner.showLoading();
+      this.usuarioService.login(model).subscribe(data=>{
+  
+        if(data.typeResponse==environment.EXITO){
+          localStorage.setItem(environment.TOKEN_NAME, data.access_token!);
+  
+          this.router.navigate(['/page/inicio']);
+        }
+              
+        this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
+        this.spinner.hideLoading();
+      }); 
+    }
   }
 }

@@ -2,16 +2,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './page/component/layout/layout.component';
 import { LoginComponent } from './page/usuario/login/login.component';
+import { ValidateService } from './_service/validate.service';
 
 const routes: Routes = [
   {
     path:'',
     pathMatch:'full',
-    redirectTo:'login'
+    redirectTo:'login',
   },  
   {
     path:'',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path:'page',
