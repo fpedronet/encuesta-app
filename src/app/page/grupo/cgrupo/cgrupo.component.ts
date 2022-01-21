@@ -8,12 +8,13 @@ import { SpinnerService } from '../../component/spinner/spinner.service';
 import { Grupo } from 'src/app/_model/grupo';
 import { GrupoService } from 'src/app/_service/grupo.service';
 
+
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-cgrupo',
+  templateUrl: './cgrupo.component.html',
+  styleUrls: ['./cgrupo.component.css']
 })
-export class CreateComponent implements OnInit {
+export class CgrupoComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
@@ -23,7 +24,7 @@ export class CreateComponent implements OnInit {
     private spinner : SpinnerService,
     private grupoService : GrupoService,
   ) { }
-  
+
   form: FormGroup = new FormGroup({});
   id: number = 0;
   ver: boolean = true;
