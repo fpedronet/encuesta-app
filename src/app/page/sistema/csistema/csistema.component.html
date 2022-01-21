@@ -1,0 +1,45 @@
+<mat-toolbar color="primary" class="example-toolbar submenu">
+    <span class="example-spacer"></span>
+    <div class="example-button-row">
+        <button mat-raised-button color="warn" routerLink="/page/sistema">
+            <mat-icon>undo</mat-icon>
+            <span>Regresar</span>
+        </button>
+        <span *ngIf="!ver">
+            <button mat-raised-button color="primary" type="submit" [disabled]="frmGrupo.invalid" form="ngForm">
+                <mat-icon>save as</mat-icon>
+                <span>Guardar</span>
+            </button> 
+        </span>       
+    </div>
+</mat-toolbar>
+
+<div class="container">
+    <mat-card class="cardborde">
+        <mat-toolbar class="cardtitle">
+            <mat-icon>home</mat-icon>
+            CREAR SISTEMA
+          </mat-toolbar>
+        <form id="ngForm" [formGroup]="form" #frmGrupo="ngForm" (ngSubmit)="guardar()">
+
+            <div [hidden]="true">
+                <mat-form-field appearance="outline">
+                     <input matInput placeholder="Id" formControlName="nIdSistemas">
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Código</mat-label>
+                <input matInput placeholder="Codigo" formControlName="nCodigo">
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <input matInput placeholder="Descripción" minlength="1" maxlength="50" required formControlName="cSistemas" autocomplete="off">
+            </mat-form-field>            
+        </form>
+    </mat-card>    
+</div>
+
+
+

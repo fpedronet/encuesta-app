@@ -5,43 +5,36 @@ import { Response } from '../_model/response';
 import { SortDirection } from '@angular/material/sort';
 import { dataCollection } from '../_model/dataCollection';
 
-import { Grupo } from '../_model/grupo';
+import { Sistema } from '../_model/sistema';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GrupoService {
+export class SistemaService {
 
-  constructor(private http: HttpClient) {} 
-  
-  private url: string = `${environment.UrlApi}/grupo`;
-  
+  constructor(private http: HttpClient) { }
+
+  private url: string = `${environment.UrlApi}/sistema`;
+
   listar(data: string, page: number,pages: number, column: string, order: SortDirection ) {
     column = (column==undefined)?'':column;
 
-    let href = `${this.url}/GetAllGrupo`;
+    let href = `${this.url}/GetAllSistemas`;
     let urls = `${href}?data=${data}&page=${page+1}&pages=${pages}&column=${column}&order=${order}`;
 
     return this.http.get<dataCollection>(urls);
   }
 
   obtener(id: number){
-    let urls = `${this.url}/GetFirstGrupo?id=${id}`;
-    return this.http.get<Grupo>(urls);
+    let urls = `${this.url}/GetFirstSistemas?id=${id}`;
+    return this.http.get<Sistema>(urls);
   }
 
-  guardar(grupo: Grupo){
-    let urls = `${this.url}/PostSaveGrupo`;
+  guardar(grupo: Sistema){
+    debugger;
+    let urls = `${this.url}/PostSaveSistemas`;
     return this.http.post<Response>(urls, grupo);
   }
 
-  cambioestado(grupo: Grupo){
-    let urls = `${this.url}/PostChangeStatusGrupo`;
-    return this.http.post<Response>(urls, grupo);
-  }
 
-  eliminar(id: number){
-    let urls = `${this.url}/DeleteGrupo?id=${id}`;
-    return this.http.delete<Response>(urls);
-  }
 }

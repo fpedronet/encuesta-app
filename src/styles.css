@@ -13,8 +13,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .container{
-  margin-right: 3em;
-  margin-left: 3em;
+  margin-right: 2em;
+  margin-left: 2em;
   margin-top: 74px;
 }
 .mat-form-field {
@@ -41,6 +41,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-toolbar.cardtitle{
   background-color: #5066de !important; 
   color: white;
+  height:47px;
 }
 
 .example-loading-shade {

@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
   mensaje?: string;
   error?: string;
   opcionSeleccionado?: number  = 0;
+  hidep?: boolean = true;
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -83,6 +84,10 @@ export class LoginComponent implements OnInit {
         this.spinner.hideLoading();
       }); 
     }
+  }
+
+  hide(){
+    hidep:false;
   }
 
 }

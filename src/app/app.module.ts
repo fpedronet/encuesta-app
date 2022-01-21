@@ -23,6 +23,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { SpinnerModule } from './page/component/spinner/spinner.module';
 import { JwtModule } from "@auth0/angular-jwt";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
 
 export function tokenGetter() {
   return localStorage.getItem(environment.TOKEN_NAME);
@@ -53,6 +54,7 @@ export function tokenGetter() {
     MatProgressSpinnerModule,
     SpinnerModule,
     HttpClientModule,
+    MatInputModule,
     // JwtModule.forRoot({
     //   config: {
     //     tokenGetter: tokenGetter,

@@ -1,9 +1,6 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { BrowserModule } from '@angular/platform-browser';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { AppRoutingModule } from '../app-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ConfirmComponent } from './component/confirm/confirm.component';
 import { CreateComponent } from './grupo/create/create.component';
@@ -14,6 +11,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { PageRoutingModule } from './page-routing.module';
 import { InterceptorService } from '../_interceptors/interceptor.service';
 import { Not404Component } from './not404/not404.component';
+import { LsistemaComponent } from './sistema/lsistema/lsistema.component';
+import { CsistemaComponent } from './sistema/csistema/csistema.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,9 @@ import { Not404Component } from './not404/not404.component';
     ConfirmComponent,
     LayoutComponent,
     InicioComponent,
-    Not404Component
+    Not404Component,
+    LsistemaComponent,
+    CsistemaComponent,
   ],
   imports: [
     MaterialModule,
