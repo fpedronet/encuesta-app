@@ -53,13 +53,13 @@ export function tokenGetter() {
     MatProgressSpinnerModule,
     SpinnerModule,
     HttpClientModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: [environment.UrlApi.substring(7)],
-        disallowedRoutes: [`http://${environment.UrlApi.substring(7)}/login/login`],
-      },
-    }),
+    // JwtModule.forRoot({
+    //   config: {
+    //     tokenGetter: tokenGetter,
+    //     allowedDomains: [environment.UrlApi.substring(7)],
+    //     disallowedRoutes: [`http://${environment.UrlApi.substring(7)}/login/login`],
+    //   },
+    // }),
   ],
   providers: [
     {

@@ -65,14 +65,12 @@
             <button mat-menu-item (click)="sidenav.toggle()" routerLink="/page/clientesistema" style="cursor: pointer">
                 <mat-icon>insert_drive_file</mat-icon>
                 <span>Cliente Sistema</span>
-            </button>           
-           
+            </button>   
            
         </mat-sidenav>
 
-        <mat-sidenav-content class="matsidenav">
+        <mat-sidenav-content>
            <router-outlet></router-outlet>
-           <!-- <app-lista></app-lista> -->
         </mat-sidenav-content>
 
     </mat-sidenav-container>

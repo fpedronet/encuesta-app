@@ -12,9 +12,8 @@ import { LayoutComponent } from './component/layout/layout.component';
 import { CommonModule } from '@angular/common';
 import { InicioComponent } from './inicio/inicio.component';
 import { PageRoutingModule } from './page-routing.module';
-import { SpinnerModule } from './component/spinner/spinner.module';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InterceptorService } from '../_interceptors/interceptor.service';
+import { Not404Component } from './not404/not404.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,8 @@ import { InterceptorService } from '../_interceptors/interceptor.service';
     ListaComponent,
     ConfirmComponent,
     LayoutComponent,
-    InicioComponent
+    InicioComponent,
+    Not404Component
   ],
   imports: [
     MaterialModule,
@@ -30,9 +30,6 @@ import { InterceptorService } from '../_interceptors/interceptor.service';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    // BrowserModule,
-    // AppRoutingModule,
-    // BrowserAnimationsModule,
     PageRoutingModule,
   ],
   providers: [
@@ -42,6 +39,5 @@ import { InterceptorService } from '../_interceptors/interceptor.service';
     multi: true
   }
 ],
-  // bootstrap: [PageModule]
 })
 export class PageModule { }

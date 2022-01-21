@@ -1,8 +1,4 @@
 <mat-toolbar color="primary" class="example-toolbar submenu">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon class="titleicon">home</mat-icon>
-    </button>
-    <span class="titleform">CREAR GRUPO</span>
     <span class="example-spacer"></span>
     <div class="example-button-row">
         <button mat-raised-button color="warn" routerLink="/page/grupo">
@@ -20,6 +16,10 @@
 
 <div class="container">
     <mat-card class="cardborde">
+        <mat-toolbar class="cardtitle">
+            <mat-icon>home</mat-icon>
+            CREAR GRUPO
+          </mat-toolbar>
         <form id="ngForm" [formGroup]="form" #frmGrupo="ngForm" (ngSubmit)="guardar()">
 
             <div [hidden]="true">

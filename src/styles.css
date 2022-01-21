@@ -33,21 +33,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-top:-8px;
   box-shadow:0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 }
-.titleform{
-  color: #3f51b5;
-  font-size: 15px;
-}
-.titleicon{
-  color: #3f51b5;
-}
 
 .mat-card.cardborde{
-  border-radius:2px;
-  border-top:4px solid rgb(27 60 243 / 68%);
-  border-left: none;
-  border-right: none;
-  border-bottom: none;
-  box-shadow: 2px 2px -2px -1px rgb(0 0 0 / 20%), 1px 1px 1px 2px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  padding: 0;
+}
+
+.mat-toolbar.cardtitle{
+  background-color: #5066de !important; 
+  color: white;
 }
 
 .example-loading-shade {
@@ -81,7 +74,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   
   form{
     margin: 10px;
-    padding-top:10px;
+    padding-top:23px;
   }
 .ver{
   color: #0d9aec;

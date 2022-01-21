@@ -1,16 +1,17 @@
+import { LoginComponent } from './usuario/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ValidateService } from '../_service/validate.service';
+import { GuardService } from '../_service/guard.service';
 import { CreateComponent } from './grupo/create/create.component';
 import { ListaComponent } from './grupo/lista/lista.component';
 import { InicioComponent } from './inicio/inicio.component';
 
 const routes: Routes = [
-  {path:'inicio', component: InicioComponent, canActivate: [ValidateService]},
-  {path:'grupo', component: ListaComponent, canActivate: [ValidateService]},
-  {path:'grupo/create', component: CreateComponent, canActivate: [ValidateService]},
-  {path:'grupo/edit/:id', component: CreateComponent, canActivate: [ValidateService]},
-  {path:'grupo/ver/:id/:ver', component: CreateComponent, canActivate: [ValidateService]},
+  {path:'inicio', component: InicioComponent, canActivate: [GuardService]},
+  {path:'grupo', component: ListaComponent, canActivate: [GuardService]},
+  {path:'grupo/create', component: CreateComponent, canActivate: [GuardService]},
+  {path:'grupo/edit/:id', component: CreateComponent, canActivate: [GuardService]},
+  {path:'grupo/ver/:id/:ver', component: CreateComponent, canActivate: [GuardService]},
 ];
 
 @NgModule({

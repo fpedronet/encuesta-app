@@ -8,7 +8,7 @@ import { UsuarioService } from './usuario.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ValidateService implements CanActivate {
+export class GuardService implements CanActivate {
 
   constructor(
 
@@ -18,23 +18,35 @@ export class ValidateService implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-
     //1) VERIFICAR SI ESTA LOGUEADO
-    let rpta = this.usuarioService.isLogin();
-    if (!rpta) {
-      this.usuarioService.closeLogin();
-      return false;
-    }
-    //2) VERIFICAR SI EL TOKEN NO HA EXPIRADO
-    const helper = new JwtHelperService();
     let token = localStorage.getItem(environment.TOKEN_NAME);
+    let url = state.url;
+
+    if (!token) {
+      if(url=="/login" || url==""){
+        return true;
+      }else{
+        this.router.navigate(['/login']);
+        return false;
+      }
+    }
+
+    //2) VERIFICAR SI EL TOKEN NO HA EXPIRADO
+    let helper = new JwtHelperService();
+    token = localStorage.getItem(environment.TOKEN_NAME);
+
     if (!helper.isTokenExpired(token!)) {
       //3) VERIFICAR SI TIENES EL ROL NECESARIO PARA ACCEDER A ESA PAGINA  
       //url -> /pages/consulta
 
-      // let url = state.url;
-      // const decodedToken = helper.decodeToken(token!);
       
+       const decodedToken = helper.decodeToken(token!);
+      
+       if(url=="/login"){
+         this.router.navigate(['/page/inicio']);
+         return false;
+       }
+
       // return this.menuService.listarPorUsuario(decodedToken.usuario).pipe(map((data: Menu[]) => {
       //   this.menuService.setMenuCambio(data);
 
@@ -54,11 +66,11 @@ export class ValidateService implements CanActivate {
       //   }
 
       // }));
-      // this.router.navigate(['/page/inicio']);
+      
       return true;
     } else {
       this.usuarioService.closeLogin();
       return false;
     }
-  }  
+  } 
 }
