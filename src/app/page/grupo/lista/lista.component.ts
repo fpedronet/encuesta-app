@@ -1,17 +1,16 @@
-import { Grupo } from './../../../_model/grupo';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { HttpClient } from '@angular/common/http';
 import {merge, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfimService } from './../../component/confirm/confim.service';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
-import { GrupoService } from 'src/app/_service/grupo.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
+import { Grupo } from './../../../_model/grupo';
+import { GrupoService } from 'src/app/_service/grupo.service';
 
 @Component({
   selector: 'app-lista',
