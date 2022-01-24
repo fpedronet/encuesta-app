@@ -13,6 +13,8 @@ import { LsistemaComponent } from './sistema/lsistema/lsistema.component';
 import { CsistemaComponent } from './sistema/csistema/csistema.component';
 import { LgrupoComponent } from './grupo/lgrupo/lgrupo.component';
 import { CgrupoComponent } from './grupo/cgrupo/cgrupo.component';
+import { LclienteComponent } from './cliente/lcliente/lcliente.component';
+import { CclienteComponent } from './cliente/ccliente/ccliente.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { CgrupoComponent } from './grupo/cgrupo/cgrupo.component';
     CsistemaComponent,
     LgrupoComponent,
     CgrupoComponent,
+    LclienteComponent,
+    CclienteComponent,
   ],
   imports: [
     MaterialModule,

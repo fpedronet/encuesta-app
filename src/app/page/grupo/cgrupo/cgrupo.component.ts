@@ -7,6 +7,7 @@ import { SpinnerService } from '../../component/spinner/spinner.service';
 
 import { Grupo } from 'src/app/_model/grupo';
 import { GrupoService } from 'src/app/_service/grupo.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -68,9 +69,14 @@ export class CgrupoComponent implements OnInit {
     this.spinner.showLoading();
     this.grupoService.guardar(model).subscribe(data=>{
 
+      this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
+
+      if(data.typeResponse==environment.EXITO){
         this.router.navigate(['/page/grupo']);
-        this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
         this.spinner.hideLoading();
+      }else{
+        this.spinner.hideLoading();
+      }      
     });
   }
 }

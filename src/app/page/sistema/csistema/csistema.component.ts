@@ -7,6 +7,7 @@ import { SpinnerService } from '../../component/spinner/spinner.service';
 
 import { Sistema } from 'src/app/_model/sistema';
 import { SistemaService } from 'src/app/_service/sistema.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-csistema',
@@ -67,10 +68,14 @@ export class CsistemaComponent implements OnInit {
     this.spinner.showLoading();
     this.sistemaService.guardar(model).subscribe(data=>{
 
+      this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
+
+      if(data.typeResponse==environment.EXITO){
         this.router.navigate(['/page/sistema']);
-        this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
         this.spinner.hideLoading();
+      }else{
+        this.spinner.hideLoading();
+      }
     });
   }
-
 }
