@@ -1,4 +1,4 @@
-.example-container {
+  .example-container {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -7,16 +7,46 @@
     left: 0;
     right: 0;
   }
-  
-  .example-sidenav-container {
-    flex: 1;
+  .mat-toolbar.mat-primary{
+    /* background:#d86001de !important; */
+    z-index:200;
+  } 
+
+.companyName{
+    font-size: 150%;
+}
+
+div {
+    overflow: inherit;
+}
+
+a{
+    text-decoration: none;
+    font-size: 72%;
+    white-space: normal;
+}
+
+button{
+    font-size: 110%;
+    min-width: min-content;
+}
+
+.example-icon {
+    padding: 0 14px;
   }
   
   .example-spacer {
     flex: 1 1 auto;
   }
-  .mat-toolbar.mat-primary{
-    background:#d86001de !important;
-    z-index:200;
+
+  .mat-sidenav-content{
+      text-align: center;
   }
-  
+
+  .mat-drawer{
+    top:43px;
+  }
+
+  .mat-toolbar-row, .mat-toolbar-single-row{
+    height:44px;
+  }

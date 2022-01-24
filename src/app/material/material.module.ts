@@ -24,6 +24,7 @@ import {FormsModule} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {CustomDateAdapter } from './custom-adapter';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [],
@@ -53,6 +54,7 @@ import {CustomDateAdapter } from './custom-adapter';
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    FlexLayoutModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
