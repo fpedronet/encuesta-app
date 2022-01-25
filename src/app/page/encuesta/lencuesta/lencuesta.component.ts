@@ -51,7 +51,6 @@ export class LencuestaComponent implements OnInit {
   }
 
   ngAfterViewInit(data: string='', finicio: Date, ffin: Date) {
-  
     this.encuestaService = new EncuestaService(this.http);
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 

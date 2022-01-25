@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
 
 import { Encuesta } from 'src/app/_model/encuesta';
+import { Sistema } from 'src/app/_model/sistema';
 import { EncuestaService } from 'src/app/_service/encuesta.service';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cencuesta',
@@ -22,53 +23,77 @@ export class CencuestaComponent implements OnInit {
     private router: Router,
     private notifierService : NotifierService,
     private spinner : SpinnerService,
+
     private encuestaService : EncuestaService,
+    private _formBuilder: FormBuilder
   ) { }
 
   form: FormGroup = new FormGroup({});
   id: number = 0;
   ver: boolean = true;
+  listaSistema?: Sistema[] = [];
+
 
   ngOnInit(): void { 
     this.form = new FormGroup({
-      //Nueva página para crear encuestas
+      'nIdEncuesta': new FormControl({ value: 0 }),
+      'nCodigo': new FormControl({ value: '###', disabled: true }),
+      'nIdSistemas': new FormControl({ value: '', disabled: false}),
+      'cTitulo': new FormControl({ value: '', disabled: false}),
+      'cDescripcion': new FormControl({ value: '', disabled: false}),
+      'dFechaIni': new FormControl({ value: null, disabled: false}),
+      'dFechaFin': new FormControl({ value: null, disabled: false})
     });
 
     this.route.params.subscribe((data: Params)=>{
-      this.id = data["id"]
+      this.id = (data["id"]==undefined)? 0:data["id"];
       this.ver = (data["ver"]=='true')? true : false
       this.obtener();
     });
   }
 
   obtener(){
-    if(this.id!=0 && this.id!=undefined){
-      this.spinner.showLoading();
-      this.encuestaService.obtener(this.id).subscribe(data=>{
+    this.spinner.showLoading();
+    this.encuestaService.obtener(this.id).subscribe(data=>{
 
-        this.form = new FormGroup({
-          'nIdEncuesta': new FormControl({ value: data.nIdEncuesta }),
-          'nIdSistemas': new FormControl({ value: data.nIdSistemas, disabled: true }),
-          'cTitulo': new FormControl({ value: data.cTitulo, disabled: this.ver})
-        });
-        this.spinner.hideLoading();
+      this.listaSistema= data.listaSistema;
 
-      });      
-    }
+      this.form = new FormGroup({
+        'nIdEncuesta': new FormControl({ value: data.nIdEncuesta }),
+        'nCodigo': new FormControl({ value: data.nIdEncuesta, disabled: true }),
+        'nIdSistemas': new FormControl({ value: data.nIdSistemas, disabled: this.ver}),
+        'cTitulo': new FormControl({ value: data.cTitulo, disabled: this.ver}),
+        'cDescripcion': new FormControl({ value: data.cDescripcion, disabled: this.ver}),
+        'dFechaIni': new FormControl({ value: data.dFechaIni, disabled: this.ver}),
+        'dFechaFin': new FormControl({ value: data.dFechaFin, disabled: this.ver})
+      });
+      this.spinner.hideLoading();
+
+    });
   }
 
   guardar(){
+    debugger;
     let model = new Encuesta();
 
-    /*model.nIdGrupo= this.form.value['nIdGrupo'].value;
+    model.nIdEncuesta= this.form.value['nIdEncuesta'].value;
+    model.nIdSistemas= this.form.value['nIdSistemas'];
+    model.cTitulo= this.form.value['cTitulo'];
     model.cDescripcion= this.form.value['cDescripcion'];
+    model.dFechaIni= this.form.value['dFechaIni'];
+    model.dFechaFin= this.form.value['dFechaFin'];
 
     this.spinner.showLoading();
-    this.grupoService.guardar(model).subscribe(data=>{
+    this.encuestaService.guardar(model).subscribe(data=>{
 
-        this.router.navigate(['/page/grupo']);
-        this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
-        this.spinner.hideLoading();
-    });*/
+    this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
+
+    if(data.typeResponse==environment.EXITO){
+       this.router.navigate(['/page/encuesta']);
+       this.spinner.hideLoading();
+    }else{
+       this.spinner.hideLoading();
+    }
+    });
   }
 }
