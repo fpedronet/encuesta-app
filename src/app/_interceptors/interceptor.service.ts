@@ -1,5 +1,5 @@
-import { catchError } from 'rxjs/operators';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -23,27 +23,21 @@ intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> 
     let request = req;
 
     if (token) {
-      request = req.clone({
-        setHeaders: {
-          'Authorization': `Bearer ${ token }`,
-          'Content-Type': 'application/json'
-        }
-      });
+      request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
     }
+    if (!request.headers.has('Content-Type')) {
+      request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
+     }
 
-    return next.handle(request).pipe(
-      catchError(this.manejoError)
-    );
-    
-  }
+     request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
 
-  manejoError(error= HttpErrorResponse){
-    console.log(error);
+     return next.handle(request).pipe(
+      map((event: HttpEvent<any>) => {
+          if (event instanceof HttpResponse) {
+              console.log('event--->>>', event);
+          }
+          return event;
+      }));
 
-    // this.notifierService.showNotification(2,'Mensaje',error.name);
-    // this.spinner.hideLoading();
-
-    return throwError("Error personalizado");
-    
   }
 }

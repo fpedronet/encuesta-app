@@ -8,7 +8,7 @@
     right: 0;
   }
   .mat-toolbar.mat-primary{
-    /* background:#d86001de !important; */
+    background:#d8690a;
     z-index:200;
   } 
 
@@ -20,10 +20,13 @@ div {
     overflow: inherit;
 }
 
-a{
+.menu{
     text-decoration: none;
-    font-size: 72%;
+    font-size: 120%;
     white-space: normal;
+    text-align:left;
+    line-height:40px;
+    padding:2px 30px;
 }
 
 button{
@@ -39,14 +42,15 @@ button{
     flex: 1 1 auto;
   }
 
-  .mat-sidenav-content{
-      text-align: center;
-  }
-
   .mat-drawer{
     top:43px;
   }
 
   .mat-toolbar-row, .mat-toolbar-single-row{
-    height:44px;
+    height:48px;
+  }
+
+  .close{
+    background-color:#c50202;
+    color:white;
   }

@@ -26,6 +26,7 @@ export class LgrupoComponent implements OnInit {
     private notifierService : NotifierService,
     private confimService : ConfimService,
     private spinner : SpinnerService,
+    
     private grupoService : GrupoService,
 
     ) { }

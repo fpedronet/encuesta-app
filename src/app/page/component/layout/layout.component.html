@@ -9,7 +9,9 @@
       </div>
   
       <a mat-button class="companyName" routerLink="/">
-        <span>Sistemas Analiticos</span>
+        <mat-icon>menu_book</mat-icon>    
+       
+        <span style="font-size: 20px;"> SISTEMAS ENCUESTAS</span>
       </a>
       <span class="example-spacer"></span>
       <div fxShow="true" fxHide.lt-md="true">
@@ -19,6 +21,7 @@
         <a mat-button routerLink="/page/sistema">Sistema</a>
         <a mat-button routerLink="/page/cliente">Cliente</a>
         <a mat-button routerLink="/page/clientesistema">Cli.Sist.</a>
+        <a class="close" mat-raised-button color="red" (click)="closeLogin()">Salir</a>
       </div>
   
     </mat-toolbar>
@@ -26,12 +29,31 @@
   
       <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
         <div fxLayout="column">
-            <a mat-button routerLink="/page/grupo">Grupo</a>
-            <a mat-button routerLink="/page/pregunta">Pregunta</a>
-            <a mat-button routerLink="/page/encuesta">Encuesta</a>
-            <a mat-button routerLink="/page/sistema">Sistema</a>
-            <a mat-button routerLink="/page/cliente">Cliente</a>
-            <a mat-button routerLink="/page/clientesistema">Cli. Sist.</a>
+            <a class="menu" mat-button routerLink="/page/grupo">
+                <mat-icon>insert_drive_file</mat-icon>               
+                Grupo
+            </a>
+            <a class="menu" mat-button routerLink="/page/pregunta">
+                <mat-icon>insert_drive_file</mat-icon>    
+                Pregunta
+            </a>
+            <a class="menu" mat-button routerLink="/page/encuesta">
+                <mat-icon>insert_drive_file</mat-icon>    
+                Encuesta
+            </a>
+            <a class="menu" mat-button routerLink="/page/sistema">
+                <mat-icon>insert_drive_file</mat-icon>    
+                Sistema
+            </a>
+            <a class="menu" mat-button routerLink="/page/cliente">
+                <mat-icon>accessibility</mat-icon>
+                Cliente
+            </a>
+            <a class="menu" mat-button routerLink="/page/clientesistema">
+                <mat-icon>healing</mat-icon>
+                Cli. Sist.
+            </a>
+
         </div>
       </mat-sidenav>
 

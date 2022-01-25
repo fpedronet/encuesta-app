@@ -17,6 +17,8 @@ import { CencuestaComponent } from './encuesta/cencuesta/cencuesta.component';
 import { LencuestaComponent } from './encuesta/lencuesta/lencuesta.component';
 import { LpreguntaComponent } from './pregunta/lpregunta/lpregunta.component';
 import { CpreguntaComponent } from './pregunta/cpregunta/cpregunta.component';
+import { LclienteComponent } from './cliente/lcliente/lcliente.component';
+import { CclienteComponent } from './cliente/ccliente/ccliente.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { CpreguntaComponent } from './pregunta/cpregunta/cpregunta.component';
     LencuestaComponent,
     LpreguntaComponent,
     CpreguntaComponent,
+    LclienteComponent,
+    CclienteComponent,
   ],
   imports: [
     MaterialModule,

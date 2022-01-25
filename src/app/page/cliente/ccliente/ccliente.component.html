@@ -1,0 +1,82 @@
+<mat-toolbar color="primary" class="example-toolbar submenu">
+    <span class="example-spacer"></span>
+    <div class="example-button-row">
+        <button mat-raised-button color="warn" routerLink="/page/cliente">
+            <mat-icon>undo</mat-icon>
+            <span>Regresar</span>
+        </button>
+        <span *ngIf="!ver">
+            <button mat-raised-button color="primary" type="submit" [disabled]="frmGrupo.invalid" form="ngForm">
+                <mat-icon>save as</mat-icon>
+                <span>Guardar</span>
+            </button> 
+        </span>       
+    </div>
+</mat-toolbar>
+
+<div class="container">
+    <mat-card class="cardborde">
+        <mat-toolbar class="cardtitle">
+            <mat-icon>home</mat-icon> 
+            CREAR CLIENTE
+          </mat-toolbar>
+        <form id="ngForm" [formGroup]="form" #frmGrupo="ngForm" (ngSubmit)="guardar()">
+
+            <div [hidden]="true">
+                <mat-form-field appearance="outline">
+                     <input matInput placeholder="Id" formControlName="nIdCliente">
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Código</mat-label>
+                <input matInput placeholder="Codigo" formControlName="nCodigo">
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <input matInput placeholder="Descripción" minlength="1" maxlength="100" required formControlName="cDescripcion" autocomplete="off">
+            </mat-form-field>     
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Ruc</mat-label>
+                <input matInput placeholder="Ruc" minlength="1" maxlength="11" required formControlName="cRuc" autocomplete="off">
+            </mat-form-field>     
+
+            <mat-form-field appearance="outline">
+                <mat-label>Contacto</mat-label>
+                <input matInput placeholder="Contacto" minlength="1" maxlength="50" required formControlName="cContacto" autocomplete="off">
+            </mat-form-field>     
+
+            <mat-form-field appearance="outline">
+                <mat-label>Clave</mat-label>
+                <input matInput placeholder="Clave" minlength="1" maxlength="20" required formControlName="cClave" autocomplete="off">
+            </mat-form-field>  
+
+            <mat-form-field>
+                <mat-select 
+                  multiple
+                  placeholder="Sistemas" 
+                  [(ngModel)]="listaIdSistema"
+                  formControlName="nIdSistemas"
+                  >
+                  <mat-option *ngFor="let el of listaSistema" [value]="el.nIdSistemas">
+                      {{el.cSistemas}}
+                  </mat-option>
+              
+                </mat-select>
+              </mat-form-field>            
+
+            <section class="example-section" [formGroup]="form">
+                <p><mat-checkbox formControlName="nEsAdministrador">Administrador</mat-checkbox></p>
+            </section>
+              
+           <br>
+
+        </form>
+    </mat-card>    
+</div>
+
+
+
+
