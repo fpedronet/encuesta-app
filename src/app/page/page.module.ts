@@ -13,6 +13,10 @@ import { LsistemaComponent } from './sistema/lsistema/lsistema.component';
 import { CsistemaComponent } from './sistema/csistema/csistema.component';
 import { LgrupoComponent } from './grupo/lgrupo/lgrupo.component';
 import { CgrupoComponent } from './grupo/cgrupo/cgrupo.component';
+import { CencuestaComponent } from './encuesta/cencuesta/cencuesta.component';
+import { LencuestaComponent } from './encuesta/lencuesta/lencuesta.component';
+import { LpreguntaComponent } from './pregunta/lpregunta/lpregunta.component';
+import { CpreguntaComponent } from './pregunta/cpregunta/cpregunta.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,10 @@ import { CgrupoComponent } from './grupo/cgrupo/cgrupo.component';
     CsistemaComponent,
     LgrupoComponent,
     CgrupoComponent,
+    CencuestaComponent,
+    LencuestaComponent,
+    LpreguntaComponent,
+    CpreguntaComponent,
   ],
   imports: [
     MaterialModule,
