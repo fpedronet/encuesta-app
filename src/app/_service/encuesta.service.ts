@@ -18,9 +18,11 @@ export class EncuestaService {
   
   listar(data: string, fechaIni: Date, fechaFin: Date, page: number,pages: number, column: string, order: SortDirection ) {
     column = (column==undefined)?'':column;
+    let finicio = (fechaIni==undefined)?'':column;
+    let ffin = (fechaFin==undefined)?'':column;
 
     let href = `${this.url}/GetAllEncuesta`;
-    let urls = `${href}?data=${data}&fechaIni=${fechaIni}&fechaFin=${fechaFin}&page=${page+1}&pages=${pages}&column=${column}&order=${order}`;
+    let urls = `${href}?data=${data}&fechaIni=${finicio}&fechaFin=${ffin}&page=${page+1}&pages=${pages}&column=${column}&order=${order}`;
 
     return this.http.get<dataCollection>(urls);
   }
