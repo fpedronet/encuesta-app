@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfimService } from './../../component/confirm/confim.service';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
+import { environment } from 'src/environments/environment';
 
 import { Pregunta } from './../../../_model/pregunta';
 import { PreguntaService } from 'src/app/_service/pregunta.service';
@@ -31,7 +32,7 @@ export class LpreguntaComponent implements OnInit {
     ) { }
 
     dataSource: Pregunta[] = [];
-    displayedColumns: string[] = ['nIdPregunta', 'cDescripcion', 'nAccion'];
+    displayedColumns: string[] = ['nIdPregunta', 'cDescripcion', 'cGrupo', 'nTipo', 'nAccion'];
     loading = true;
     existRegistro = false;
     countRegistro = 0;
@@ -70,6 +71,12 @@ export class LpreguntaComponent implements OnInit {
             if (res === null) {
               return [];
             }
+            else{
+              res.items.forEach(item => {
+                var preg = item as Pregunta
+                preg.cTipo = environment.listaTipo.find(e => e.nIdTipo === preg.nTipo)?.cDescripcion;
+              });
+            }
   
             this.countRegistro = res.pagination.total;
             return res.items;
@@ -81,6 +88,10 @@ export class LpreguntaComponent implements OnInit {
   
       let data = (event.target as HTMLInputElement).value;
       this.ngAfterViewInit(data);
+    }
+
+    tipoDescripcion(nTipo: number){
+      return 0;
     }
   }
   

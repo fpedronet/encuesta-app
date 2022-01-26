@@ -5,6 +5,9 @@ import { GuardService } from '../_service/guard.service';
 import { LgrupoComponent } from './grupo/lgrupo/lgrupo.component';
 import { CgrupoComponent } from './grupo/cgrupo/cgrupo.component';
 
+import { LpreguntaComponent } from './pregunta/lpregunta/lpregunta.component';
+import { CpreguntaComponent } from './pregunta/cpregunta/cpregunta.component';
+
 import { InicioComponent } from './inicio/inicio.component';
 
 import { LsistemaComponent } from './sistema/lsistema/lsistema.component';
@@ -23,6 +26,11 @@ const routes: Routes = [
   {path:'grupo/create', component: CgrupoComponent, canActivate: [GuardService]},
   {path:'grupo/edit/:id', component: CgrupoComponent, canActivate: [GuardService]},
   {path:'grupo/ver/:id/:ver', component: CgrupoComponent, canActivate: [GuardService]},
+
+  {path:'pregunta', component: LpreguntaComponent, canActivate: [GuardService]},
+  {path:'pregunta/create', component: CpreguntaComponent, canActivate: [GuardService]},
+  {path:'pregunta/edit/:id', component: CpreguntaComponent, canActivate: [GuardService]},
+  {path:'pregunta/ver/:id/:ver', component: CpreguntaComponent, canActivate: [GuardService]},
 
   {path:'sistema', component: LsistemaComponent, canActivate: [GuardService]},
   {path:'sistema/create', component: CsistemaComponent, canActivate: [GuardService]},
