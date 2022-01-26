@@ -48,13 +48,26 @@
                     <ng-template matStepLabel>Configuración</ng-template>
 
                     <mat-form-field appearance="outline">
-                        <mat-select placeholder="Seleccione Cliente" formControlName="nIdSistemas">
+                        <mat-select placeholder="Seleccione Sistema" formControlName="nIdSistemas" (selectionChange)="listarclienteporsistema($event.value)">
                           <mat-option *ngFor="let c of listaSistema" [value]="c.nIdSistemas">
                            {{c.cSistemas}}
-                        </mat-option>
-                    </mat-select>
+                          </mat-option>
+                        </mat-select>
                     </mat-form-field>
-                        <mat-form-field appearance="outline">
+
+                    <mat-form-field appearance="outline">
+                        <mat-select 
+                        multiple
+                        placeholder="Seleccione Cliente" 
+                        [(ngModel)]="listaIdCliente"
+                        formControlName="nIdCliente">
+                          <mat-option *ngFor="let c of listaCliente" [value]="c.nIdCliente">
+                           {{c.cRuc}} {{c.cDescripcion}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
                         <mat-label>Fecha Inicio</mat-label>
                         <input matInput [matDatepicker]="dFechaIni" placeholder="dd/mm/yyyy" formControlName="dFechaIni">
                         <mat-datepicker-toggle matSuffix [for]="dFechaIni"></mat-datepicker-toggle>

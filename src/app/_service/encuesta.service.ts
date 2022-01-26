@@ -17,7 +17,6 @@ export class EncuestaService {
   private url: string = `${environment.UrlApi}/encuesta`;
   
   listar(data: string, fechaIni: Date, fechaFin: Date, page: number,pages: number, column: string, order: SortDirection ) {
-    debugger;
     column = (column==undefined)?'':column;
     let finicio = (fechaIni==undefined)?'':fechaIni.toDateString();
     let ffin = (fechaFin==undefined)?'':fechaFin.toDateString();
@@ -31,6 +30,11 @@ export class EncuestaService {
   obtener(id: number){
     let urls = `${this.url}/GetFirstEncuesta?id=${id}`;
     return this.http.get<Encuesta>(urls);
+  }
+
+  listarclienteporsistema(id: number) {
+    let urls = `${this.url}/GetAllClientePorSistema?id=${id}`;
+    return this.http.get<dataCollection>(urls);
   }
 
   guardar(encuesta: Encuesta){

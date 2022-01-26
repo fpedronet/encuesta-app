@@ -7,6 +7,7 @@ import { SpinnerService } from '../../component/spinner/spinner.service';
 
 import { Encuesta } from 'src/app/_model/encuesta';
 import { Sistema } from 'src/app/_model/sistema';
+import { Cliente } from 'src/app/_model/cliente';
 import { EncuestaService } from 'src/app/_service/encuesta.service';
 import { environment } from 'src/environments/environment';
 
@@ -32,13 +33,15 @@ export class CencuestaComponent implements OnInit {
   id: number = 0;
   ver: boolean = true;
   listaSistema?: Sistema[] = [];
-
+  listaCliente?: Cliente[] = [];
+  listaIdCliente?: number[] = [];
 
   ngOnInit(): void { 
     this.form = new FormGroup({
       'nIdEncuesta': new FormControl({ value: 0 }),
       'nCodigo': new FormControl({ value: '###', disabled: true }),
       'nIdSistemas': new FormControl({ value: '', disabled: false}),
+      'nIdCliente': new FormControl({ value: '', disabled: false}),
       'cTitulo': new FormControl({ value: '', disabled: false}),
       'cDescripcion': new FormControl({ value: '', disabled: false}),
       'dFechaIni': new FormControl({ value: null, disabled: false}),
@@ -57,11 +60,14 @@ export class CencuestaComponent implements OnInit {
     this.encuestaService.obtener(this.id).subscribe(data=>{
 
       this.listaSistema= data.listaSistema;
+      this.listaCliente= data.listaCliente;
+      this.listaIdCliente= data.listaIdCliente;
 
       this.form = new FormGroup({
         'nIdEncuesta': new FormControl({ value: data.nIdEncuesta }),
         'nCodigo': new FormControl({ value: data.nIdEncuesta, disabled: true }),
         'nIdSistemas': new FormControl({ value: data.nIdSistemas, disabled: this.ver}),
+        'nIdCliente': new FormControl({ value: data.nIdCliente, disabled: this.ver}),
         'cTitulo': new FormControl({ value: data.cTitulo, disabled: this.ver}),
         'cDescripcion': new FormControl({ value: data.cDescripcion, disabled: this.ver}),
         'dFechaIni': new FormControl({ value: data.dFechaIni, disabled: this.ver}),
@@ -72,8 +78,18 @@ export class CencuestaComponent implements OnInit {
     });
   }
 
+  listarclienteporsistema(nIdSistemas: number){
+
+    this.spinner.showLoading();
+    this.encuestaService.listarclienteporsistema(nIdSistemas).subscribe(data=>{
+      debugger;
+      this.listaCliente= data.items;
+      this.listaIdCliente=[];
+      this.spinner.hideLoading();
+    });
+  }
+
   guardar(){
-    debugger;
     let model = new Encuesta();
 
     model.nIdEncuesta= this.form.value['nIdEncuesta'].value;
@@ -82,6 +98,7 @@ export class CencuestaComponent implements OnInit {
     model.cDescripcion= this.form.value['cDescripcion'];
     model.dFechaIni= this.form.value['dFechaIni'];
     model.dFechaFin= this.form.value['dFechaFin'];
+    model.listaIdCliente = this.form.value['nIdCliente']; 
 
     this.spinner.showLoading();
     this.encuestaService.guardar(model).subscribe(data=>{
