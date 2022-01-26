@@ -65,8 +65,8 @@ export class LpreguntaComponent implements OnInit {
           }),
           map(res => {
   
-             this.loading = false;
-             this.existRegistro = res === null;
+            this.loading = false;
+            this.existRegistro = res === null;
   
             if (res === null) {
               return [];
