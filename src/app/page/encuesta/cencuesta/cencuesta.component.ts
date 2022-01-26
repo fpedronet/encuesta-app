@@ -82,7 +82,7 @@ export class CencuestaComponent implements OnInit {
 
     this.spinner.showLoading();
     this.encuestaService.listarclienteporsistema(nIdSistemas).subscribe(data=>{
-      debugger;
+      
       this.listaCliente= data.items;
       this.listaIdCliente=[];
       this.spinner.hideLoading();
