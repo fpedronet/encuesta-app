@@ -16,6 +16,9 @@ import { CsistemaComponent } from './sistema/csistema/csistema.component';
 import { LclienteComponent } from './cliente/lcliente/lcliente.component';
 import { CclienteComponent } from './cliente/ccliente/ccliente.component';
 
+import { LencuestaComponent } from './encuesta/lencuesta/lencuesta.component';
+import { CencuestaComponent } from './encuesta/cencuesta/cencuesta.component';
+
 const routes: Routes = [
   {path:'inicio', component: InicioComponent, canActivate: [GuardService]},
 
@@ -38,6 +41,11 @@ const routes: Routes = [
   {path:'cliente/create', component: CclienteComponent, canActivate: [GuardService]},
   {path:'cliente/edit/:id', component: CclienteComponent, canActivate: [GuardService]},
   {path:'cliente/ver/:id/:ver', component: CclienteComponent, canActivate: [GuardService]},
+
+  {path:'encuesta', component: LencuestaComponent, canActivate: [GuardService]},
+  {path:'encuesta/create', component: CencuestaComponent, canActivate: [GuardService]},
+  {path:'encuesta/edit/:id', component: CencuestaComponent, canActivate: [GuardService]},
+  {path:'encuesta/ver/:id/:ver', component: CencuestaComponent, canActivate: [GuardService]},
 ];
 
 @NgModule({

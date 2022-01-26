@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" class="example-toolbar submenu">
     <span class="example-spacer"></span>
     <div class="example-button-row">
-        <button mat-raised-button color="warn" routerLink="/page/grupo">
+        <button mat-raised-button color="warn" routerLink="/page/encuesta">
             <mat-icon>undo</mat-icon>
             <span>Regresar</span>
         </button>
@@ -21,23 +21,68 @@
             CREAR ENCUESTA
           </mat-toolbar>
         <form id="ngForm" [formGroup]="form" #frmGrupo="ngForm" (ngSubmit)="guardar()">
+            <mat-stepper labelPosition="bottom" #stepper>
+                <mat-step>
+                    <ng-template matStepLabel>Encuesta</ng-template>
 
-            <div [hidden]="true">
-                <mat-form-field appearance="outline">
-                     <input matInput placeholder="Id" formControlName="nIdGrupo">
-                </mat-form-field>
-            </div>
+                    <div [hidden]="true">
+                        <mat-form-field appearance="outline">
+                             <input matInput placeholder="Id" formControlName="nIdEncuesta">
+                        </mat-form-field>
+                    </div> 
+                    <mat-form-field appearance="outline">
+                        <mat-label>Código</mat-label>
+                        <input matInput placeholder="Codigo" formControlName="nCodigo">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Título</mat-label>
+                        <input matInput placeholder="Título" minlength="1" maxlength="50" required formControlName="cTitulo" autocomplete="off">
+                    </mat-form-field>  
+                    <mat-form-field appearance="outline">
+                        <mat-label>Descripción</mat-label>
+                        <input matInput placeholder="Descripción" minlength="1" maxlength="500" required formControlName="cDescripcion" autocomplete="off">
+                    </mat-form-field> 
 
-            <mat-form-field appearance="outline">
-                <mat-label>Código</mat-label>
-                <input matInput placeholder="Codigo" formControlName="nCodigo">
-            </mat-form-field>
-        
-            <mat-form-field appearance="outline">
-                <mat-label>Descripción</mat-label>
-                <input matInput placeholder="Descripción" minlength="1" maxlength="50" required formControlName="cDescripcion" autocomplete="off">
-            </mat-form-field>            
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Configuración</ng-template>
+
+                    <mat-form-field appearance="outline">
+                        <mat-select placeholder="Seleccione Sistema" formControlName="nIdSistemas" (selectionChange)="listarclienteporsistema($event.value)">
+                          <mat-option *ngFor="let c of listaSistema" [value]="c.nIdSistemas">
+                           {{c.cSistemas}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-select 
+                        multiple
+                        placeholder="Seleccione Cliente" 
+                        [(ngModel)]="listaIdCliente"
+                        formControlName="nIdCliente">
+                          <mat-option *ngFor="let c of listaCliente" [value]="c.nIdCliente">
+                           {{c.cRuc}} {{c.cDescripcion}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Fecha Inicio</mat-label>
+                        <input matInput [matDatepicker]="dFechaIni" placeholder="dd/mm/yyyy" formControlName="dFechaIni">
+                        <mat-datepicker-toggle matSuffix [for]="dFechaIni"></mat-datepicker-toggle>
+                        <mat-datepicker #dFechaIni></mat-datepicker>
+                    </mat-form-field>
+              
+                    <mat-form-field appearance="outline">
+                        <mat-label>Fecha Fin</mat-label>
+                        <input matInput [matDatepicker]="dFechaFin" placeholder="dd/mm/yyyy" formControlName="dFechaFin">
+                        <mat-datepicker-toggle matSuffix [for]="dFechaFin"></mat-datepicker-toggle>
+                        <mat-datepicker #dFechaFin></mat-datepicker>
+                    </mat-form-field>
+
+                </mat-step>
+            </mat-stepper>                      
         </form>
     </mat-card>    
 </div>
-

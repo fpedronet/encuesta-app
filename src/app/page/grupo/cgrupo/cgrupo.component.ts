@@ -32,20 +32,20 @@ export class CgrupoComponent implements OnInit {
 
   ngOnInit(): void { 
     this.form = new FormGroup({
-      'nIdGrupo': new FormControl({ value: '0' }),
+      'nIdGrupo': new FormControl({ value: 0 }),
       'nCodigo': new FormControl({ value: '###', disabled: true }),
       'cDescripcion': new FormControl({ value: '', disabled: false})
     });
 
     this.route.params.subscribe((data: Params)=>{
-      this.id = data["id"]
+      this.id = (data["id"]==undefined)? 0:data["id"];
       this.ver = (data["ver"]=='true')? true : false
       this.obtener();
     });
   }
 
   obtener(){
-    if(this.id!=0 && this.id!=undefined){
+    if(this.id!=0){
       this.spinner.showLoading();
       this.grupoService.obtener(this.id).subscribe(data=>{
 
