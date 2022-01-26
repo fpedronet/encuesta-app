@@ -24,10 +24,11 @@ import {FormsModule} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {CustomDateAdapter } from './custom-adapter';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import {FlexLayoutModule } from '@angular/flex-layout';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [],
@@ -60,7 +61,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     FlexLayoutModule,
     MatCheckboxModule,
     MatGridListModule,
-    MatStepperModule
+    MatStepperModule,
+    MatListModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },

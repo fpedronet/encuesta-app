@@ -47,10 +47,18 @@ button{
   }
 
   .mat-toolbar-row, .mat-toolbar-single-row{
-    height:48px;
+    height:50px;
   }
 
   .close{
     background-color:#c50202;
     color:white;
+  }
+
+  .example-button {
+    margin-top: 16px;
+  }
+  
+  .example-tooltip-red {
+    background: #b71c1c;
   }
