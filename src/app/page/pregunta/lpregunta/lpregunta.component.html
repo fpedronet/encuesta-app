@@ -20,6 +20,17 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="Búsqueda" #input>
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
+
+      <!--mat-form-field>
+        <mat-select
+          placeholder="Grupo"
+          formControlName="nIdGrupo"
+        >
+          <mat-option *ngFor="let el of listaGrupo" [value]="el.nIdGrupo">
+              {{el.cDescripcion}}
+          </mat-option>              
+        </mat-select>
+      </mat-form-field-->
       
       <div class="example-loading-shade" *ngIf="loading || existRegistro">
         <mat-spinner *ngIf="loading"></mat-spinner>
@@ -35,19 +46,29 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </th>
             <td mat-cell *matCellDef="let element"> {{element.nIdPregunta}} </td>
           </ng-container>
+
+          <ng-container matColumnDef="cGrupo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Grupo </th>
+            <td mat-cell *matCellDef="let element"> {{element.cGrupo}} </td>
+          </ng-container>
         
           <ng-container matColumnDef="cDescripcion">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
             <td mat-cell *matCellDef="let element"> {{element.cDescripcion}} </td>
           </ng-container>
+
+          <ng-container matColumnDef="nTipo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+            <td mat-cell *matCellDef="let element"> {{element.cTipo}} </td>
+          </ng-container>
               
           <ng-container matColumnDef="nAccion">
               <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let element" style="text-align: right;">
-                  <a class="pointer ver" matTooltip="Ver" [routerLink]="['ver', element.nIdGrupo, true]">
+                  <a class="pointer ver" matTooltip="Ver" [routerLink]="['ver', element.nIdPregunta, true]">
                     <mat-icon>visibility</mat-icon>
                  </a>
-                 <a class="pointer edit" matTooltip="Editar" [routerLink]="['edit', element.nIdGrupo]">
+                 <a class="pointer edit" matTooltip="Editar" [routerLink]="['edit', element.nIdPregunta]">
                    <mat-icon>edit</mat-icon>
                 </a>
               </td>
