@@ -24,6 +24,7 @@ import { SpinnerModule } from './page/component/spinner/spinner.module';
 import { JwtModule } from "@auth0/angular-jwt";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
+import { PregdinamicaModule } from './page/component/pregdinamica/pregdinamica.module';
 
 export function tokenGetter() {
   return localStorage.getItem(environment.TOKEN_NAME);
@@ -32,7 +33,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +56,7 @@ export function tokenGetter() {
     SpinnerModule,
     HttpClientModule,
     MatInputModule,
+    PregdinamicaModule
     // JwtModule.forRoot({
     //   config: {
     //     tokenGetter: tokenGetter,

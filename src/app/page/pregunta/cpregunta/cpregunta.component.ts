@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
+import { PregdinamicaService } from '../../component/pregdinamica/pregdinamica.service';
 
 import { Pregunta } from 'src/app/_model/pregunta';
 import { PreguntaService } from 'src/app/_service/pregunta.service';
@@ -27,6 +28,7 @@ export class CpreguntaComponent implements OnInit {
     private notifierService : NotifierService,
     private spinner : SpinnerService,
     private preguntaService : PreguntaService,
+    private pregdinamicaService: PregdinamicaService
   ) { }
 
   form: FormGroup = new FormGroup({});
@@ -38,6 +40,7 @@ export class CpreguntaComponent implements OnInit {
   listaGrupo?: Grupo[] = [];
 
   listaTipo?: TipoPregunta[] = [];
+  selectedTipo?: TipoPregunta;
 
   ngOnInit(): void { 
     this.form = new FormGroup({
@@ -109,7 +112,11 @@ export class CpreguntaComponent implements OnInit {
     });
   }
 
-  cambioTipoPregunta(){
-
+  cambioTipoPregunta(newTipo: number){
+    debugger;
+    //let nTipoStr = (event.target as HTMLInputElement).value;
+    //let nTipo: number = +nTipoStr;
+    this.pregdinamicaService.changeIdTipo(newTipo);
+    debugger;
   }
 }

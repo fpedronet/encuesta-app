@@ -15,22 +15,43 @@
       LISTA PREGUNTA
     </mat-toolbar>
     <form>
-      <mat-form-field appearance="outline">
-        <mat-label>Búsqueda</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Búsqueda" #input>
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
+      <mat-grid-list cols="3" rowHeight="90px" gutterSize="15px">
 
-      <!--mat-form-field>
-        <mat-select
-          placeholder="Grupo"
-          formControlName="nIdGrupo"
-        >
-          <mat-option *ngFor="let el of listaGrupo" [value]="el.nIdGrupo">
-              {{el.cDescripcion}}
-          </mat-option>              
-        </mat-select>
-      </mat-form-field-->
+        <mat-grid-tile>
+          <mat-form-field appearance="outline">
+            <mat-label>Búsqueda</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Búsqueda" #input>
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field appearance="outline">
+            <mat-select
+              placeholder="Grupo"
+              formControlName="nIdGrupo"
+            >
+              <mat-option *ngFor="let el of listaGrupo" [value]="el.nIdGrupo">
+                  {{el.cDescripcion}}
+              </mat-option>              
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field appearance="outline">
+            <mat-select
+              placeholder="Tipo"
+              formControlName="nIdTipo"
+            >
+              <mat-option *ngFor="let el of listaTipo" [value]="el.nIdTipo">
+                  {{el.cDescripcion}}
+              </mat-option>              
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+      </mat-grid-list>
       
       <div class="example-loading-shade" *ngIf="loading || existRegistro">
         <mat-spinner *ngIf="loading"></mat-spinner>

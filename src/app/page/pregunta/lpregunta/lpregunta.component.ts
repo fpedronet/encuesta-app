@@ -12,6 +12,9 @@ import { environment } from 'src/environments/environment';
 
 import { Pregunta } from './../../../_model/pregunta';
 import { PreguntaService } from 'src/app/_service/pregunta.service';
+import { GrupoService } from 'src/app/_service/grupo.service';
+import { Grupo } from 'src/app/_model/grupo';
+import { TipoPregunta } from 'src/app/_model/tipoPregunta';
 
 @Component({
   selector: 'app-lpregunta',
@@ -28,6 +31,7 @@ export class LpreguntaComponent implements OnInit {
     private confimService : ConfimService,
     private spinner : SpinnerService,
     private preguntaService : PreguntaService,
+    private grupoService : GrupoService
 
     ) { }
 
@@ -36,11 +40,15 @@ export class LpreguntaComponent implements OnInit {
     loading = true;
     existRegistro = false;
     countRegistro = 0;
-  
+    listaGrupo: Grupo[] = [];
+    listaTipo: TipoPregunta[] = [];
+
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
     
     ngOnInit(): void {
+      this.listarGrupos();
+      this.listaTipo = environment.listaTipo;
     }
   
     ngAfterViewInit(data: string = '', grupo: number = 0, tipo: number = 0) {
@@ -87,7 +95,17 @@ export class LpreguntaComponent implements OnInit {
     applyFilter(event: Event) {
   
       let data = (event.target as HTMLInputElement).value;
-      this.ngAfterViewInit(data);
+      let grupo = 0;
+      let tipo = 0;
+      this.ngAfterViewInit(data, grupo, tipo);
+    }
+
+    listarGrupos(){
+      this.spinner.showLoading();
+      this.grupoService.listar('',0,0,'','').subscribe(data=>{
+        this.listaGrupo= data.items;
+        this.spinner.hideLoading();
+      });
     }
 
     tipoDescripcion(nTipo: number){

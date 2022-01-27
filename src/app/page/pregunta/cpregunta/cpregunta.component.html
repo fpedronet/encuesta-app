@@ -54,7 +54,7 @@
                 <mat-select
                   placeholder="Tipo"
                   formControlName="nTipo"
-                  (onchange)="cambioTipoPregunta()"
+                  (selectionChange)="cambioTipoPregunta($event.value)"
                   required
                   >
                   <mat-option *ngFor="let el of listaTipo" [value]="el.nIdTipo">
@@ -83,6 +83,10 @@
                 <mat-form-field appearance="outline">
                     <input matInput placeholder="Definicion" formControlName="cDefinicion">
                </mat-form-field>
+            </div>
+
+            <div [hidden]="!otrosParametros">
+                <app-pregdinamica ></app-pregdinamica>
             </div>
         </form>
     </mat-card>    
