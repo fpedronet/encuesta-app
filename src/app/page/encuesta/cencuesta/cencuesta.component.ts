@@ -1,7 +1,8 @@
+import { Pregunta } from './../../../_model/pregunta';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Event, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
 
@@ -10,6 +11,7 @@ import { Sistema } from 'src/app/_model/sistema';
 import { Cliente } from 'src/app/_model/cliente';
 import { EncuestaService } from 'src/app/_service/encuesta.service';
 import { environment } from 'src/environments/environment';
+import { EncuestaPregunta } from 'src/app/_model/encuestaPregunta';
 
 @Component({
   selector: 'app-cencuesta',
@@ -32,9 +34,17 @@ export class CencuestaComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   id: number = 0;
   ver: boolean = true;
+  seleccionado?: string;
   listaSistema?: Sistema[] = [];
   listaCliente?: Cliente[] = [];
   listaIdCliente?: number[] = [];
+  listaPregunta: Pregunta[] =[];
+  listaEncuestaPregunta: EncuestaPregunta[] = [];
+
+  displayedColumnsP: string[] = ['cDescripcion', 'nAccion'];
+
+  listaId?: string;
+  isChecked! : boolean;
 
   ngOnInit(): void { 
     this.form = new FormGroup({
@@ -62,6 +72,8 @@ export class CencuestaComponent implements OnInit {
       this.listaSistema= data.listaSistema;
       this.listaCliente= data.listaCliente;
       this.listaIdCliente= data.listaIdCliente;
+      this.listaPregunta= data.listaPregunta;
+      this.listaEncuestaPregunta= data.listaEncuestaPregunta;     
 
       this.form = new FormGroup({
         'nIdEncuesta': new FormControl({ value: data.nIdEncuesta }),
@@ -79,10 +91,9 @@ export class CencuestaComponent implements OnInit {
   }
 
   listarclienteporsistema(nIdSistemas: number){
-
     this.spinner.showLoading();
     this.encuestaService.listarclienteporsistema(nIdSistemas).subscribe(data=>{
-      debugger;
+      
       this.listaCliente= data.items;
       this.listaIdCliente=[];
       this.spinner.hideLoading();
@@ -99,6 +110,7 @@ export class CencuestaComponent implements OnInit {
     model.dFechaIni= this.form.value['dFechaIni'];
     model.dFechaFin= this.form.value['dFechaFin'];
     model.listaIdCliente = this.form.value['nIdCliente']; 
+    model.listaEncuestaPregunta = this.listaEncuestaPregunta; 
 
     this.spinner.showLoading();
     this.encuestaService.guardar(model).subscribe(data=>{
@@ -112,5 +124,28 @@ export class CencuestaComponent implements OnInit {
        this.spinner.hideLoading();
     }
     });
+  }
+
+  checkPregunta(element: EncuestaPregunta, e: any){
+    debugger;
+
+    if(e.checked){
+      let model =new EncuestaPregunta();
+
+      model.nIdEncuestaPregunta=element.nIdEncuestaPregunta;
+      model.nIdPregunta=element.nIdPregunta;
+      model.nIdGrupo=element.nIdGrupo;
+      model.cDescripcion=element.cDescripcion;
+      model.nTipo=element.nTipo;
+      model.nRqObservacion=element.nRqObservacion;
+      model.nRangoMinimo=element.nRangoMinimo;
+      model.nRangoMaximo=element.nRangoMaximo;
+      model.cDefinicion=element.cDefinicion;
+  
+      this.listaEncuestaPregunta.push(model);
+    }
+    else{
+      this.listaEncuestaPregunta = this.listaEncuestaPregunta.filter(y=>y.nIdPregunta!=element.nIdPregunta);  
+    }    
   }
 }

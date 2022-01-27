@@ -8,7 +8,7 @@
     right: 0;
   }
   .mat-toolbar.mat-primary{
-    background:#d8690a;
+    background:#ee4b06 no-repeat 0 0;
     z-index:200;
   } 
 
@@ -47,10 +47,18 @@ button{
   }
 
   .mat-toolbar-row, .mat-toolbar-single-row{
-    height:48px;
+    height:50px;
   }
 
   .close{
     background-color:#c50202;
     color:white;
+  }
+
+  .example-button {
+    margin-top: 16px;
+  }
+  
+  .example-tooltip-red {
+    background: #b71c1c;
   }

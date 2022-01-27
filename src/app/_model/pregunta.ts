@@ -12,6 +12,7 @@ export class Pregunta{
     nRangoMinimo? :number;
     nRangoMaximo? :number;
     cDefinicion? : string;
+    bMarcado?: boolean;
 
     listaGrupo?: Grupo[];
 }

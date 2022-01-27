@@ -27,7 +27,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   z-index: 100;
   background:white;
   margin-top:40px;
-  box-shadow:0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  /* box-shadow:0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%); */
+  box-shadow: 0px 3px 10px 4px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 }
 
 .mat-card.cardborde{
@@ -35,7 +36,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .mat-toolbar.cardtitle{
-  background-color: #3f51b5 !important;
+  background: linear-gradient( 180deg,#1367ff,#045ed8);
   color: white;
   height:36px;
   font-size:17px;
@@ -46,7 +47,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .container{
   margin-right: 2em;
   margin-left: 2em;
-  margin-top: 152px;
+  margin-top: 136px;
 }
 
 .overlay{
@@ -77,10 +78,8 @@ form{
 /* botones en la cabezera formulario */
 .example-button-row .mat-button-base {
   /* margin: 8px 8px 8px 0; */
-  margin: 3px 11px 3px 0;
+  margin: 10px 36px -3px -25px;
 }
-
-
 
 /* loading page */
 .example-loading-shade {
