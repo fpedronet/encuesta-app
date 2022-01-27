@@ -2,7 +2,7 @@ import { Pregunta } from './../../../_model/pregunta';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Event, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
 
@@ -68,12 +68,12 @@ export class CencuestaComponent implements OnInit {
   obtener(){
     this.spinner.showLoading();
     this.encuestaService.obtener(this.id).subscribe(data=>{
-debugger;
+
       this.listaSistema= data.listaSistema;
       this.listaCliente= data.listaCliente;
       this.listaIdCliente= data.listaIdCliente;
       this.listaPregunta= data.listaPregunta;
-      this.listaEncuestaPregunta= data.listaEncuestaPregunta;
+      this.listaEncuestaPregunta= data.listaEncuestaPregunta;     
 
       this.form = new FormGroup({
         'nIdEncuesta': new FormControl({ value: data.nIdEncuesta }),
@@ -126,19 +126,26 @@ debugger;
     });
   }
 
-  checkPregunta(element: EncuestaPregunta){
-    let model =new EncuestaPregunta();
+  checkPregunta(element: EncuestaPregunta, e: any){
+    debugger;
 
-    model.nIdEncuestaPregunta=element.nIdEncuestaPregunta;
-    model.nIdPregunta=element.nIdPregunta;
-    model.nIdGrupo=element.nIdGrupo;
-    model.cDescripcion=element.cDescripcion;
-    model.nTipo=element.nTipo;
-    model.nRqObservacion=element.nRqObservacion;
-    model.nRangoMinimo=element.nRangoMinimo;
-    model.nRangoMaximo=element.nRangoMaximo;
-    model.cDefinicion=element.cDefinicion;
+    if(e.checked){
+      let model =new EncuestaPregunta();
 
-    this.listaEncuestaPregunta.push(model);
+      model.nIdEncuestaPregunta=element.nIdEncuestaPregunta;
+      model.nIdPregunta=element.nIdPregunta;
+      model.nIdGrupo=element.nIdGrupo;
+      model.cDescripcion=element.cDescripcion;
+      model.nTipo=element.nTipo;
+      model.nRqObservacion=element.nRqObservacion;
+      model.nRangoMinimo=element.nRangoMinimo;
+      model.nRangoMaximo=element.nRangoMaximo;
+      model.cDefinicion=element.cDefinicion;
+  
+      this.listaEncuestaPregunta.push(model);
+    }
+    else{
+      this.listaEncuestaPregunta = this.listaEncuestaPregunta.filter(y=>y.nIdPregunta!=element.nIdPregunta);  
+    }    
   }
 }
