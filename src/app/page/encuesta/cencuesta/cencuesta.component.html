@@ -43,15 +43,16 @@
                         <input matInput placeholder="Descripción" minlength="1" maxlength="500" required formControlName="cDescripcion" autocomplete="off">
                     </mat-form-field> 
 
-                    
-                    <mat-grid-list cols="2" rowHeight="180px">
+                   <mat-divider></mat-divider>
+
+                    <mat-grid-list style="margin-top: 11px;" cols="2" rowHeight="180px">
                         
                         <mat-grid-tile>
                             <div class="mat-elevation-z0">
                                 <table mat-table [dataSource]="listaPregunta" matSort>
                                                               
                                   <ng-container matColumnDef="cDescripcion">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> PREGUNTAS </th>
+                                    <th style="color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> PREGUNTAS </th>
                                     <td mat-cell *matCellDef="let element"> {{element.cDescripcion}} </td>
                                   </ng-container>                        
                                       
