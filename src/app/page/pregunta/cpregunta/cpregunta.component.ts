@@ -9,6 +9,7 @@ import { PregdinamicaService } from '../../component/pregdinamica/pregdinamica.s
 
 import { Pregunta } from 'src/app/_model/pregunta';
 import { PreguntaService } from 'src/app/_service/pregunta.service';
+import { EncuestaPregunta } from 'src/app/_model/encuestaPregunta';
 import { environment } from 'src/environments/environment';
 import { TipoPregunta } from 'src/app/_model/tipoPregunta';
 import { DateRange } from '@angular/material/datepicker';
@@ -40,7 +41,8 @@ export class CpreguntaComponent implements OnInit {
   listaGrupo?: Grupo[] = [];
 
   listaTipo?: TipoPregunta[] = [];
-  selectedTipo?: TipoPregunta;
+
+  curPregunta?: EncuestaPregunta;
 
   ngOnInit(): void { 
     this.form = new FormGroup({
@@ -62,6 +64,8 @@ export class CpreguntaComponent implements OnInit {
       this.ver = (data["ver"]=='true')? true : false
       this.obtener();
     });
+
+    this.curPregunta = new EncuestaPregunta();
   }
 
   obtener(){
@@ -113,10 +117,11 @@ export class CpreguntaComponent implements OnInit {
   }
 
   cambioTipoPregunta(newTipo: number){
-    debugger;
-    //let nTipoStr = (event.target as HTMLInputElement).value;
-    //let nTipo: number = +nTipoStr;
-    this.pregdinamicaService.changeIdTipo(newTipo);
-    debugger;
+    if(this.curPregunta !== undefined){
+      this.curPregunta.nTipo = newTipo;
+
+      this.pregdinamicaService.actualizaPregunta(this.curPregunta);
+    }    
+    //debugger;
   }
 }

@@ -1,8 +1,37 @@
-<div [ngSwitch]="curTipo">
-    <div    *ngSwitchCase="1"    >2</div>
-    <div   *ngSwitchCase="2"     >3</div>
-    <div     *ngSwitchCase="3"  >4</div>
-    <div     *ngSwitchCase="4"   >5</div>
-    <div  *ngSwitchDefault           >0</div>
-</div>
+<div [ngSwitch]="curPregunta.nTipo">
 
+    <div *ngSwitchCase="1"> <!-- Casillas -->
+        <li *ngFor="let el of listaOpciones">
+            <mat-checkbox>
+              {{el}}
+            </mat-checkbox>
+        </li>
+    </div>
+
+    <div *ngSwitchCase="2"> <!-- Escala lineal -->
+        2
+    </div>
+
+    <div *ngSwitchCase="3"> <!-- Respuesta corta -->
+        <mat-form-field appearance="outline">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+        </mat-form-field>
+    </div>
+
+    <div *ngSwitchCase="4"> <!-- Sí/No -->
+        4
+    </div>
+
+    <div *ngSwitchCase="5"> <!-- Varias opciones -->
+        <li *ngFor="let el of listaOpciones">
+            <mat-checkbox>
+              {{el}}
+            </mat-checkbox>
+        </li>
+    </div>
+
+    <div *ngSwitchDefault>
+        Selecciona un tipo para cargar plantilla.
+    </div>
+</div>

@@ -47,12 +47,14 @@ export class LpreguntaComponent implements OnInit {
     @ViewChild(MatSort) sort!: MatSort;
     
     ngOnInit(): void {
+      debugger;
       this.listarGrupos();
       this.listaTipo = environment.listaTipo;
+      debugger;
     }
   
     ngAfterViewInit(data: string = '', grupo: number = 0, tipo: number = 0) {
-  
+      debugger;
       this.preguntaService = new PreguntaService(this.http);
       this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
   

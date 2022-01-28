@@ -19,6 +19,7 @@ import { LpreguntaComponent } from './pregunta/lpregunta/lpregunta.component';
 import { CpreguntaComponent } from './pregunta/cpregunta/cpregunta.component';
 import { LclienteComponent } from './cliente/lcliente/lcliente.component';
 import { CclienteComponent } from './cliente/ccliente/ccliente.component';
+import { PregdinamicaComponent } from './component/pregdinamica/pregdinamica.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CclienteComponent } from './cliente/ccliente/ccliente.component';
     CpreguntaComponent,
     LclienteComponent,
     CclienteComponent,
+    PregdinamicaComponent,
   ],
   imports: [
     MaterialModule,

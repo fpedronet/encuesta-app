@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TipoPregunta } from 'src/app/_model/tipoPregunta';
 import { PregdinamicaComponent } from './pregdinamica.component';
+import { EncuestaPregunta } from 'src/app/_model/encuestaPregunta';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -10,12 +11,12 @@ export class PregdinamicaService {
 
   pregDinamicaComp!: PregdinamicaComponent;
 
-  curTipo: number = 0;
+  curPregunta: EncuestaPregunta = new EncuestaPregunta();
 
   constructor() { }
 
-  changeIdTipo(newTipo: number){
-    this.pregDinamicaComp.curTipo = newTipo;
+  actualizaPregunta(newPregunta: EncuestaPregunta){
+    this.pregDinamicaComp.curPregunta = newPregunta;
     //this.pregDinamicaComp.ngOnInit();
   }
 

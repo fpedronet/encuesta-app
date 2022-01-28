@@ -19,7 +19,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {SpinnerModule } from '../page/component/spinner/spinner.module';
-import {PregdinamicaModule } from '../page/component/pregdinamica/pregdinamica.module';
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -55,7 +54,6 @@ import {MatListModule} from '@angular/material/list';
     MatDialogModule,
     MatProgressSpinnerModule,
     SpinnerModule,
-    PregdinamicaModule,
     MatSelectModule,
     FormsModule,
     MatDatepickerModule,
