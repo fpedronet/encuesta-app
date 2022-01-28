@@ -14,7 +14,7 @@
                 <mat-label>Mínimo</mat-label>
                 <mat-list-item *ngFor="let el of listaOpciones; let i = index">                    
                     <mat-radio-button [value]="i" (change)="answer = $event.value">
-                        {{el}}
+                        {{el}}                    
                     </mat-radio-button>                    
                 </mat-list-item>
                 <mat-label>Máximo</mat-label>
