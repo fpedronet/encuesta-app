@@ -1,34 +1,46 @@
 <div [ngSwitch]="curPregunta.nTipo">
+    <mat-label>Modelo de pregunta</mat-label>
 
     <div *ngSwitchCase="1"> <!-- Casillas -->
-        <li *ngFor="let el of listaOpciones">
+        <mat-list-item *ngFor="let el of listaOpciones; let i = index">
             <mat-checkbox>
               {{el}}
             </mat-checkbox>
-        </li>
+        </mat-list-item>
     </div>
 
     <div *ngSwitchCase="2"> <!-- Escala lineal -->
-        2
+            <mat-radio-group class="escala-lineal">
+                <mat-label>Mínimo</mat-label>
+                <mat-list-item *ngFor="let el of listaOpciones; let i = index">                    
+                    <mat-radio-button [value]="i" (change)="answer = $event.value">
+                        {{el}}
+                    </mat-radio-button>                    
+                </mat-list-item>
+                <mat-label>Máximo</mat-label>
+            </mat-radio-group>            
     </div>
 
     <div *ngSwitchCase="3"> <!-- Respuesta corta -->
-        <mat-form-field appearance="outline">
-            <mat-label>Leave a comment</mat-label>
-            <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-        </mat-form-field>
+            <mat-label>Enunciado de la pregunta</mat-label>
+            <textarea matInput placeholder="Escriba sus respuesta"></textarea>
     </div>
 
     <div *ngSwitchCase="4"> <!-- Sí/No -->
-        4
+            <mat-radio-group class="varias-opciones">
+                <mat-radio-button value="1">Sí</mat-radio-button>
+                <mat-radio-button value="2">No</mat-radio-button>
+            </mat-radio-group>     
     </div>
 
     <div *ngSwitchCase="5"> <!-- Varias opciones -->
-        <li *ngFor="let el of listaOpciones">
-            <mat-checkbox>
-              {{el}}
-            </mat-checkbox>
-        </li>
+            <mat-radio-group class="varias-opciones">
+                <mat-list-item *ngFor="let el of listaOpciones; let i = index">
+                    <mat-radio-button [value]="i" (change)="answer = $event.value">
+                        {{el}}
+                    </mat-radio-button>
+                </mat-list-item>
+            </mat-radio-group>         
     </div>
 
     <div *ngSwitchDefault>

@@ -14,6 +14,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCardModule} from '@angular/material/card';
+import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -49,6 +50,7 @@ import {MatListModule} from '@angular/material/list';
     MatPaginatorModule,
     MatSortModule,
     MatCardModule,
+    MatRadioModule,
     MatSnackBarModule,
     MatButtonToggleModule,
     MatDialogModule,

@@ -29,7 +29,6 @@
           <mat-form-field appearance="outline">
             <mat-select
               placeholder="Grupo"
-              formControlName="nIdGrupo"
             >
               <mat-option *ngFor="let el of listaGrupo" [value]="el.nIdGrupo">
                   {{el.cDescripcion}}
@@ -42,7 +41,6 @@
           <mat-form-field appearance="outline">
             <mat-select
               placeholder="Tipo"
-              formControlName="nIdTipo"
             >
               <mat-option *ngFor="let el of listaTipo" [value]="el.nIdTipo">
                   {{el.cDescripcion}}
