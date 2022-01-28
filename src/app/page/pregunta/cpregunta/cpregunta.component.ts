@@ -42,7 +42,7 @@ export class CpreguntaComponent implements OnInit {
 
   listaTipo?: TipoPregunta[] = [];
 
-  curPregunta?: EncuestaPregunta;
+  curPregunta?: EncuestaPregunta = new EncuestaPregunta();
 
   ngOnInit(): void { 
     this.form = new FormGroup({
@@ -65,13 +65,17 @@ export class CpreguntaComponent implements OnInit {
       this.obtener();
     });
 
-    this.curPregunta = new EncuestaPregunta();
+    //this.curPregunta = new EncuestaPregunta();
   }
 
   obtener(){
       this.spinner.showLoading();
       this.preguntaService.obtener(this.id).subscribe(data=>{
         this.listaGrupo = data.listaGrupo;
+
+        if(data.nTipo !== undefined){
+          this.cambioTipoPregunta(data.nTipo);
+        }
 
         this.form = new FormGroup({
           'nIdPregunta': new FormControl({ value: data.nIdPregunta }),
@@ -82,10 +86,10 @@ export class CpreguntaComponent implements OnInit {
           'nRqObservacion': new FormControl({ value: data.nRqObservacion, disabled: this.ver }),
           'nRangoMinimo': new FormControl({ value: data.nRangoMinimo, disabled: this.ver }),
           'nRangoMaximo': new FormControl({ value: data.nRangoMaximo, disabled: this.ver }),
-          'cDefinicion': new FormControl({ value: data.cDefinicion, disabled: this.ver})
+          'cDefinicion': new FormControl({ value: data.cDefinicion, disabled: true})
         });
+        
         this.spinner.hideLoading();
-
       });
   }
 
@@ -117,11 +121,15 @@ export class CpreguntaComponent implements OnInit {
   }
 
   cambioTipoPregunta(newTipo: number){
+    this.otrosParametros = false;
+    if(newTipo === 2){
+      this.otrosParametros = true;
+    }
     if(this.curPregunta !== undefined){
       this.curPregunta.nTipo = newTipo;
 
       this.pregdinamicaService.actualizaPregunta(this.curPregunta);
-    }    
+    }
     //debugger;
   }
 }

@@ -15,6 +15,8 @@ export class PregdinamicaComponent implements OnInit {
 
   curPregunta = this.pregdinamica.curPregunta;
 
+  answer: number[] = [];
+
   listaOpciones = ['Opción 1', 'Opción 2', 'Opción 3'];
 
   ngOnInit(): void {

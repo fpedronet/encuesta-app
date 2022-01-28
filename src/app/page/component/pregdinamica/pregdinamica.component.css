@@ -1,0 +1,13 @@
+.varias-opciones {
+    display: flex; flex-direction: column;
+    /* display: inline-grid; */ 
+    /* display: grid; */
+    margin: 15px 0;
+}
+
+.escala-lineal {
+    display: flex; flex-direction: row;
+    /* display: inline-grid; */ 
+    /* display: grid; */
+    margin: 15px 0;
+}
