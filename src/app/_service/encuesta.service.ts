@@ -27,6 +27,19 @@ export class EncuestaService {
     return this.http.get<dataCollection>(urls);
   }
 
+  listarSegunUsuario(data: string, usuario: number, enCurso: number, fechaIni: Date, fechaFin: Date, page: number,pages: number, column: string, order: SortDirection ) {
+    column = (column==undefined)?'':column;
+    usuario = (usuario==undefined)?0:usuario;
+    enCurso = (enCurso==undefined)?1:enCurso;
+    let finicio = (fechaIni==undefined)?'':fechaIni.toDateString();
+    let ffin = (fechaFin==undefined)?'':fechaFin.toDateString();
+
+    let href = `${this.url}/GetAllEncuestaUsuario`;
+    let urls = `${href}?data=${data}&usuario=${usuario}&enCurso=${enCurso}&fechaIni=${finicio}&fechaFin=${ffin}&page=${page+1}&pages=${pages}&column=${column}&order=${order}`;
+
+    return this.http.get<dataCollection>(urls);
+  }
+
   obtener(id: number){
     let urls = `${this.url}/GetFirstEncuesta?id=${id}`;
     return this.http.get<Encuesta>(urls);

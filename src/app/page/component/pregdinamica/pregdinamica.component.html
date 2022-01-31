@@ -1,6 +1,7 @@
 <div [ngSwitch]="curPregunta.nTipo">
+    <mat-divider></mat-divider>
     <mat-label>Modelo de pregunta</mat-label>
-
+    <mat-divider></mat-divider>
     <div *ngSwitchCase="1"> <!-- Casillas -->
         <mat-list-item *ngFor="let el of listaOpciones; let i = index">
             <mat-checkbox>
