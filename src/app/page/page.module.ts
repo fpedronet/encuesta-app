@@ -20,6 +20,8 @@ import { CpreguntaComponent } from './pregunta/cpregunta/cpregunta.component';
 import { LclienteComponent } from './cliente/lcliente/lcliente.component';
 import { CclienteComponent } from './cliente/ccliente/ccliente.component';
 import { PregdinamicaComponent } from './component/pregdinamica/pregdinamica.component';
+import { LvistaclienteComponent } from './vistacliente/lvistacliente/lvistacliente.component';
+import { CvistaclienteComponent } from './vistacliente/cvistacliente/cvistacliente.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { PregdinamicaComponent } from './component/pregdinamica/pregdinamica.com
     LclienteComponent,
     CclienteComponent,
     PregdinamicaComponent,
+    LvistaclienteComponent,
+    CvistaclienteComponent,
   ],
   imports: [
     MaterialModule,

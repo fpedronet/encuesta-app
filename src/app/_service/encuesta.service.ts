@@ -40,6 +40,11 @@ export class EncuestaService {
     return this.http.get<dataCollection>(urls);
   }
 
+  existeEncuseta() {
+    let urls = `${this.url}/GetExistEncuestaUsuario`;
+    return this.http.get<dataCollection>(urls);
+  }
+
   obtener(id: number){
     let urls = `${this.url}/GetFirstEncuesta?id=${id}`;
     return this.http.get<Encuesta>(urls);
