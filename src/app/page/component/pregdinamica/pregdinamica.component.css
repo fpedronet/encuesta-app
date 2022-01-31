@@ -11,3 +11,7 @@
     /* display: grid; */
     margin: 15px 0;
 }
+
+.escala-lineal::ng-deep.mat-radio-label{
+    flex-direction: column-reverse;
+}
