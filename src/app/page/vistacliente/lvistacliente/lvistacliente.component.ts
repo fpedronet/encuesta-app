@@ -85,8 +85,9 @@ export class LvistaclienteComponent implements OnInit {
     this.data = (event.target as HTMLInputElement).value;
   }
 
-  verVistaCliente(){
-    this.router.navigate(['/page/vistacliente']);
+  verVistaCliente(id: number){
+    let url = '/page/vistacliente/'+id;
+    this.router.navigate([url]);
     this.dialogRef.close();
   }
 

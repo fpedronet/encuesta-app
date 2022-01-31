@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TipoPregunta } from 'src/app/_model/tipoPregunta';
 import { PregdinamicaService } from './pregdinamica.service';
 
@@ -9,11 +9,13 @@ import { PregdinamicaService } from './pregdinamica.service';
 })
 export class PregdinamicaComponent implements OnInit {
 
+  @Input() curPregunta:any;
+
   constructor(private pregdinamica: PregdinamicaService) { 
     pregdinamica.pregDinamicaComp = this;
   }
 
-  curPregunta = this.pregdinamica.curPregunta;
+  // curPregunta = this.pregdinamica.curPregunta;
 
   answer: number[] = [];
 

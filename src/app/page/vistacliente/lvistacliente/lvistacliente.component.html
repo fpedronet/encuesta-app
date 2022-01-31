@@ -35,7 +35,7 @@
       <ng-container matColumnDef="nAccion">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element" style="text-align: right;">
-             <a class="pointer ver" matTooltip="Ver" (click)="verVistaCliente()">
+             <a class="pointer ver" matTooltip="Ver" (click)="verVistaCliente(element.nIdEncuesta)">
               <mat-icon>visibility</mat-icon>
            </a>
           </td>

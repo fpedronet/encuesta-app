@@ -49,7 +49,7 @@ const routes: Routes = [
   {path:'encuesta/edit/:id', component: CencuestaComponent, canActivate: [GuardService]},
   {path:'encuesta/ver/:id/:ver', component: CencuestaComponent, canActivate: [GuardService]},
 
-  {path:'vistacliente', component: CvistaclienteComponent, canActivate: [GuardService]},
+  {path:'vistacliente/:id', component: CvistaclienteComponent, canActivate: [GuardService]},
 ];
 
 @NgModule({

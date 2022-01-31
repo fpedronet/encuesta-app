@@ -127,7 +127,6 @@ export class CencuestaComponent implements OnInit {
   }
 
   checkPregunta(element: EncuestaPregunta, e: any){
-    debugger;
 
     if(e.checked){
       let model =new EncuestaPregunta();
