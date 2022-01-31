@@ -31,13 +31,14 @@ export class CvistaclienteComponent implements OnInit {
   id: number = 0;
   listaEncuestaPregunta: EncuestaPregunta[] = [];
   
+  nIdEncuesta: number = 0;
+  cTitulo: string = '';
+  cDescripcion: string = '';
+
   ngOnInit(): void {
     this.form = new FormGroup({
-      'nIdEncuesta': new FormControl({ value: 0, disabled: false }),
-      'cTitulo': new FormControl({ value: '', disabled: false}),
-      'cDescripcion': new FormControl({ value: '', disabled: false})
+      
     });
-
     this.route.params.subscribe((data: Params)=>{
       this.id = (data["id"]==undefined)? 0:data["id"];
       this.obtener();
@@ -48,13 +49,17 @@ export class CvistaclienteComponent implements OnInit {
     this.spinner.showLoading();
     this.encuestaService.obtener(this.id).subscribe(data=>{
 
+      this.form = new FormGroup({
+      
+      });
+
+      this.nIdEncuesta= data.nIdEncuesta!;
+      this.cTitulo=  data.cTitulo!;
+      this.cDescripcion= data.cDescripcion!;
       this.listaEncuestaPregunta = data.listaEncuestaPregunta;
 
-      this.form = new FormGroup({
-        'nIdEncuesta': new FormControl({ value: data.nIdEncuesta, disabled: false }),
-        'cTitulo': new FormControl({ value: data.cTitulo, disabled: false}),
-        'cDescripcion': new FormControl({ value: data.cDescripcion, disabled: false})
-      });
+
+
       this.spinner.hideLoading();
 
     });

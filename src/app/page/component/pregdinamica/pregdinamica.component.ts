@@ -14,9 +14,7 @@ export class PregdinamicaComponent implements OnInit {
   constructor(private pregdinamica: PregdinamicaService) { 
     pregdinamica.pregDinamicaComp = this;
   }
-
-  // curPregunta = this.pregdinamica.curPregunta;
-
+  
   answer: number[] = [];
 
   listaOpciones = ['Opción 1', 'Opción 2', 'Opción 3'];
