@@ -1,9 +1,9 @@
 <div [ngSwitch]="curPregunta.nTipo">
-    <mat-divider></mat-divider>
-    <mat-label>Modelo de pregunta</mat-label>
-    <mat-divider></mat-divider>
+
+    <mat-label>{{curPregunta.nOrden}}. {{curPregunta.cDescripcion}}</mat-label>
+
     <div *ngSwitchCase="1"> <!-- Casillas -->
-        <mat-list-item *ngFor="let el of listaOpciones; let i = index">
+        <mat-list-item *ngFor="let el of options; let i = index">
             <mat-checkbox>
               {{el}}
             </mat-checkbox>
@@ -12,19 +12,18 @@
 
     <div *ngSwitchCase="2"> <!-- Escala lineal -->
             <mat-radio-group class="escala-lineal">
-                <mat-label>Mínimo</mat-label>
-                <mat-list-item *ngFor="let el of listaOpciones; let i = index">                    
+                <mat-label>{{minScale}}</mat-label>
+                <mat-list-item *ngFor="let el of scaleNumbers; let i = index">                    
                     <mat-radio-button [value]="i" (change)="answer = $event.value">
                         {{el}}                    
                     </mat-radio-button>                    
                 </mat-list-item>
-                <mat-label>Máximo</mat-label>
+                <mat-label>{{maxScale}}</mat-label>
             </mat-radio-group>            
     </div>
 
     <div *ngSwitchCase="3"> <!-- Respuesta corta -->
-            <mat-label>Enunciado de la pregunta</mat-label>
-            <textarea matInput placeholder="Escriba sus respuesta"></textarea>
+            <textarea matInput placeholder="Escriba su respuesta"></textarea>
     </div>
 
     <div *ngSwitchCase="4"> <!-- Sí/No -->
@@ -36,15 +35,25 @@
 
     <div *ngSwitchCase="5"> <!-- Varias opciones -->
             <mat-radio-group class="varias-opciones">
-                <mat-list-item *ngFor="let el of listaOpciones; let i = index">
+                <mat-list-item *ngFor="let el of options; let i = index">
                     <mat-radio-button [value]="i" (change)="answer = $event.value">
                         {{el}}
                     </mat-radio-button>
                 </mat-list-item>
+                <div *ngIf="curPregunta.nRqObservacion" >
+                    <mat-radio-button [value]="options.length" (change)="answer = $event.value">
+                        Otro
+                    </mat-radio-button>
+                    <mat-form-field>
+                        <input matInput placeholder="Indique su opción">
+                    </mat-form-field>
+                </div>
             </mat-radio-group>         
     </div>
 
     <div *ngSwitchDefault>
         Selecciona un tipo para cargar plantilla.
     </div>
+
+    <mat-divider></mat-divider>
 </div>
