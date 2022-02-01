@@ -55,13 +55,6 @@ export function tokenGetter() {
     SpinnerModule,
     HttpClientModule,
     MatInputModule
-    // JwtModule.forRoot({
-    //   config: {
-    //     tokenGetter: tokenGetter,
-    //     allowedDomains: [environment.UrlApi.substring(7)],
-    //     disallowedRoutes: [`http://${environment.UrlApi.substring(7)}/login/login`],
-    //   },
-    // }),
   ],
   providers: [
     {

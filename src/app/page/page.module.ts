@@ -22,6 +22,7 @@ import { CclienteComponent } from './cliente/ccliente/ccliente.component';
 import { PregdinamicaComponent } from './component/pregdinamica/pregdinamica.component';
 import { LvistaclienteComponent } from './vistacliente/lvistacliente/lvistacliente.component';
 import { CvistaclienteComponent } from './vistacliente/cvistacliente/cvistacliente.component';
+import { Not403Component } from './not403/not403.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { CvistaclienteComponent } from './vistacliente/cvistacliente/cvistaclien
     PregdinamicaComponent,
     LvistaclienteComponent,
     CvistaclienteComponent,
+    Not403Component,
   ],
   imports: [
     MaterialModule,
