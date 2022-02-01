@@ -15,6 +15,7 @@
       </a>
       <span class="example-spacer"></span>
       <div fxShow="true" fxHide.lt-md="true">
+        <a mat-button routerLink="/page/inicio">Inicio</a>
         <a mat-button routerLink="/page/sistema">Sistema</a>
         <a mat-button routerLink="/page/cliente">Cliente</a>
         <a mat-button routerLink="/page/grupo">Grupo</a>
@@ -30,6 +31,10 @@
   
       <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
         <div fxLayout="column">
+            <a class="menu" mat-button routerLink="/page/inicio">
+                <mat-icon>insert_drive_file</mat-icon>    
+                Inicio
+            </a>
             <a class="menu" mat-button routerLink="/page/sistema">
                 <mat-icon>insert_drive_file</mat-icon>    
                 Sistema

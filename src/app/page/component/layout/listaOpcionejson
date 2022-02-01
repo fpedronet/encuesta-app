@@ -1,0 +1,13 @@
+[
+   {
+      "id":"1",
+      "nombre":"Torta de Chocolate",
+      "stock":"35",
+      "precio":"5.00",
+      "url":"torta-de-chocolate",
+      "img":"tc.jpg",
+      "fecha":"2019-06-17 15:56:23"
+   }
+
+]
+ 
