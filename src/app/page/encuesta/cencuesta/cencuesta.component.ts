@@ -67,7 +67,7 @@ export class CencuestaComponent implements OnInit {
 
   obtener(){
     this.spinner.showLoading();
-    this.encuestaService.obtener(this.id).subscribe(data=>{
+    this.encuestaService.obtener(this.id, 0).subscribe(data=>{
 
       this.listaSistema= data.listaSistema;
       this.listaCliente= data.listaCliente;

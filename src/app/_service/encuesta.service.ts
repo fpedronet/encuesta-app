@@ -6,6 +6,7 @@ import { SortDirection } from '@angular/material/sort';
 import { dataCollection } from '../_model/dataCollection';
 
 import { Encuesta } from '../_model/encuesta';
+import { Respuesta } from '../_model/respuesta';
 
 @Injectable({
   providedIn: 'root'
@@ -45,8 +46,8 @@ export class EncuestaService {
     return this.http.get<dataCollection>(urls);
   }
 
-  obtener(id: number){
-    let urls = `${this.url}/GetFirstEncuesta?id=${id}`;
+  obtener(id: number, vistaCliente: number){
+    let urls = `${this.url}/GetFirstEncuesta?id=${id}&vistaCliente=${vistaCliente}`;
     return this.http.get<Encuesta>(urls);
   }
 
@@ -58,5 +59,10 @@ export class EncuestaService {
   guardar(encuesta: Encuesta){
     let urls = `${this.url}/PostSaveEncuesta`;
     return this.http.post<Response>(urls, encuesta);
+  }
+
+  guardarRespuesta(respuesta: Respuesta){
+    let urls = `${this.url}/PostSaveEncuesta`;
+    return this.http.post<Response>(urls, respuesta);
   }
 }

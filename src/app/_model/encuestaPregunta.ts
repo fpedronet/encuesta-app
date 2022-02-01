@@ -1,3 +1,5 @@
+import { Respuesta } from './respuesta';
+
 export class EncuestaPregunta{
     constructor() {
         this.nIdEncuestaPregunta = 0;
@@ -25,4 +27,5 @@ export class EncuestaPregunta{
     nRangoMaximo? :number;
     cDefinicion? : string;
     nEstado? :number;
+    respuesta? : Respuesta;
 }

@@ -47,7 +47,7 @@ export class CvistaclienteComponent implements OnInit {
 
   obtener(){
     this.spinner.showLoading();
-    this.encuestaService.obtener(this.id).subscribe(data=>{
+    this.encuestaService.obtener(this.id, 1).subscribe(data=>{
 
       this.form = new FormGroup({
       
