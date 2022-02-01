@@ -22,7 +22,7 @@
             
             <ul>
                 <li *ngFor="let item of listaEncuestaPregunta" value={{item.nIdPregunta}}>
-                    <app-pregdinamica [curPregunta]="item"></app-pregdinamica>
+                    <app-pregdinamica [curPregunta]="item" [edicion]="false"></app-pregdinamica>
                 </li>
             </ul>           
 

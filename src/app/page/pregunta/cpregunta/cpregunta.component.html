@@ -84,9 +84,12 @@
                     <input matInput placeholder="Definicion" formControlName="cDefinicion">
                </mat-form-field>
             </div>
-
+            
             <div>
-                <app-pregdinamica ></app-pregdinamica>
+                <mat-divider></mat-divider>
+                    <mat-label>Modelo de pregunta</mat-label>
+                <mat-divider></mat-divider>
+                <app-pregdinamica [edicion]="true"></app-pregdinamica>
             </div>
         </form>
     </mat-card>    

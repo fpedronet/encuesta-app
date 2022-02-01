@@ -17,6 +17,10 @@ export class PregdinamicaService {
 
   actualizaPregunta(newPregunta: EncuestaPregunta){
     this.pregDinamicaComp.curPregunta = newPregunta;
+    
+    if(newPregunta.cDefinicion !== undefined){
+      this.pregDinamicaComp.setDefinicion(newPregunta.cDefinicion);
+    }    
     //this.pregDinamicaComp.ngOnInit();
   }
 
