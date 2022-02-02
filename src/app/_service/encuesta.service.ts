@@ -61,8 +61,8 @@ export class EncuestaService {
     return this.http.post<Response>(urls, encuesta);
   }
 
-  guardarRespuesta(respuesta: Respuesta){
+  guardarRespuesta(encuesta: Encuesta){
     let urls = `${this.url}/PostSaveEncuesta`;
-    return this.http.post<Response>(urls, respuesta);
+    return this.http.post<Response>(urls, encuesta);
   }
 }

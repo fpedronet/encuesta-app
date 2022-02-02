@@ -4,7 +4,7 @@
         <span>
             <button mat-raised-button color="primary" type="submit" [disabled]="frmGrupo.invalid" form="ngForm">
                 <mat-icon>save as</mat-icon>
-                <span>Guardar</span>
+                <span>Enviar</span>
             </button> 
         </span>       
     </div>
@@ -15,13 +15,13 @@
         <mat-toolbar class="toolbarencuesta">
             
           </mat-toolbar>
-          <form id="ngForm" [formGroup]="form" #frmGrupo="ngForm" (ngSubmit)="guardar()">
+          <form id="ngForm" [formGroup]="form" #frmGrupo="ngForm" (ngSubmit)="enviar()">
               
             <h1 class="titleencuesta">{{cTitulo}}</h1>
             <h2 class="subtitleencuesta">{{cDescripcion}}</h2>
             
             <ul>
-                <li *ngFor="let item of listaEncuestaPregunta" value={{item.nIdPregunta}}>
+                <li *ngFor="let item of listaEncuestaPregunta" value={{item.nIdPregunta}}; let i = index>
                     <app-pregdinamica [curPregunta]="item" [edicion]="false"></app-pregdinamica>
                 </li>
             </ul>           

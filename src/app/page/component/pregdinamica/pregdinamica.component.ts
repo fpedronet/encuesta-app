@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { TipoPregunta } from 'src/app/_model/tipoPregunta';
 import { PregdinamicaService } from './pregdinamica.service';
 import { safeJsonParse, isDefinitionObj } from "./definitionObj";
@@ -20,9 +20,15 @@ export class PregdinamicaComponent implements OnInit {
   constructor(private pregdinamica: PregdinamicaService) { 
     pregdinamica.pregDinamicaComp = this;
   }
-
-  answer: number = 0;
+  
   options: string[] = [];
+
+  @Output()
+  answer: number = -1;
+
+  @Output()
+  optionsCheckbox: boolean[] = [];
+  
   minScale: string = 'Mínimo';
   maxScale: string = 'Máximo';
   scaleNumbers: number[] = [];
@@ -56,9 +62,16 @@ export class PregdinamicaComponent implements OnInit {
     } else {
       var obj = result.parsed;
 
-      //Opciones para listas
+      //Opciones para listas (checkbox y radiobutton)
       this.options = obj.opciones;
       if(this.options.length === 0) this.options = this.defaultOptions;
+
+      //Crea arreglo de deseleccionados para checkbox
+      this.options.forEach(op => {
+        this.optionsCheckbox.push(false);
+      });
+      if(this.curPregunta.nRqObservacion === 1) //Añade uno más si existe opción otro
+        this.optionsCheckbox.push(false);
 
       //Opciones para escalas
       if(obj.minEscala !== '') this.minScale = obj.minEscala;
@@ -66,4 +79,13 @@ export class PregdinamicaComponent implements OnInit {
     }
   }
 
+  updateAnswer(valorSel: number){
+    //debugger;
+    console.log(valorSel);
+    this.answer = valorSel;
+  }
+
+  returnAnswer(){
+    return "A";
+  }
 }

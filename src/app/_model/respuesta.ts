@@ -1,5 +1,5 @@
 export class Respuesta{
-    nIdRepuesta?: number;
+    nIdRespuesta?: number;
     nIdEncuestaPregunta?: number;
     nIdCliente?: number;
     cRespuesta?: string;
