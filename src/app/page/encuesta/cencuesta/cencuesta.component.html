@@ -22,6 +22,7 @@
           </mat-toolbar>
         <form id="ngForm" [formGroup]="form" #frmGrupo="ngForm" (ngSubmit)="guardar()">
             <mat-stepper labelPosition="bottom" #stepper>
+
                 <mat-step>
                     <ng-template matStepLabel>Encuesta</ng-template>
 
@@ -52,12 +53,12 @@
                                 <table mat-table [dataSource]="listaPregunta" matSort>
                                                               
                                   <ng-container matColumnDef="cDescripcion">
-                                    <th style="color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> PREGUNTAS </th>
+                                    <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> PREGUNTAS </th>
                                     <td mat-cell *matCellDef="let element"> {{element.cDescripcion}} </td>
                                   </ng-container>                        
                                       
                                   <ng-container matColumnDef="nAccion" >
-                                      <th mat-header-cell *matHeaderCellDef></th>
+                                      <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);" mat-header-cell *matHeaderCellDef></th>
                                       <td mat-cell *matCellDef="let element" style="text-align: right;">                                       
                                         <mat-checkbox [checked]="element.bMarcado" class="example-margin" (change)="checkPregunta(element, $event)"></mat-checkbox>
                                       </td>
@@ -85,6 +86,54 @@
                 </mat-step>
                 
                 <mat-step>
+                    <ng-template matStepLabel>Respuesta</ng-template>  
+
+                      <div class="mat-elevation-z0">
+                        <table style="width: 100%;" mat-table [dataSource]="listaRespuesta" matSort>
+                      
+                          <ng-container matColumnDef="nIdPregunta">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </th>
+                            <td mat-cell *matCellDef="let element"> {{element.nIdPregunta}} </td>
+                          </ng-container>
+                
+                          <ng-container matColumnDef="cGrupo">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Grupo </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cGrupo}} </td>
+                          </ng-container>
+                        
+                          <ng-container matColumnDef="cDescripcion">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cDescripcion}} </td>
+                          </ng-container>
+                
+                          <ng-container matColumnDef="nTipo">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cTipo}} </td>
+                          </ng-container>
+                              
+                          <ng-container matColumnDef="nAccion">
+                              <th mat-header-cell *matHeaderCellDef></th>
+                              <td mat-cell *matCellDef="let element" style="text-align: right;">
+                                  <a class="pointer ver" matTooltip="Ver" [routerLink]="['ver', element.nIdPregunta, true]">
+                                    <mat-icon>visibility</mat-icon>
+                                 </a>
+                              </td>
+                            </ng-container>
+                          
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsR"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsR;"></tr>
+                         
+                        </table>
+                        <mat-paginator 
+                          [length]="countRegistro" 
+                          [pageSizeOptions]="[5, 10, 20]" 
+                          showFirstLastButtons 
+                          aria-label="Select page of users">
+                        </mat-paginator>
+                      </div>
+                </mat-step>
+
+                <mat-step>
                     <ng-template matStepLabel>Configuración</ng-template>
 
                     <mat-form-field appearance="outline">
@@ -109,19 +158,20 @@
 
                     <mat-form-field appearance="outline">
                         <mat-label>Fecha Inicio</mat-label>
-                        <input matInput [matDatepicker]="dFechaIni" placeholder="dd/mm/yyyy" formControlName="dFechaIni">
+                        <input matInput [matDatepicker]="dFechaIni" placeholder="dd/mm/yyyy" formControlName="dFechaIni" required>
                         <mat-datepicker-toggle matSuffix [for]="dFechaIni"></mat-datepicker-toggle>
                         <mat-datepicker #dFechaIni></mat-datepicker>
                     </mat-form-field>
               
                     <mat-form-field appearance="outline">
                         <mat-label>Fecha Fin</mat-label>
-                        <input matInput [matDatepicker]="dFechaFin" placeholder="dd/mm/yyyy" formControlName="dFechaFin">
+                        <input matInput [matDatepicker]="dFechaFin" placeholder="dd/mm/yyyy" formControlName="dFechaFin" required>
                         <mat-datepicker-toggle matSuffix [for]="dFechaFin"></mat-datepicker-toggle>
                         <mat-datepicker #dFechaFin></mat-datepicker>
                     </mat-form-field>
 
                 </mat-step>
+
             </mat-stepper>                      
         </form>
     </mat-card>    

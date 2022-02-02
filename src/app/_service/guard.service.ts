@@ -61,27 +61,6 @@ export class GuardService implements CanActivate {
           return false;
       }
 
-      // return this.menuService.listarPorUsuario(decodedToken.usuario).pipe(map((data: Menu[]) => {
-      //   this.menuService.setMenuCambio(data);
-
-      //   let cont = 0;
-      //   for (let m of data) {
-      //     if (url.startsWith(m.url)) {
-      //       cont++;
-      //       break;
-      //     }
-      //   }
-
-      //   if (cont > 0) {
-      //     return true;
-      //   } else {
-      //     this.router.navigate(['/pages/not-403']);
-      //     return false;
-      //   }
-
-      // }));
-      
-      // return true;
     } else {
       this.usuarioService.closeLogin();
       return false;

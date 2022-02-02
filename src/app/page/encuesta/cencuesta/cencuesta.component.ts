@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Event, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
+// import publicIp from 'public-ip';
 
 import { Encuesta } from 'src/app/_model/encuesta';
 import { Sistema } from 'src/app/_model/sistema';
@@ -31,6 +32,7 @@ export class CencuestaComponent implements OnInit {
     private _formBuilder: FormBuilder
   ) { }
 
+  /*tabla de encuesta maestra */
   form: FormGroup = new FormGroup({});
   id: number = 0;
   ver: boolean = true;
@@ -41,7 +43,15 @@ export class CencuestaComponent implements OnInit {
   listaPregunta: Pregunta[] =[];
   listaEncuestaPregunta: EncuestaPregunta[] = [];
 
+  /*Listado de pregunta tabla maestra */
   displayedColumnsP: string[] = ['cDescripcion', 'nAccion'];
+
+  /*Listado de respuesta */
+  listaRespuesta: Pregunta[] = [];
+  displayedColumnsR: string[] = ['nIdPregunta', 'cGrupo','cDescripcion','nTipo', 'nAccion'];
+  loading = true;
+  existRegistro = false;
+  countRegistro = 0;
 
   listaId?: string;
   isChecked! : boolean;
@@ -66,6 +76,11 @@ export class CencuestaComponent implements OnInit {
   }
 
   obtener(){
+
+//     console.log(publicIp.v4());
+
+// console.log(publicIp.v6());
+
     this.spinner.showLoading();
     this.encuestaService.obtener(this.id, 0).subscribe(data=>{
 
@@ -73,7 +88,9 @@ export class CencuestaComponent implements OnInit {
       this.listaCliente= data.listaCliente;
       this.listaIdCliente= data.listaIdCliente;
       this.listaPregunta= data.listaPregunta;
-      this.listaEncuestaPregunta= data.listaEncuestaPregunta;     
+      this.listaEncuestaPregunta= data.listaEncuestaPregunta; 
+
+      this.listaRespuesta = data.listaPregunta;
 
       this.form = new FormGroup({
         'nIdEncuesta': new FormControl({ value: data.nIdEncuesta }),
