@@ -40,7 +40,7 @@ export class CvistaclienteComponent implements OnInit {
   cTitulo: string = '';
   cDescripcion: string = '';
 
-  existeRespuesta: boolean = false;
+  existeRespuesta: boolean = true;
   
   @ViewChildren(PregdinamicaComponent) listaComponentes: QueryList<PregdinamicaComponent> = new QueryList<PregdinamicaComponent>();
 
@@ -78,6 +78,9 @@ export class CvistaclienteComponent implements OnInit {
             let compRpta = this.listaComponentes.find(e => e.curPregunta.nIdEncuestaPregunta === preg.nIdEncuestaPregunta)!;
             compRpta.setAnswers(preg.respuesta?.cRespuestaOpt, preg.respuesta?.cRespuestaObs);
           });
+        }
+        else{
+          this.existeRespuesta = false;
         }
       });
 
