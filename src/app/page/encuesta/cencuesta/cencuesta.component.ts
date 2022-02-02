@@ -48,7 +48,7 @@ export class CencuestaComponent implements OnInit {
 
   /*Listado de respuesta */
   listaRespuesta: Pregunta[] = [];
-  displayedColumnsR: string[] = ['nIdPregunta', 'cGrupo','cDescripcion','nTipo', 'nAccion'];
+  displayedColumnsR: string[] = ['nIdRespuesta', 'cDescripcion','cRuc','dFecha', 'cUsuario','nAccion'];
   loading = true;
   existRegistro = false;
   countRegistro = 0;
@@ -84,13 +84,13 @@ export class CencuestaComponent implements OnInit {
     this.spinner.showLoading();
     this.encuestaService.obtener(this.id, 0).subscribe(data=>{
 
+      let idencuesta = data.nIdEncuesta!;
+
       this.listaSistema= data.listaSistema;
       this.listaCliente= data.listaCliente;
       this.listaIdCliente= data.listaIdCliente;
       this.listaPregunta= data.listaPregunta;
-      this.listaEncuestaPregunta= data.listaEncuestaPregunta; 
-
-      this.listaRespuesta = data.listaPregunta;
+      this.listaEncuestaPregunta= data.listaEncuestaPregunta;      
 
       this.form = new FormGroup({
         'nIdEncuesta': new FormControl({ value: data.nIdEncuesta }),
@@ -102,6 +102,11 @@ export class CencuestaComponent implements OnInit {
         'dFechaIni': new FormControl({ value: data.dFechaIni, disabled: this.ver}),
         'dFechaFin': new FormControl({ value: data.dFechaFin, disabled: this.ver})
       });
+
+      this.encuestaService.listarRespuestas(idencuesta).subscribe(resp=>{
+        this.listaRespuesta = resp.items;
+      });
+
       this.spinner.hideLoading();
 
     });
@@ -163,5 +168,10 @@ export class CencuestaComponent implements OnInit {
     else{
       this.listaEncuestaPregunta = this.listaEncuestaPregunta.filter(y=>y.nIdPregunta!=element.nIdPregunta);  
     }    
+  }
+
+  verVistaCliente(){
+    let url = '/page/vistacliente/'+ this.id;
+    this.router.navigate([url]);
   }
 }
