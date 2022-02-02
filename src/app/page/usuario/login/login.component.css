@@ -5,33 +5,39 @@ html {
   height: 100%;
 }
 
-body {
-  background-color: #eff3f4;
+.container2 {
+  background-image: url('/assets/login2.jpeg');
   position: relative;
   width: 100%;
   height: 100%;        
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
+  background-repeat:round;
 }
 
 form {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  display: block;
-  width: 100%;
-  max-width: 400px;
-  background-color: #FFF;
-  margin: 0;
-  padding: 2.25em;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  border: solid 1px #DDD;
-  border-radius: .5em;
-  font-family: 'Source Sans Pro', sans-serif;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 100%;
+    max-width: 370px;
+    background-color: #45454587;
+    margin: 0;
+    padding: 2.25em;
+    box-sizing: border-box;
+    /* border: solid 1px #df5e10; */
+    border-radius: 1.5em;
+    font-family: 'Source Sans Pro', sans-serif;
 }
+.textcliente{
+  background-color: #f3fafd;
+  border: solid 2px #217093;
+  border-radius: 8px;
+  height: 58px;
+}
+
 form .svgContainer {
   position: relative;
   width: 200px;
@@ -59,7 +65,7 @@ form .svgContainer .mySVG {
   pointer-events: none;
 }
 form .inputGroup {
-  margin: 0 0 1em;
+  margin: 12px 0 1em;
   padding: 0;
   position: relative;
 }
@@ -70,7 +76,7 @@ form label {
   margin: 0 0 12px;
   display: block;
   font-size: 1.25em;
-  color: #217093;
+  color: #ffffff;
   font-weight: 700;
   font-family: inherit;
 }
@@ -87,7 +93,7 @@ form input[type='email'], form input[type="text"], form input[type='password'] {
   width: 100%;
   height: 48px;
   font-size: 1.55em;
-  color: #353538;
+  color: #126284;
   font-weight: 600;
   font-family: inherit;
   -webkit-transition: border-color .25s ease-out, -webkit-box-shadow .2s linear;
@@ -106,27 +112,24 @@ form input[type='email'], form input[type="text"] {
 }
 form button {
   display: block;
-  margin: 0;
-  padding: .65em 1em 1em;
-  background-color: #4eb8dd;
-  border: none;
-  border-radius: 4px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  width: 100%;
-  height: 65px;
-  font-size: 1.55em;
-  color: #FFF;
-  font-weight: 600;
-  font-family: inherit;
-  -webkit-transition: background-color .2s ease-out;
-  transition: background-color .2s ease-out;
+    margin: 0;
+    padding: 0.65em 1em 1em;
+    background-color: #e0670d;
+    border: none;
+    border-radius: 20px;
+    box-sizing: border-box;
+    box-shadow: none;
+    width: 100%;
+    height: 48px;
+    font-size: 1.3em;
+    color: #FFF;
+    font-weight: 600;
+    font-family: inherit;
+    transition: background-color .2s ease-out;
 }
-form button:hover, form button:active {
-  background-color: #217093;
-}
+/* form button:hover, form button:active {
+  background-color: #5331ee;
+} */
 form .inputGroup1 .helper {
   position: absolute;
   z-index: 1;

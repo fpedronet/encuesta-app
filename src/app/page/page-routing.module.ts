@@ -21,6 +21,8 @@ import { CencuestaComponent } from './encuesta/cencuesta/cencuesta.component';
 
 import { CvistaclienteComponent } from './vistacliente/cvistacliente/cvistacliente.component';
 
+import { Not403Component } from './not403/not403.component';
+
 const routes: Routes = [
   {path:'inicio', component: InicioComponent, canActivate: [GuardService]},
 
@@ -50,6 +52,8 @@ const routes: Routes = [
   {path:'encuesta/ver/:id/:ver', component: CencuestaComponent, canActivate: [GuardService]},
 
   {path:'vistacliente/:id', component: CvistaclienteComponent, canActivate: [GuardService]},
+
+  { path: 'not-403', component: Not403Component}
 ];
 
 @NgModule({

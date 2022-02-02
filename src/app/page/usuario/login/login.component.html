@@ -1,14 +1,14 @@
 <app-spinner></app-spinner>
 
-
-<form [formGroup]="form" #frmLogin="ngForm">
+<div class="container2">
+  <form [formGroup]="form" #frmLogin="ngForm">
 
     <div class="inputGroup inputGroup1" style="text-align: center">
-      <img src="../../../../assets/logo.png" style="width: 113px; margin-top: -30px;" >
+      <img src="../../../../assets/logo.png" style="margin-top: -96px;" >
     </div>  
    
     <label for="email1">Cliente</label>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="textcliente">
       <mat-select placeholder="Seleccione Cliente" formControlName="nIdCliente">
         <mat-option *ngFor="let c of cliente" [value]="c.nIdCliente">
           {{c.cRuc}} {{c.cDescripcion}}
@@ -33,3 +33,4 @@
     <mat-card *ngIf="error">{{error}}</mat-card>
     
   </form>
+</div>
