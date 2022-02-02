@@ -28,10 +28,20 @@
                 </mat-form-field>
             </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Código</mat-label>
-                <input matInput placeholder="Codigo" formControlName="nCodigo">
-            </mat-form-field>
+            <mat-grid-list cols="2" rowHeight="80px" gutterSize="1px">
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Código</mat-label>
+                        <input matInput placeholder="Codigo" formControlName="nCodigo">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <section class="example-section" [formGroup]="form">
+                        <p><mat-checkbox formControlName="nEsAdministrador">Administrador</mat-checkbox></p>
+                    </section>
+                </mat-grid-tile>
+            </mat-grid-list>           
         
             <mat-form-field appearance="outline">
                 <mat-label>Descripción</mat-label>
@@ -66,10 +76,6 @@
               
                 </mat-select>
               </mat-form-field>            
-
-            <section class="example-section" [formGroup]="form">
-                <p><mat-checkbox formControlName="nEsAdministrador">Administrador</mat-checkbox></p>
-            </section>
               
            <br>
 
