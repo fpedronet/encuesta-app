@@ -70,4 +70,9 @@ export class EncuestaService {
     let urls = `${this.url}/GetExistRespuestas?encuesta=${idEncuesta}`;
     return this.http.get<dataCollection>(urls);
   }
+
+  listarRespuestas(idEncuesta: number){
+    let urls = `${this.url}/GetAllEncuestaRespuestas?encuesta=${idEncuesta}`;
+    return this.http.get<dataCollection>(urls);
+  }
 }
