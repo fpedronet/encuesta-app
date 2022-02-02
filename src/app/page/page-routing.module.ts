@@ -51,7 +51,7 @@ const routes: Routes = [
   {path:'encuesta/edit/:id', component: CencuestaComponent, canActivate: [GuardService]},
   {path:'encuesta/ver/:id/:ver', component: CencuestaComponent, canActivate: [GuardService]},
 
-  {path:'vistacliente/:id', component: CvistaclienteComponent, canActivate: [GuardService]},
+  {path:'vistacliente/:vistaCli/:idEnc/:idCli', component: CvistaclienteComponent, canActivate: [GuardService]},
 
   { path: 'not-403', component: Not403Component}
 ];

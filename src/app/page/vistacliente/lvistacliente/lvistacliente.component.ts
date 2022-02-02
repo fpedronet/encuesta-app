@@ -86,7 +86,8 @@ export class LvistaclienteComponent implements OnInit {
   }
 
   verVistaCliente(id: number){
-    let url = '/page/vistacliente/'+id;
+    //Vista cliente en 1, usuario en 0 (agarra al actual el back)
+    let url = '/page/vistacliente/' + 1 + '/' + id + '/' + 0;
     this.router.navigate([url]);
     this.dialogRef.close();
   }

@@ -33,7 +33,9 @@ export class CvistaclienteComponent implements OnInit {
   ) { }
 
   form: FormGroup = new FormGroup({});
-  id: number = 0;
+  vistaCli: number = 0;
+  idEnc: number = 0;
+  idCli: number = 0;
   listaEncuestaPregunta: EncuestaPregunta[] = [];
   
   nIdEncuesta: number = 0;
@@ -49,7 +51,9 @@ export class CvistaclienteComponent implements OnInit {
       
     });
     this.route.params.subscribe((data: Params)=>{
-      this.id = (data["id"]==undefined)? 0:data["id"];
+      this.vistaCli = (data["vistaCli"]==undefined)? 0:data["vistaCli"];
+      this.idEnc = (data["idEnc"]==undefined)? 0:data["idEnc"];
+      this.idCli = (data["idCli"]==undefined)? 0:data["idCli"];
       this.obtener();
     });    
   }
@@ -60,7 +64,7 @@ export class CvistaclienteComponent implements OnInit {
 
   obtener(){
     this.spinner.showLoading();
-    this.encuestaService.obtener(this.id, 1).subscribe(data=>{
+    this.encuestaService.obtener(this.idEnc, this.vistaCli, this.idCli).subscribe(data=>{
 
       this.form = new FormGroup({
       
@@ -71,7 +75,7 @@ export class CvistaclienteComponent implements OnInit {
       this.cDescripcion= data.cDescripcion!;
       this.listaEncuestaPregunta = data.listaEncuestaPregunta;
 
-      this.encuestaService.existeRespuesta(this.id).subscribe(data=>{
+      this.encuestaService.existeRespuesta(this.idEnc, this.idCli).subscribe(data=>{
         if(data.items.length > 0){
           this.existeRespuesta = true;
           this.listaEncuestaPregunta.forEach(preg => {

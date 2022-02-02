@@ -82,7 +82,7 @@ export class CencuestaComponent implements OnInit {
 // console.log(publicIp.v6());
 
     this.spinner.showLoading();
-    this.encuestaService.obtener(this.id, 0).subscribe(data=>{
+    this.encuestaService.obtener(this.id, 0, 0).subscribe(data=>{
 
       let idencuesta = data.nIdEncuesta!;
 
@@ -170,8 +170,9 @@ export class CencuestaComponent implements OnInit {
     }    
   }
 
-  verVistaCliente(){
-    let url = '/page/vistacliente/'+ this.id;
+  verVistaCliente(idCliente: number){
+    //Vista cliente en 0
+    let url = '/page/vistacliente/'+ 0 + '/' + this.id + '/' + idCliente;
     this.router.navigate([url]);
   }
 }
