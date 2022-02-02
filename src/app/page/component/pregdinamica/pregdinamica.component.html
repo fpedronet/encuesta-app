@@ -19,7 +19,7 @@
     </div>
 
     <div *ngSwitchCase="2"> <!-- Escala lineal -->
-        <mat-radio-group class="escala-lineal">
+        <mat-radio-group class="escala-lineal" [(ngModel)]="answerSelected">
             <mat-label>{{minScale}}</mat-label>
             <mat-list-item *ngFor="let el of scaleNumbers; let i = index">                    
                 <mat-radio-button [value]="i" (change)="updateAnswer($event.value)">
@@ -35,11 +35,11 @@
     </div>
 
     <div *ngSwitchCase="4"> <!-- Sí/No -->
-        <mat-radio-group class="varias-opciones">
-            <mat-radio-button value="0" (change)="updateAnswer($event.value)">Sí</mat-radio-button>
-            <mat-radio-button value="1" (change)="updateAnswer($event.value)">No</mat-radio-button>
+        <mat-radio-group class="varias-opciones" [(ngModel)]="answerSelected">
+            <mat-radio-button [value]="0" (change)="updateAnswer($event.value)">Sí</mat-radio-button>
+            <mat-radio-button [value]="1" (change)="updateAnswer($event.value)">No</mat-radio-button>
             <div *ngIf="curPregunta.nRqObservacion" >
-                <mat-radio-button value="2" (change)="updateAnswer($event.value)">
+                <mat-radio-button [value]="2" (change)="updateAnswer($event.value)">
                     Otro
                 </mat-radio-button>
                 <mat-form-field>
@@ -50,7 +50,7 @@
     </div>
 
     <div *ngSwitchCase="5"> <!-- Varias opciones -->
-        <mat-radio-group class="varias-opciones">
+        <mat-radio-group class="varias-opciones" [(ngModel)]="answerSelected">
             <mat-list-item *ngFor="let el of options; let i = index">
                 <mat-radio-button [value]="i" (change)="updateAnswer($event.value)">
                     {{el}}

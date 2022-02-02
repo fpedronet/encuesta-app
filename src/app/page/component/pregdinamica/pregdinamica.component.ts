@@ -24,6 +24,7 @@ export class PregdinamicaComponent implements OnInit {
   options: string[] = [];
 
   answer: string = '';
+  answerSelected: number = -1;
   optionsCheckbox: boolean[] = [];
   inputText: string = '';
   
@@ -64,6 +65,10 @@ export class PregdinamicaComponent implements OnInit {
       this.options = obj.opciones;
       if(this.options.length === 0) this.options = this.defaultOptions;
 
+      //Opciones para sí/no
+      if(this.curPregunta.nTipo === 4)
+        this.options = ['Sí', 'No'];
+
       //Crea arreglo de deseleccionados para checkbox
       this.options.forEach(op => {
         this.optionsCheckbox.push(false);
@@ -74,6 +79,25 @@ export class PregdinamicaComponent implements OnInit {
       //Opciones para escalas
       if(obj.minEscala !== '') this.minScale = obj.minEscala;
       if(obj.maxEscala !== '') this.maxScale = obj.maxEscala;
+    }
+  }
+
+  setAnswers(rptaOpt?: string, rptaObs?: string){
+    this.inputText = rptaObs!;
+
+    //Casillas
+    if(this.curPregunta.nTipo === 1){
+      let listaRptas:number[] = [];
+      listaRptas = rptaOpt!.split(',').map(Number);
+      //Convertir cadena de opciones en lista
+      listaRptas.forEach(rpta => {
+        this.optionsCheckbox[rpta] = true;
+      });
+    }
+
+    //Escala lineal, Sí/No, Varias opciones
+    if(this.curPregunta.nTipo === 2 || this.curPregunta.nTipo === 4 || this.curPregunta.nTipo === 5){
+      this.answerSelected = parseInt(rptaOpt!);
     }
   }
 
@@ -102,8 +126,9 @@ export class PregdinamicaComponent implements OnInit {
     //Escala lineal, Sí/No, Varias opciones
     if(this.curPregunta.nTipo === 2 || this.curPregunta.nTipo === 4 || this.curPregunta.nTipo === 5){
       rptaOpt = this.answer;
-      if(this.curPregunta.nRqObservacion === 1 && this.answer === (this.options.length - 1).toString())
+      if(this.curPregunta.nRqObservacion === 1 && this.answer === (this.options.length).toString()){
         rptaObs = this.inputText;
+      }
     }
 
     //Respuesta corta

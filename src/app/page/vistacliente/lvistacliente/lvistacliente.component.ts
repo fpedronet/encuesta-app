@@ -33,7 +33,7 @@ export class LvistaclienteComponent implements OnInit {
   ) { }
 
   dataSource: Encuesta[] = [];
-  displayedColumns: string[] = ['cSistemas','cTitulo', 'dFechaFin','dFechaIni', 'nAccion'];
+  displayedColumns: string[] = ['cSistemas','cTitulo', 'dFechaIni','dFechaFin', 'nAccion'];
   loading = true;
   existRegistro = false;
   countRegistro = 0;

@@ -2,7 +2,7 @@
     <span class="example-spacer"></span>
     <div class="example-button-row">
         <span>
-            <button mat-raised-button color="primary" type="submit" [disabled]="frmGrupo.invalid" form="ngForm">
+            <button *ngIf="!existeRespuesta" mat-raised-button color="primary" type="submit" [disabled]="frmGrupo.invalid" form="ngForm">
                 <mat-icon>save as</mat-icon>
                 <span>Enviar</span>
             </button> 
