@@ -12,6 +12,7 @@ import { PregdinamicaComponent } from '../../component/pregdinamica/pregdinamica
 
 import { Encuesta } from 'src/app/_model/encuesta';
 import { environment } from 'src/environments/environment';
+import { Respuesta } from 'src/app/_model/respuesta';
 
 @Component({
   selector: 'app-cvistacliente',
@@ -72,33 +73,39 @@ export class CvistaclienteComponent implements OnInit {
   }
 
   enviar(){
-    debugger;
-    var e: any = this.listaComponentes;
+    //debugger;
 
     let model = new Encuesta();
 
     model.listaEncuestaPregunta = this.listaEncuestaPregunta;
     model.listaEncuestaPregunta.forEach(preg => {
-      let rpta = preg.respuesta;
-
+      
       //Crea modelo para respuesta
-      if(rpta !== undefined){
+      var rpta = new Respuesta();
 
-        //Busca el componente correcto según su ID
-        let compRpta = this.listaComponentes.find(e => e.curPregunta.nIdEncuestaPregunta === preg.nIdEncuestaPregunta);
+      //Busca el componente correcto según su ID
+      let compRpta = this.listaComponentes.find(e => e.curPregunta.nIdEncuestaPregunta === preg.nIdEncuestaPregunta);
 
-        if(compRpta !== undefined){
-          rpta.nIdRespuesta = 0;
-          rpta.nIdEncuestaPregunta = preg.nIdEncuestaPregunta;
-          rpta.nIdCliente = 0; //
-          rpta.cRespuesta = compRpta?.returnAnswer();
-          rpta.cIdentificador = '';
-          rpta.dFecha = undefined; //
-          rpta.cUsuario = '' //
-        }
+      //Respuestas (opción y observación)
+      var rptas = ['', ''];
+      rptas = compRpta?.returnAnswer()!;
+
+      if(compRpta !== undefined){
+        rpta.nIdRespuesta = 0;
+        rpta.nIdEncuestaPregunta = preg.nIdEncuestaPregunta;
+        rpta.nIdCliente = 0; //
+        rpta.cRespuestaOpt = rptas[0];
+        rpta.cRespuestaObs = rptas[1];
+        rpta.cIdentificador = '';
+        //rpta.dFecha = undefined; //
+        rpta.cUsuario = '' //
       }
+
+      preg.respuesta = rpta;
       
     });
+
+    //debugger;
 
     this.spinner.showLoading();
     this.encuestaService.guardarRespuesta(model).subscribe(data=>{
@@ -106,7 +113,7 @@ export class CvistaclienteComponent implements OnInit {
     this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
 
     if(data.typeResponse==environment.EXITO){
-       this.router.navigate(['/page/inicio']);
+       //this.router.navigate(['/page/inicio']);
        this.spinner.hideLoading();
     }else{
        this.spinner.hideLoading();

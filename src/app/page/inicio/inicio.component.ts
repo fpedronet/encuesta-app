@@ -28,7 +28,7 @@ export class InicioComponent implements OnInit {
     // const decodedToken = helper.decodeToken(token!);
     // this.usuario = decodedToken.usuario;
 
-    this.encuestaService.existeEncuseta().subscribe(data=>{
+    this.encuestaService.existeEncuesta().subscribe(data=>{
 
       if(data.items.length > 0){
         this.dialog.open(LvistaclienteComponent, {
@@ -39,7 +39,7 @@ export class InicioComponent implements OnInit {
   }
 
   abrirListaEncuestaCliente() {
-    this.encuestaService.existeEncuseta().subscribe(data=>{
+    this.encuestaService.existeEncuesta().subscribe(data=>{
 
       if(data.items.length > 0){
         this.dialog.open(LvistaclienteComponent, {

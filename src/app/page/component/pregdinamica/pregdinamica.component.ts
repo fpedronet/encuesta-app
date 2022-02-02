@@ -23,11 +23,9 @@ export class PregdinamicaComponent implements OnInit {
   
   options: string[] = [];
 
-  @Output()
-  answer: number = -1;
-
-  @Output()
+  answer: string = '';
   optionsCheckbox: boolean[] = [];
+  inputText: string = '';
   
   minScale: string = 'Mínimo';
   maxScale: string = 'Máximo';
@@ -79,13 +77,44 @@ export class PregdinamicaComponent implements OnInit {
     }
   }
 
-  updateAnswer(valorSel: number){
+  updateAnswer(valorSel: string){
     //debugger;
-    console.log(valorSel);
-    this.answer = valorSel;
+    //console.log(valorSel);
+    this.answer = valorSel.toString();
   }
 
   returnAnswer(){
-    return "A";
+    var rptaOpt = '';
+    var rptaObs = '';
+
+    //Casillas
+    if(this.curPregunta.nTipo === 1){
+      let index = 0;
+      this.optionsCheckbox.forEach(chk => {
+        if(chk)
+          rptaOpt += index + ',';
+        index++;
+      });
+      if(this.curPregunta.nRqObservacion === 1 && this.optionsCheckbox[index-1])
+        rptaObs = this.inputText;
+    }
+
+    //Escala lineal, Sí/No, Varias opciones
+    if(this.curPregunta.nTipo === 2 || this.curPregunta.nTipo === 4 || this.curPregunta.nTipo === 5){
+      rptaOpt = this.answer;
+      if(this.curPregunta.nRqObservacion === 1 && this.answer === (this.options.length - 1).toString())
+        rptaObs = this.inputText;
+    }
+
+    //Respuesta corta
+    if(this.curPregunta.nTipo === 3){
+      rptaObs = this.inputText;
+    }
+
+    let rptas = [];
+    rptas.push(rptaOpt);
+    rptas.push(rptaObs);
+
+    return rptas;
   }
 }

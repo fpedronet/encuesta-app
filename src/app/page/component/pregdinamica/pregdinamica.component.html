@@ -13,7 +13,7 @@
                 Otro
             </mat-checkbox>
             <mat-form-field>
-                <input matInput placeholder="Indique su opción">
+                <input matInput placeholder="Indique su opción" [(ngModel)]="inputText">
             </mat-form-field>
         </div>
     </div>
@@ -31,7 +31,7 @@
     </div>
 
     <div *ngSwitchCase="3"> <!-- Respuesta corta -->
-            <textarea matInput placeholder="Escriba su respuesta"></textarea>
+        <textarea matInput placeholder="Escriba su respuesta" [(ngModel)]="inputText"></textarea>
     </div>
 
     <div *ngSwitchCase="4"> <!-- Sí/No -->
@@ -43,7 +43,7 @@
                     Otro
                 </mat-radio-button>
                 <mat-form-field>
-                    <input matInput placeholder="Indique su opción">
+                    <input matInput placeholder="Indique su opción" [(ngModel)]="inputText">
                 </mat-form-field>
             </div>
         </mat-radio-group>     
@@ -61,7 +61,7 @@
                     Otro
                 </mat-radio-button>
                 <mat-form-field>
-                    <input matInput placeholder="Indique su opción">
+                    <input matInput placeholder="Indique su opción" [(ngModel)]="inputText">
                 </mat-form-field>
             </div>
         </mat-radio-group>         

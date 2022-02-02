@@ -41,7 +41,7 @@ export class EncuestaService {
     return this.http.get<dataCollection>(urls);
   }
 
-  existeEncuseta() {
+  existeEncuesta() {
     let urls = `${this.url}/GetExistEncuestaUsuario`;
     return this.http.get<dataCollection>(urls);
   }
@@ -62,7 +62,7 @@ export class EncuestaService {
   }
 
   guardarRespuesta(encuesta: Encuesta){
-    let urls = `${this.url}/PostSaveEncuesta`;
+    let urls = `${this.url}/PostSaveRespuestas`;
     return this.http.post<Response>(urls, encuesta);
   }
 }
