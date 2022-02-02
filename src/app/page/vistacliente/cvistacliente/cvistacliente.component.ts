@@ -39,6 +39,8 @@ export class CvistaclienteComponent implements OnInit {
   nIdEncuesta: number = 0;
   cTitulo: string = '';
   cDescripcion: string = '';
+
+  existeRespuesta: boolean = false;
   
   @ViewChildren(PregdinamicaComponent) listaComponentes: QueryList<PregdinamicaComponent> = new QueryList<PregdinamicaComponent>();
 
@@ -49,7 +51,11 @@ export class CvistaclienteComponent implements OnInit {
     this.route.params.subscribe((data: Params)=>{
       this.id = (data["id"]==undefined)? 0:data["id"];
       this.obtener();
-    });
+    });    
+  }
+
+  ngAfterViewInit () { //Aquí ya se tiene la lista de componentes hijo
+    
   }
 
   obtener(){
@@ -65,7 +71,15 @@ export class CvistaclienteComponent implements OnInit {
       this.cDescripcion= data.cDescripcion!;
       this.listaEncuestaPregunta = data.listaEncuestaPregunta;
 
-
+      this.encuestaService.existeRespuesta(this.id).subscribe(data=>{
+        if(data.items.length > 0){
+          this.existeRespuesta = true;
+          this.listaEncuestaPregunta.forEach(preg => {
+            let compRpta = this.listaComponentes.find(e => e.curPregunta.nIdEncuestaPregunta === preg.nIdEncuestaPregunta)!;
+            compRpta.setAnswers(preg.respuesta?.cRespuestaOpt, preg.respuesta?.cRespuestaObs);
+          });
+        }
+      });
 
       this.spinner.hideLoading();
 
@@ -93,12 +107,12 @@ export class CvistaclienteComponent implements OnInit {
       if(compRpta !== undefined){
         rpta.nIdRespuesta = 0;
         rpta.nIdEncuestaPregunta = preg.nIdEncuestaPregunta;
-        rpta.nIdCliente = 0; //
+        //rpta.nIdCliente = 0; //
         rpta.cRespuestaOpt = rptas[0];
         rpta.cRespuestaObs = rptas[1];
         rpta.cIdentificador = '';
         //rpta.dFecha = undefined; //
-        rpta.cUsuario = '' //
+        //rpta.cUsuario = '' //
       }
 
       preg.respuesta = rpta;
@@ -113,7 +127,7 @@ export class CvistaclienteComponent implements OnInit {
     this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
 
     if(data.typeResponse==environment.EXITO){
-       //this.router.navigate(['/page/inicio']);
+       this.router.navigate(['/page/inicio']);
        this.spinner.hideLoading();
     }else{
        this.spinner.hideLoading();

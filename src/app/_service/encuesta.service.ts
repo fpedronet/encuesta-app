@@ -65,4 +65,9 @@ export class EncuestaService {
     let urls = `${this.url}/PostSaveRespuestas`;
     return this.http.post<Response>(urls, encuesta);
   }
+
+  existeRespuesta(idEncuesta: number) {
+    let urls = `${this.url}/GetExistRespuestas?encuesta=${idEncuesta}`;
+    return this.http.get<dataCollection>(urls);
+  }
 }
