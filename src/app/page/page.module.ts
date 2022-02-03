@@ -57,7 +57,8 @@ import { Not403Component } from './not403/not403.component';
     {
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
-    multi: true
+    multi: true,
+    
   }
 ],
 })

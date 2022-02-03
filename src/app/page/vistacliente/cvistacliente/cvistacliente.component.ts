@@ -13,6 +13,7 @@ import { PregdinamicaComponent } from '../../component/pregdinamica/pregdinamica
 import { Encuesta } from 'src/app/_model/encuesta';
 import { environment } from 'src/environments/environment';
 import { Respuesta } from 'src/app/_model/respuesta';
+import { EncrDecrService } from 'src/app/_service/encr-decr.service';
 
 @Component({
   selector: 'app-cvistacliente',
@@ -29,7 +30,9 @@ export class CvistaclienteComponent implements OnInit {
     private spinner : SpinnerService,
 
     private encuestaService : EncuestaService,
-    private pregdinamicaService: PregdinamicaService
+    private pregdinamicaService: PregdinamicaService,
+    private EncrDecr: EncrDecrService
+    
   ) { }
 
   form: FormGroup = new FormGroup({});
@@ -51,9 +54,18 @@ export class CvistaclienteComponent implements OnInit {
       
     });
     this.route.params.subscribe((data: Params)=>{
-      this.vistaCli = (data["vistaCli"]==undefined)? 0:data["vistaCli"];
-      this.idEnc = (data["idEnc"]==undefined)? 0:data["idEnc"];
-      this.idCli = (data["idCli"]==undefined)? 0:data["idCli"];
+      debugger;
+      let id = (data["id"]==undefined)? 0:data["id"];
+      let key = this.EncrDecr.get(id);
+
+      if(key!="" && key!=undefined){
+        let split = key.split('-');
+
+        this.vistaCli = parseInt(split[0]);
+        this.idEnc =  parseInt(split[1]);
+        this.idCli =  parseInt(split[2]);
+      }     
+
       this.obtener();
     });    
   }

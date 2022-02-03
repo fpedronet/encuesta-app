@@ -12,7 +12,7 @@ import { SpinnerService } from '../../component/spinner/spinner.service';
 import { Encuesta } from './../../../_model/encuesta';
 import { EncuestaService } from 'src/app/_service/encuesta.service';
 import { MatDialogRef } from '@angular/material/dialog';
-// import * as CryptoJS from 'crypto-js'
+import { EncrDecrService } from 'src/app/_service/encr-decr.service';
 
 @Component({
   selector: 'app-lvistacliente',
@@ -31,6 +31,7 @@ export class LvistaclienteComponent implements OnInit {
     private dialogRef: MatDialogRef<LvistaclienteComponent>,
 
     private encuestaService : EncuestaService,
+    private EncrDecr: EncrDecrService
   ) { }
 
   dataSource: Encuesta[] = [];
@@ -87,11 +88,10 @@ export class LvistaclienteComponent implements OnInit {
   }
 
   verVistaCliente(id: number){
-    //Vista cliente en 1, usuario en 0 (agarra al actual el back)
-  // let AES = require("crypto-js/aes");
-    
-  //    let val = AES(1+"/"+id+"/"+0);
-    let url = '/page/vistacliente/' + 1 + '/' + id + '/' + 0;
+    let value =  1 + '-' + id + '-' + 0;
+    let key = this.EncrDecr.set(value);
+
+    let url = '/page/vistacliente/' + key;
     this.router.navigate([url]);
     this.dialogRef.close();
   }

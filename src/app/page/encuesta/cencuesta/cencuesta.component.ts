@@ -1,8 +1,8 @@
 import { Pregunta } from './../../../_model/pregunta';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Event, Params, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
 // import publicIp from 'public-ip';
@@ -13,6 +13,7 @@ import { Cliente } from 'src/app/_model/cliente';
 import { EncuestaService } from 'src/app/_service/encuesta.service';
 import { environment } from 'src/environments/environment';
 import { EncuestaPregunta } from 'src/app/_model/encuestaPregunta';
+import { EncrDecrService } from 'src/app/_service/encr-decr.service';
 
 @Component({
   selector: 'app-cencuesta',
@@ -29,7 +30,7 @@ export class CencuestaComponent implements OnInit {
     private spinner : SpinnerService,
 
     private encuestaService : EncuestaService,
-    private _formBuilder: FormBuilder
+    private EncrDecr: EncrDecrService
   ) { }
 
   /*tabla de encuesta maestra */
@@ -171,8 +172,10 @@ export class CencuestaComponent implements OnInit {
   }
 
   verVistaCliente(idCliente: number){
-    //Vista cliente en 0
-    let url = '/page/vistacliente/'+ 0 + '/' + this.id + '/' + idCliente;
+    let value =  0 + '-' + this.id + '-' + idCliente;
+    let key = this.EncrDecr.set(value);
+
+    let url = '/page/vistacliente/'+ key;
     this.router.navigate([url]);
   }
 }
