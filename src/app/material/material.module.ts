@@ -30,6 +30,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatListModule} from '@angular/material/list';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [],
@@ -64,7 +65,8 @@ import {MatListModule} from '@angular/material/list';
     MatCheckboxModule,
     MatGridListModule,
     MatStepperModule,
-    MatListModule
+    MatListModule,
+    MatTabsModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },

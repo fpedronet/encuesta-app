@@ -86,7 +86,10 @@
                 </mat-step>
                 
                 <mat-step>
-                    <ng-template matStepLabel>Respuesta</ng-template>  
+                  
+                  <mat-tab-group mat-align-tabs="center">
+                    <mat-tab label="Individual">
+                      <ng-template matStepLabel>Respuesta</ng-template>  
 
                       <div class="mat-elevation-z0">
                         <table style="width: 100%;" mat-table [dataSource]="listaRespuesta" matSort>
@@ -136,6 +139,13 @@
                           aria-label="Select page of users">
                         </mat-paginator>
                       </div>
+                    </mat-tab>
+                    <mat-tab label="Resumen">
+                      En Proceso 1
+                    </mat-tab>
+                    <mat-tab label="Otros">En Proceso 2</mat-tab>
+                  </mat-tab-group>
+                  
                 </mat-step>
 
                 <mat-step>
