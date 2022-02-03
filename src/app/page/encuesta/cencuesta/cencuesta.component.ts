@@ -5,7 +5,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
-// import publicIp from 'public-ip';
 
 import { Encuesta } from 'src/app/_model/encuesta';
 import { Sistema } from 'src/app/_model/sistema';
@@ -77,10 +76,6 @@ export class CencuestaComponent implements OnInit {
   }
 
   obtener(){
-
-//     console.log(publicIp.v4());
-
-// console.log(publicIp.v6());
 
     this.spinner.showLoading();
     this.encuestaService.obtener(this.id, 0, 0).subscribe(data=>{
