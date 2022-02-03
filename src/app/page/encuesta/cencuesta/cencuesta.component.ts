@@ -10,6 +10,7 @@ import { SpinnerService } from '../../component/spinner/spinner.service';
 import { Encuesta } from 'src/app/_model/encuesta';
 import { Sistema } from 'src/app/_model/sistema';
 import { Cliente } from 'src/app/_model/cliente';
+import { RespuestasResumen } from 'src/app/_model/respuestasResumen';
 import { EncuestaService } from 'src/app/_service/encuesta.service';
 import { environment } from 'src/environments/environment';
 import { EncuestaPregunta } from 'src/app/_model/encuestaPregunta';
@@ -43,6 +44,7 @@ export class CencuestaComponent implements OnInit {
   listaIdCliente?: number[] = [];
   listaPregunta: Pregunta[] =[];
   listaEncuestaPregunta: EncuestaPregunta[] = [];
+  listaRespuestasResumen: RespuestasResumen[] = []
 
   /*Listado de pregunta tabla maestra */
   displayedColumnsP: string[] = ['cDescripcion', 'nAccion'];
@@ -108,6 +110,8 @@ export class CencuestaComponent implements OnInit {
         this.listaRespuesta = resp.items;
       });
 
+      this.listarRespuestasResumen();
+
       this.spinner.hideLoading();
 
     });
@@ -119,6 +123,15 @@ export class CencuestaComponent implements OnInit {
       
       this.listaCliente= data.items;
       this.listaIdCliente=[];
+      this.spinner.hideLoading();
+    });
+  }
+
+  listarRespuestasResumen(){
+    this.spinner.showLoading();
+    this.encuestaService.listarRespuestasResumen(this.id).subscribe(data=>{
+      debugger;
+      this.listaRespuestasResumen = data.items;
       this.spinner.hideLoading();
     });
   }
