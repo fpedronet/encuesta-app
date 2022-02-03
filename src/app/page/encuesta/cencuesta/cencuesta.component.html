@@ -141,9 +141,12 @@
                       </div>
                     </mat-tab>
                     <mat-tab label="Resumen">
-                      En Proceso 1
+                      <mat-list-item *ngFor="let el of listaRespuestasResumen; let i = index">
+                        <mat-label>
+                          {{el.pregunta?.nOrden}}. {{el.pregunta?.cDescripcion}}
+                        </mat-label>
+                      </mat-list-item>
                     </mat-tab>
-                    <mat-tab label="Otros">En Proceso 2</mat-tab>
                   </mat-tab-group>
                   
                 </mat-step>
