@@ -15,3 +15,8 @@
 .escala-lineal::ng-deep.mat-radio-label{
     flex-direction: column-reverse;
 }
+
+.mat-radio-button{
+    margin-left:6px;
+    padding-top:3px;
+}
