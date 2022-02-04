@@ -87,11 +87,17 @@
                 
                 <mat-step>
                   
-                  <mat-tab-group mat-align-tabs="center">
+                  <mat-tab-group mat-align-tabs="center">                                     
+                    
                     <mat-tab label="Individual">
-                      <ng-template matStepLabel>Respuesta</ng-template>  
+                      <ng-template matStepLabel>Respuesta</ng-template>                        
 
-                      <div class="mat-elevation-z0">
+                      <div class="mat-elevation-z0">          
+                        <div *ngIf="listaRespuesta.length == 0" class="mat-elevation-z0">
+                          <ul>
+                            <mat-label>No se han registrado respuestas</mat-label>
+                          </ul>
+                        </div>                 
                         <table style="width: 100%;" mat-table [dataSource]="listaRespuesta" matSort>
                       
                           <ng-container matColumnDef="nIdRespuesta">
@@ -138,9 +144,21 @@
                           showFirstLastButtons 
                           aria-label="Select page of users">
                         </mat-paginator>
+                        
                       </div>
                     </mat-tab>
                     <mat-tab label="Resumen">
+                      <div *ngIf="listaRespuesta.length == 0" class="mat-elevation-z0">
+                        <ul>
+                          <mat-label>No se han registrado respuestas</mat-label>
+                        </ul>
+                      </div>
+                      <div *ngIf="listaRespuesta.length > 0" class="mat-elevation-z0">
+                        <button mat-raised-button color="warn" (onclick)="exportarExcelResumen()">
+                          <mat-icon>ballot</mat-icon>
+                          <span>Exportar</span>
+                        </button>
+                      </div>
                       <mat-list-item *ngFor="let el of listaRespuestasResumen; let i = index">
                         <ul>
                         <mat-label style="margin-top: 20px;">
@@ -161,7 +179,7 @@
 
                               <ng-container matColumnDef="frecuenciaRel" >
                                 <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> Porcentaje </th>
-                                <td style="text-align: center" mat-cell *matCellDef="let element"> {{element.frecuenciaRel * 100}}% </td>
+                                <td style="text-align: center" mat-cell *matCellDef="let element"> {{(element.frecuenciaRel * 100).toFixed(2)}}% </td>
                               </ng-container>
                               
                               <tr mat-header-row *matHeaderRowDef="displayedColumnsResuR"></tr>
@@ -179,6 +197,16 @@
                                 {{item}}
                               </li>
                             </ul>
+                          </div>
+                          <div *ngIf="el.muestraEst" class="mat-elevation-z0">
+                            <mat-divider></mat-divider>
+                            <mat-label>
+                              Promedio: {{el.promEst}}
+                            </mat-label>
+                            <br>
+                            <mat-label>
+                              Mediana: {{el.medEst}}
+                            </mat-label>
                           </div>
                         </ul>
                       </mat-list-item>

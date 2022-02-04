@@ -11,5 +11,8 @@ export class RespuestasResumen{
     observaciones?: string[];
     muestraOpt?: boolean;
     muestraObs?: boolean;
+    muestraEst?: boolean;
+    promEst?: number;
+    medEst?: number;
     tituloObs?: string;
 }
