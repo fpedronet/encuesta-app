@@ -7,6 +7,7 @@ import { dataCollection } from '../_model/dataCollection';
 
 import { Encuesta } from '../_model/encuesta';
 import { Respuesta } from '../_model/respuesta';
+import { ExcelRptasResumen } from '../_model/excelRptasResumen';
 
 @Injectable({
   providedIn: 'root'
@@ -79,5 +80,10 @@ export class EncuestaService {
   listarRespuestasResumen(idEncuesta: number){
     let urls = `${this.url}/GetAllRespuestasResumen?encuesta=${idEncuesta}`;
     return this.http.get<dataCollection>(urls);
+  }
+
+  excelRespuestasResumen(resumen: ExcelRptasResumen[]){
+    let urls = `${this.url}/PostExcelRespuestasResumen`;
+    return this.http.post<Response>(urls, resumen);
   }
 }

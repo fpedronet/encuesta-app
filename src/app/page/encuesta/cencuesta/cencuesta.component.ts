@@ -12,6 +12,7 @@ import { Encuesta } from 'src/app/_model/encuesta';
 import { Sistema } from 'src/app/_model/sistema';
 import { Cliente } from 'src/app/_model/cliente';
 import { RespuestasResumen } from 'src/app/_model/respuestasResumen';
+import { ExcelRptasResumen } from 'src/app/_model/excelRptasResumen';
 import { EncuestaService } from 'src/app/_service/encuesta.service';
 import { environment } from 'src/environments/environment';
 import { EncuestaPregunta } from 'src/app/_model/encuestaPregunta';
@@ -110,9 +111,9 @@ export class CencuestaComponent implements OnInit {
 
       this.encuestaService.listarRespuestas(idencuesta).subscribe(resp=>{
         this.listaRespuesta = resp.items;
-      });
-
-      this.listarRespuestasResumen();
+        if(this.listaRespuesta.length > 0)
+          this.listarRespuestasResumen();          
+      });      
 
       this.spinner.hideLoading();
 
@@ -139,6 +140,7 @@ export class CencuestaComponent implements OnInit {
         //Muestra u oculta opciones y comentarios
         resu.muestraOpt = false;
         resu.muestraObs = false;
+        resu.muestraEst = false;
 
         //Si no es de respuesta corta
         if(resu.pregunta?.nTipo !== 3)
@@ -146,6 +148,11 @@ export class CencuestaComponent implements OnInit {
         else{
           resu.muestraObs = true;
           resu.tituloObs = 'Respuestas'
+        }
+
+        //Escala lineal
+        if(resu.pregunta?.nTipo === 2){
+          resu.muestraEst = true;
         }
 
         if(resu.pregunta?.nRqObservacion === 1){
@@ -189,13 +196,38 @@ export class CencuestaComponent implements OnInit {
             frec.frecuenciaRel = frec.frecuenciaAbs! / listaRptas.length;
         });
 
+        //Calcula estadísticas para escala lineal
+        if(resu.pregunta?.nTipo === 2){
+          resu.promEst = 0;
+          var arrFrec:FrecuenciaOpcion[] = frecOpc.slice();
+          let indexLastZero = -1;
+          arrFrec.sort(function(a, b){return a.frecuenciaAbs! - b.frecuenciaAbs!})
+          let index = 0;
+
+          arrFrec.forEach(frec => {
+            resu.promEst = resu.promEst! + parseInt(frec.opcion!) * frec.frecuenciaRel!;
+            if(frec.frecuenciaAbs === 0) indexLastZero = index;
+            index++;
+          });
+          if(indexLastZero !== 1)
+            arrFrec = arrFrec.slice(indexLastZero + 1)
+
+          if(arrFrec.length > 0){
+            if(arrFrec.length % 2 === 1){ //Impar
+              resu.medEst = parseInt(arrFrec[(arrFrec.length - 1)/2].opcion!);
+            }
+            else{
+              resu.medEst = (Number(arrFrec[(arrFrec.length/2)-1].opcion!) + Number(arrFrec[(arrFrec.length/2)].opcion!))/2
+            }
+          }          
+        }
+
         //Convierte la cadena de observaciones a una lista
         resu.observaciones = resu.cRptasObs!.split('|').map(String).filter(Boolean);;
         //debugger;
 
-       
-
-      });
+        //this.exportarExcelResumen();
+      });      
 
       this.spinner.hideLoading();
     });
@@ -285,5 +317,17 @@ export class CencuestaComponent implements OnInit {
 
     let url = '/page/vistacliente/'+ key;
     this.router.navigate([url]);
+  }
+
+  exportarExcelResumen(){
+    var resumenesExcel: ExcelRptasResumen[] = [];
+    this.listaRespuestasResumen.forEach(resu => {
+      let filaExcel: ExcelRptasResumen = new ExcelRptasResumen(resu.pregunta?.cDescripcion!);
+      resumenesExcel.push(filaExcel);
+    });
+
+    this.encuestaService.excelRespuestasResumen(resumenesExcel).subscribe(data=>{
+      
+    });
   }
 }
