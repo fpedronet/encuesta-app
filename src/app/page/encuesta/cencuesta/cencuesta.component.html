@@ -147,6 +147,7 @@
                         
                       </div>
                     </mat-tab>
+
                     <mat-tab label="Resumen">
                       <div *ngIf="listaRespuesta.length == 0" class="mat-elevation-z0">
                         <ul>
@@ -186,7 +187,11 @@
                               <tr mat-row *matRowDef="let row; columns: displayedColumnsResuR;"></tr>
                               
                             </table>
+
+                            <!-- <app-chart id="canvas" [genReporte]="el.frecuencias"></app-chart> -->
+
                           </div>
+
                           <div *ngIf="el.muestraObs" class="mat-elevation-z0">
                             <mat-divider></mat-divider>
                             <mat-label>
@@ -210,7 +215,9 @@
                           </div>
                         </ul>
                       </mat-list-item>
+
                     </mat-tab>
+
                   </mat-tab-group>
                   
                 </mat-step>

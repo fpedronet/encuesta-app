@@ -23,6 +23,8 @@ import { PregdinamicaComponent } from './component/pregdinamica/pregdinamica.com
 import { LvistaclienteComponent } from './vistacliente/lvistacliente/lvistacliente.component';
 import { CvistaclienteComponent } from './vistacliente/cvistacliente/cvistacliente.component';
 import { Not403Component } from './not403/not403.component';
+import { Demo1Component } from './reporte/demo1/demo1.component';
+import { ChartComponent } from './component/chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { Not403Component } from './not403/not403.component';
     LvistaclienteComponent,
     CvistaclienteComponent,
     Not403Component,
+    Demo1Component,
+    ChartComponent,
   ],
   imports: [
     MaterialModule,
@@ -51,7 +55,7 @@ import { Not403Component } from './not403/not403.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    PageRoutingModule,
+    PageRoutingModule
   ],
   providers: [
     {

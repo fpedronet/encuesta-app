@@ -66,7 +66,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatGridListModule,
     MatStepperModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
