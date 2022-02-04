@@ -142,9 +142,45 @@
                     </mat-tab>
                     <mat-tab label="Resumen">
                       <mat-list-item *ngFor="let el of listaRespuestasResumen; let i = index">
-                        <mat-label>
+                        <ul>
+                        <mat-label style="margin-top: 20px;">
                           {{el.pregunta?.nOrden}}. {{el.pregunta?.cDescripcion}}
                         </mat-label>
+                        <div *ngIf="el.muestraOpt" class="mat-elevation-z0">
+                            <table mat-table [dataSource]="el.frecuencias!" matSort>
+                                                          
+                              <ng-container matColumnDef="opcion">
+                                <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> Opción </th>
+                                <td mat-cell *matCellDef="let element"> {{element.opcion}} </td>
+                              </ng-container>                        
+                                  
+                              <ng-container matColumnDef="frecuenciaAbs" >
+                                <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+                                <td style="text-align: center" mat-cell *matCellDef="let element"> {{element.frecuenciaAbs}} </td>
+                              </ng-container>
+
+                              <ng-container matColumnDef="frecuenciaRel" >
+                                <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> Porcentaje </th>
+                                <td style="text-align: center" mat-cell *matCellDef="let element"> {{element.frecuenciaRel * 100}}% </td>
+                              </ng-container>
+                              
+                              <tr mat-header-row *matHeaderRowDef="displayedColumnsResuR"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumnsResuR;"></tr>
+                              
+                            </table>
+                          </div>
+                          <div *ngIf="el.muestraObs" class="mat-elevation-z0">
+                            <mat-divider></mat-divider>
+                            <mat-label>
+                              {{el.tituloObs}} (Total: {{el.observaciones?.length}})
+                            </mat-label>
+                            <ul>
+                              <li *ngFor="let item of el.observaciones; let i = index" value="i">
+                                {{item}}
+                              </li>
+                            </ul>
+                          </div>
+                        </ul>
                       </mat-list-item>
                     </mat-tab>
                   </mat-tab-group>
