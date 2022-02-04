@@ -23,6 +23,8 @@ import { CvistaclienteComponent } from './vistacliente/cvistacliente/cvistaclien
 
 import { Not403Component } from './not403/not403.component';
 
+import { Demo1Component } from './reporte/demo1/demo1.component';
+
 const routes: Routes = [
   {path:'inicio', component: InicioComponent, canActivate: [GuardService]},
 
@@ -53,7 +55,9 @@ const routes: Routes = [
 
   {path:'vistacliente/:id', component: CvistaclienteComponent, canActivate: [GuardService]},
 
-  { path: 'not-403', component: Not403Component}
+  { path: 'not-403', component: Not403Component},
+
+  {path:'reporte/demo1', component: Demo1Component, canActivate: [GuardService]},
 ];
 
 @NgModule({
