@@ -86,10 +86,6 @@ export class CencuestaComponent implements OnInit {
 
   obtener(){
 
-//     console.log(publicIp.v4());
-
-// console.log(publicIp.v6());
-
     this.spinner.showLoading();
     this.encuestaService.obtener(this.id, 0, 0).subscribe(data=>{
 

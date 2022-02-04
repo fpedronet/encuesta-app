@@ -1,5 +1,4 @@
 import { Pregunta } from './../../../_model/pregunta';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Event, Params, Router } from '@angular/router';
@@ -21,9 +20,9 @@ import { EncrDecrService } from 'src/app/_service/encr-decr.service';
   styleUrls: ['./cvistacliente.component.css']
 })
 export class CvistaclienteComponent implements OnInit {
+  httpClient: any;
 
   constructor(
-    private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
     private notifierService : NotifierService,
@@ -55,6 +54,7 @@ export class CvistaclienteComponent implements OnInit {
     });
     this.route.params.subscribe((data: Params)=>{
       //debugger;
+
       let id = (data["id"]==undefined)? 0:data["id"];
       let key = this.EncrDecr.get(id);
 
@@ -153,4 +153,5 @@ export class CvistaclienteComponent implements OnInit {
     }
     });
   }
+
 }
