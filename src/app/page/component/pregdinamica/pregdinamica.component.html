@@ -38,12 +38,9 @@
         <mat-radio-group class="varias-opciones" [(ngModel)]="answerSelected">
             <mat-radio-button [value]="0" (change)="updateAnswer($event.value)">Sí</mat-radio-button>
             <mat-radio-button [value]="1" (change)="updateAnswer($event.value)">No</mat-radio-button>
-            <div *ngIf="curPregunta.nRqObservacion" >
-                <mat-radio-button [value]="2" (change)="updateAnswer($event.value)">
-                    Otro
-                </mat-radio-button>
+            <div *ngIf="curPregunta.nRqObservacion">
                 <mat-form-field>
-                    <input matInput placeholder="Indique su opción" [(ngModel)]="inputText">
+                    <input matInput placeholder="Justifique su respuesta" [(ngModel)]="inputText">
                 </mat-form-field>
             </div>
         </mat-radio-group>     

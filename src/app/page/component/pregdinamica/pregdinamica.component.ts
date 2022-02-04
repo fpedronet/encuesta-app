@@ -119,6 +119,9 @@ export class PregdinamicaComponent implements OnInit {
           rptaOpt += index + ',';
         index++;
       });
+      if(rptaOpt.length > 0){ //Quita la última coma
+        rptaOpt = rptaOpt.substring(0, rptaOpt.length - 1);
+      }
       if(this.curPregunta.nRqObservacion === 1 && this.optionsCheckbox[index-1])
         rptaObs = this.inputText;
     }
@@ -126,8 +129,10 @@ export class PregdinamicaComponent implements OnInit {
     //Escala lineal, Sí/No, Varias opciones
     if(this.curPregunta.nTipo === 2 || this.curPregunta.nTipo === 4 || this.curPregunta.nTipo === 5){
       rptaOpt = this.answer;
-      if(this.curPregunta.nRqObservacion === 1 && this.answer === (this.options.length).toString()){
-        rptaObs = this.inputText;
+      if(this.curPregunta.nRqObservacion === 1){
+        if(this.curPregunta.nTipo === 4 || this.answer === (this.options.length).toString()){
+          rptaObs = this.inputText;
+        }
       }
     }
 

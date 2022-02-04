@@ -5,6 +5,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
+import { safeJsonParse, isDefinitionObj } from "../../component/pregdinamica/definitionObj";
+// import publicIp from 'public-ip';
 
 import { Encuesta } from 'src/app/_model/encuesta';
 import { Sistema } from 'src/app/_model/sistema';
@@ -14,6 +16,7 @@ import { EncuestaService } from 'src/app/_service/encuesta.service';
 import { environment } from 'src/environments/environment';
 import { EncuestaPregunta } from 'src/app/_model/encuestaPregunta';
 import { EncrDecrService } from 'src/app/_service/encr-decr.service';
+import { FrecuenciaOpcion } from 'src/app/_model/frecuenciaOpcion';
 
 @Component({
   selector: 'app-cencuesta',
@@ -43,13 +46,17 @@ export class CencuestaComponent implements OnInit {
   listaIdCliente?: number[] = [];
   listaPregunta: Pregunta[] =[];
   listaEncuestaPregunta: EncuestaPregunta[] = [];
-  listaRespuestasResumen: RespuestasResumen[] = []
+  listaRespuestasResumen: RespuestasResumen[] = [];
 
   /*Listado de pregunta tabla maestra */
   displayedColumnsP: string[] = ['cDescripcion', 'nAccion'];
 
   /*Listado de respuesta */
   listaRespuesta: Pregunta[] = [];
+
+  /*Listado de resumen de respuestas para cada pregunta*/
+  displayedColumnsResuR: string[] = ['opcion', 'frecuenciaAbs', 'frecuenciaRel'];;
+  
   displayedColumnsR: string[] = ['nIdRespuesta', 'cDescripcion','cRuc','dFecha', 'cUsuario','nAccion'];
   loading = true;
   existRegistro = false;
@@ -125,10 +132,101 @@ export class CencuestaComponent implements OnInit {
   listarRespuestasResumen(){
     this.spinner.showLoading();
     this.encuestaService.listarRespuestasResumen(this.id).subscribe(data=>{
-      debugger;
       this.listaRespuestasResumen = data.items;
+      
+      this.listaRespuestasResumen.forEach(resu => {        
+      
+        //Muestra u oculta opciones y comentarios
+        resu.muestraOpt = false;
+        resu.muestraObs = false;
+
+        //Si no es de respuesta corta
+        if(resu.pregunta?.nTipo !== 3)
+          resu.muestraOpt = true;
+        else{
+          resu.muestraObs = true;
+          resu.tituloObs = 'Respuestas'
+        }
+
+
+        if(resu.pregunta?.nRqObservacion === 1){
+          //Casillas, Sí/No, Varias opciones
+          if(resu.pregunta?.nTipo === 1 || resu.pregunta?.nTipo === 4 || resu.pregunta?.nTipo === 5){
+            resu.muestraObs = true;
+            if(resu.pregunta?.nTipo === 4)
+              resu.tituloObs = 'Justificaciones'
+            else
+              resu.tituloObs = 'Respuestas dadas en Otro'
+          }            
+        }
+
+        //Añade las opciones a la lista de frecuencias
+        resu.frecuencias = [];
+        let listaOpcs:string[] = this.extraeListaOpciones(resu.pregunta!)
+        listaOpcs.forEach(opc => {
+          resu.frecuencias?.push(new FrecuenciaOpcion(opc));
+        });
+        //Casillas y varias opciones pueden tener una opción extra
+        if(resu.pregunta?.nRqObservacion === 1 &&
+          (resu.pregunta?.nTipo === 1 || resu.pregunta?.nTipo === 5)){
+            resu.frecuencias?.push(new FrecuenciaOpcion("Otro"));
+        }
+
+        //Convierte la cadena de opciones marcadas a una lista
+        let listaRptas:number[] = [];
+        listaRptas = resu.cRptasOpt!.split(',').map(Number);
+
+        //Almacena respuestas en el contador de frecuencias absolutas
+        var frecOpc:FrecuenciaOpcion[] = resu.frecuencias!;
+        listaRptas.forEach(rpta => {
+          if(rpta <= frecOpc.length-1){
+            frecOpc[rpta].frecuenciaAbs!++;
+          }
+        });
+
+        //Actualiza frecuencias relativas
+        frecOpc.forEach(frec => {
+          if(listaRptas.length > 0)
+            frec.frecuenciaRel = frec.frecuenciaAbs! / listaRptas.length;
+        });
+
+        //Convierte la cadena de observaciones a una lista
+        resu.observaciones = resu.cRptasObs!.split('|').map(String).filter(Boolean);;
+        //debugger;
+      });
+
       this.spinner.hideLoading();
     });
+  }
+
+  extraeListaOpciones(preg: EncuestaPregunta){
+    var listaOpciones:string[] = [];
+    const result = safeJsonParse(isDefinitionObj)(preg.cDefinicion!); // result: ParseResult<definitionObj>
+    if (result.hasError) {
+      console.log("Error en el la definición de pregunta extraida")  // external data not valid. Do some error handling here.
+    } else {
+      var obj = result.parsed;
+
+      //Opciones para listas (checkbox y radiobutton)
+      listaOpciones = obj.opciones;
+
+      //Opciones para sí/no
+      if(preg.nTipo === 4)
+        listaOpciones = ['Sí', 'No'];
+
+      //Opciones para escalas
+      if(preg.nTipo == 2){ //Escala lineal
+        listaOpciones = [];
+        var init = preg.nRangoMinimo;
+        var end = preg.nRangoMaximo;
+        if(init && end){
+          for(var i = init; i <= end; i++){
+            listaOpciones.push(i.toString());
+          }
+        }        
+      }
+    }
+    return listaOpciones;
   }
 
   guardar(){
