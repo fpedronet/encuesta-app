@@ -21,7 +21,6 @@ import { LoginComponent } from './page/usuario/login/login.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 import { SpinnerModule } from './page/component/spinner/spinner.module';
-import { JwtModule } from "@auth0/angular-jwt";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 

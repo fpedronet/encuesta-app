@@ -6,7 +6,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
 import { safeJsonParse, isDefinitionObj } from "../../component/pregdinamica/definitionObj";
-// import publicIp from 'public-ip';
+
 
 import { Encuesta } from 'src/app/_model/encuesta';
 import { Sistema } from 'src/app/_model/sistema';
@@ -148,7 +148,6 @@ export class CencuestaComponent implements OnInit {
           resu.tituloObs = 'Respuestas'
         }
 
-
         if(resu.pregunta?.nRqObservacion === 1){
           //Casillas, Sí/No, Varias opciones
           if(resu.pregunta?.nTipo === 1 || resu.pregunta?.nTipo === 4 || resu.pregunta?.nTipo === 5){
@@ -193,6 +192,9 @@ export class CencuestaComponent implements OnInit {
         //Convierte la cadena de observaciones a una lista
         resu.observaciones = resu.cRptasObs!.split('|').map(String).filter(Boolean);;
         //debugger;
+
+       
+
       });
 
       this.spinner.hideLoading();

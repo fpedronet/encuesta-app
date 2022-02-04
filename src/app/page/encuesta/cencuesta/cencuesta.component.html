@@ -88,6 +88,7 @@
                 <mat-step>
                   
                   <mat-tab-group mat-align-tabs="center">
+
                     <mat-tab label="Individual">
                       <ng-template matStepLabel>Respuesta</ng-template>  
 
@@ -140,7 +141,9 @@
                         </mat-paginator>
                       </div>
                     </mat-tab>
+
                     <mat-tab label="Resumen">
+
                       <mat-list-item *ngFor="let el of listaRespuestasResumen; let i = index">
                         <ul>
                         <mat-label style="margin-top: 20px;">
@@ -168,7 +171,11 @@
                               <tr mat-row *matRowDef="let row; columns: displayedColumnsResuR;"></tr>
                               
                             </table>
+
+                            <!-- <app-chart id="canvas" [genReporte]="el.frecuencias"></app-chart> -->
+
                           </div>
+
                           <div *ngIf="el.muestraObs" class="mat-elevation-z0">
                             <mat-divider></mat-divider>
                             <mat-label>
@@ -182,7 +189,9 @@
                           </div>
                         </ul>
                       </mat-list-item>
+
                     </mat-tab>
+
                   </mat-tab-group>
                   
                 </mat-step>

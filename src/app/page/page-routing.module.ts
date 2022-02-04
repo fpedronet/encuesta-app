@@ -57,7 +57,7 @@ const routes: Routes = [
 
   { path: 'not-403', component: Not403Component},
 
-  {path:'reporte/demo1', component: Demo1Component, canActivate: [GuardService]},
+  {path:'reporte', component: Demo1Component, canActivate: [GuardService]},
 ];
 
 @NgModule({
