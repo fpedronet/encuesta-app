@@ -48,7 +48,6 @@ export class EncuestaService {
   }
 
   obtener(id: number, vistaCliente: number, idCliente: number, nomUsuario: string){
-    debugger;
     let urls = `${this.url}/GetFirstEncuesta?id=${id}&vistaCliente=${vistaCliente}&clienteOpc=${idCliente}&usuarioOpc=${nomUsuario}`;
     return this.http.get<Encuesta>(urls);
   }
