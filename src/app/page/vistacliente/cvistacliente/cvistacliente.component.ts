@@ -38,6 +38,7 @@ export class CvistaclienteComponent implements OnInit {
   vistaCli: number = 0;
   idEnc: number = 0;
   idCli: number = 0;
+  nomUsu: string = '';
   listaEncuestaPregunta: EncuestaPregunta[] = [];
   
   nIdEncuesta: number = 0;
@@ -61,9 +62,12 @@ export class CvistaclienteComponent implements OnInit {
       if(key!="" && key!=undefined){
         let split = key.split('-');
 
+        //debugger;
+
         this.vistaCli = parseInt(split[0]);
         this.idEnc =  parseInt(split[1]);
         this.idCli =  parseInt(split[2]);
+        this.nomUsu = split[3].toString();
       }     
 
       this.obtener();
@@ -76,7 +80,7 @@ export class CvistaclienteComponent implements OnInit {
 
   obtener(){
     this.spinner.showLoading();
-    this.encuestaService.obtener(this.idEnc, this.vistaCli, this.idCli).subscribe(data=>{
+    this.encuestaService.obtener(this.idEnc, this.vistaCli, this.idCli, this.nomUsu).subscribe(data=>{
 
       this.form = new FormGroup({
       
@@ -87,7 +91,7 @@ export class CvistaclienteComponent implements OnInit {
       this.cDescripcion= data.cDescripcion!;
       this.listaEncuestaPregunta = data.listaEncuestaPregunta;
 
-      this.encuestaService.existeRespuesta(this.idEnc, this.idCli).subscribe(data=>{
+      this.encuestaService.existeRespuesta(this.idEnc, this.idCli, this.nomUsu).subscribe(data=>{
         if(data.items.length > 0){
           this.existeRespuesta = true;
           this.listaEncuestaPregunta.forEach(preg => {

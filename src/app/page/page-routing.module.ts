@@ -55,7 +55,7 @@ const routes: Routes = [
 
   {path:'vistacliente/:id', component: CvistaclienteComponent, canActivate: [GuardService]},
 
-  { path: 'not-403', component: Not403Component},
+  {path: 'not-403', component: Not403Component},
 
   {path:'reporte', component: Demo1Component, canActivate: [GuardService]},
 ];

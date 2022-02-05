@@ -47,8 +47,9 @@ export class EncuestaService {
     return this.http.get<dataCollection>(urls);
   }
 
-  obtener(id: number, vistaCliente: number, usuario: number){
-    let urls = `${this.url}/GetFirstEncuesta?id=${id}&vistaCliente=${vistaCliente}&usuarioOpc=${usuario}`;
+  obtener(id: number, vistaCliente: number, idCliente: number, nomUsuario: string){
+    debugger;
+    let urls = `${this.url}/GetFirstEncuesta?id=${id}&vistaCliente=${vistaCliente}&clienteOpc=${idCliente}&usuarioOpc=${nomUsuario}`;
     return this.http.get<Encuesta>(urls);
   }
 
@@ -67,8 +68,8 @@ export class EncuestaService {
     return this.http.post<Response>(urls, encuesta);
   }
 
-  existeRespuesta(idEncuesta: number, idUsuario: number) {
-    let urls = `${this.url}/GetExistRespuestas?encuesta=${idEncuesta}&usuario=${idUsuario}`;
+  existeRespuesta(idEncuesta: number, idUsuario: number, nomUsuario: string) {
+    let urls = `${this.url}/GetExistRespuestas?encuesta=${idEncuesta}&cliente=${idUsuario}&nomUsuario=${nomUsuario}`;
     return this.http.get<dataCollection>(urls);
   }
 
