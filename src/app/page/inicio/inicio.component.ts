@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DebugElement, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
@@ -26,13 +26,16 @@ export class InicioComponent implements OnInit {
   ) { }
 
   idEncuesta?: string;
+  usuario?: string;
 
   ngOnInit(): void {
-   
+
+    this.usuario = this.usuarioService.sessionUsuario()?.usuario;
+
     this.encuestaService.existeEncuesta().subscribe(data=>{
 
     this.idEncuesta = this.usuarioService.sessionUsuario()?.idEncuesta;
-
+   
     if(data.items.length >=2){
         this.dialog.open(LvistaclienteComponent, {
           width: '850px'
@@ -42,7 +45,7 @@ export class InicioComponent implements OnInit {
 
         //El nombre de usuario y el id del cliente se obtendrán en el front
         let id = parseInt(this.idEncuesta!);
-        let value =  1 + '-' + this.idEncuesta + '-' + 0 + '-' + ' ';
+        let value =  1 + '-' + this.idEncuesta + '-' + 0 + '-' + ' '+ '-'+ ' ';
         let key = this.EncrDecr.set(value);
 
         let url = '/page/vistacliente/' + key;
@@ -66,7 +69,7 @@ export class InicioComponent implements OnInit {
 
         //El nombre de usuario y el id del cliente se obtendrán en el front
         let id = parseInt(this.idEncuesta!);
-        let value =  1 + '-' + id + '-' + 0 + '-' + ' ';
+        let value =  1 + '-' + id + '-' + 0 + '-' + ' '+ '-'+ ' ';
         let key = this.EncrDecr.set(value);
 
         let url = '/page/vistacliente/' + key;

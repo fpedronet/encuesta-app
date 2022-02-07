@@ -57,20 +57,18 @@ export class CvistaclienteComponent implements OnInit {
       
     });
     this.route.params.subscribe((data: Params)=>{
-debugger;
+
       let id = (data["id"]==undefined)? 0:data["id"];
       let key = this.EncrDecr.get(id);
 
       if(key!="" && key!=undefined){
         let split = key.split('-');
 
-        //debugger;
-
         this.vistaCli = parseInt(split[0]);
         this.idEnc =  parseInt(split[1]);
         this.idCli =  parseInt(split[2]);
-        this.clientUsu = split[3].toString();
         this.nomUsu = split[3].toString();
+        this.clientUsu = split[4].toString();
 
         if(this.nomUsu.trim()==""){
           let usuario = this.usuarioService.sessionUsuario();
