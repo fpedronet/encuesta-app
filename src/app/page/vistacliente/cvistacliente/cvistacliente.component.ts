@@ -13,6 +13,7 @@ import { Encuesta } from 'src/app/_model/encuesta';
 import { environment } from 'src/environments/environment';
 import { Respuesta } from 'src/app/_model/respuesta';
 import { EncrDecrService } from 'src/app/_service/encr-decr.service';
+import { UsuarioService } from 'src/app/_service/usuario.service';
 
 @Component({
   selector: 'app-cvistacliente',
@@ -30,7 +31,8 @@ export class CvistaclienteComponent implements OnInit {
 
     private encuestaService : EncuestaService,
     private pregdinamicaService: PregdinamicaService,
-    private EncrDecr: EncrDecrService
+    private EncrDecr: EncrDecrService,
+    private usuarioService : UsuarioService, 
     
   ) { }
 
@@ -39,6 +41,7 @@ export class CvistaclienteComponent implements OnInit {
   idEnc: number = 0;
   idCli: number = 0;
   nomUsu: string = '';
+  clientUsu: string = '';
   listaEncuestaPregunta: EncuestaPregunta[] = [];
   
   nIdEncuesta: number = 0;
@@ -54,7 +57,7 @@ export class CvistaclienteComponent implements OnInit {
       
     });
     this.route.params.subscribe((data: Params)=>{
-
+debugger;
       let id = (data["id"]==undefined)? 0:data["id"];
       let key = this.EncrDecr.get(id);
 
@@ -66,7 +69,15 @@ export class CvistaclienteComponent implements OnInit {
         this.vistaCli = parseInt(split[0]);
         this.idEnc =  parseInt(split[1]);
         this.idCli =  parseInt(split[2]);
+        this.clientUsu = split[3].toString();
         this.nomUsu = split[3].toString();
+
+        if(this.nomUsu.trim()==""){
+          let usuario = this.usuarioService.sessionUsuario();
+
+          this.clientUsu = usuario.descripcion;
+          this.nomUsu = usuario.usuario;
+        }
       }     
 
       this.obtener();
