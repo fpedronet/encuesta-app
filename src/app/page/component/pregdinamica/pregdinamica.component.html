@@ -12,14 +12,16 @@
             <mat-checkbox [value]="options.length.toString()" [(ngModel)]="optionsCheckbox[options.length]" [disabled]="bloqueado">
                 Otro
             </mat-checkbox>
-            <mat-form-field>
+            <mat-form-field *ngIf="optionsCheckbox[options.length]">
                 <input matInput placeholder="Indique su opción" [(ngModel)]="inputText" [disabled]="bloqueado">
             </mat-form-field>
         </div>
     </div>
 
     <div *ngSwitchCase="2"> <!-- Escala lineal -->
-        <mat-radio-group class="escala-lineal" [(ngModel)]="answerSelected">
+
+        <!-- Vista Normal -->
+        <mat-radio-group class="varias-opciones" [(ngModel)]="answerSelected" fxHide.gt-sm="true">
             <mat-label>{{minScale}}</mat-label>
             <mat-list-item *ngFor="let el of scaleNumbers; let i = index">                    
                 <mat-radio-button [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
@@ -27,7 +29,18 @@
                 </mat-radio-button>                    
             </mat-list-item>
             <mat-label>{{maxScale}}</mat-label>
-        </mat-radio-group>            
+        </mat-radio-group>
+
+        <!-- Vista Responsive -->
+        <mat-radio-group class="escala-lineal" [(ngModel)]="answerSelected" fxHide.lt-md="true">
+            <mat-label>{{minScale}}</mat-label>
+            <mat-list-item *ngFor="let el of scaleNumbers; let i = index">                    
+                <mat-radio-button [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
+                    {{el}}                    
+                </mat-radio-button>                    
+            </mat-list-item>
+            <mat-label>{{maxScale}}</mat-label>
+        </mat-radio-group>   
     </div>
 
     <div *ngSwitchCase="3"> <!-- Respuesta corta -->
@@ -57,7 +70,7 @@
                 <mat-radio-button [value]="options.length" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
                     Otro
                 </mat-radio-button>
-                <mat-form-field>
+                <mat-form-field *ngIf="answer == options.length.toString()">
                     <input matInput placeholder="Indique su opción" [(ngModel)]="inputText" [disabled]="bloqueado">
                 </mat-form-field>
             </div>

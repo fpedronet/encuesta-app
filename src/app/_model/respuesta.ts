@@ -8,5 +8,6 @@ export class Respuesta{
     cRespuestaObs?: string;
     cIdentificador?: string;
     dFecha?: Date;
+    sFecha?: string;
     cUsuario?: string;
 }

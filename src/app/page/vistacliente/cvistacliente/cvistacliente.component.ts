@@ -44,6 +44,7 @@ export class CvistaclienteComponent implements OnInit {
   idCli: number = 0;
   nomUsu: string = '';
   clientUsu: string = '';
+  fechaRegistro: string = '';
   listaEncuestaPregunta: EncuestaPregunta[] = [];
   
   nIdEncuesta: number = 0;
@@ -102,12 +103,15 @@ export class CvistaclienteComponent implements OnInit {
 
       this.encuestaService.existeRespuesta(this.idEnc, this.idCli, this.nomUsu).subscribe(data=>{
         if(data.items.length > 0){
+          var listaRpta: Respuesta[] = data.items;
+          this.fechaRegistro = listaRpta[0].sFecha!;
           this.existeRespuesta = true;
           this.listaEncuestaPregunta.forEach(preg => {
             let compRpta = this.listaComponentes.find(e => e.curPregunta.nIdEncuestaPregunta === preg.nIdEncuestaPregunta)!;
             compRpta.setAnswers(preg.respuesta?.cRespuestaOpt, preg.respuesta?.cRespuestaObs);
           });
-          this.muestraExistente();
+          if(this.vistaCli === 1)
+            this.muestraExistente();
         }
         else{
           this.existeRespuesta = false;
@@ -169,7 +173,7 @@ export class CvistaclienteComponent implements OnInit {
   }
 
   muestraExistente(){
-    let msg1: string = "Ya se ha registrado una respuesta en la encuesta con los siquientes datos:";
+    let msg1: string = "Se ha registrado una respuesta en la encuesta con los siquientes datos:";
     let msg2: string = "Cliente: " + this.clientUsu;
     let msg3: string = "Usuario: " + this.nomUsu;
     let msg4: string = "¿Desea volver a iniciar sesión?";
@@ -179,5 +183,11 @@ export class CvistaclienteComponent implements OnInit {
         this.router.navigate(['']);
       }
     });
+  }
+
+  btnUndo(){
+    let undoRoute = '/page/encuesta/ver/' + this.idEnc.toString() + '/true';
+    this.router.navigate([undoRoute]);
+       //this.spinner.hideLoading();
   }
 }
