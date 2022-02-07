@@ -10,12 +10,15 @@ export class ConfimService {
 
   constructor(private dialog: MatDialog) { }
 
-  openConfirmDialog(msg: string){
+  openConfirmDialog(msg: string, msg2: string = '', msg3: string = '', msg4: string = ''){
   return this.dialog.open(ConfirmComponent,{
       width:'430px',
       disableClose:true,
       data:{
-        message: msg
+        message: msg,
+        message2: msg2,
+        message3: msg3,
+        message4: msg4,
       }
     });
   }

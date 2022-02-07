@@ -8,6 +8,7 @@ import { EncuestaService } from 'src/app/_service/encuesta.service';
 import { EncuestaPregunta } from 'src/app/_model/encuestaPregunta';
 import { PregdinamicaService } from '../../component/pregdinamica/pregdinamica.service';
 import { PregdinamicaComponent } from '../../component/pregdinamica/pregdinamica.component';
+import { ConfimService } from './../../component/confirm/confim.service';
 
 import { Encuesta } from 'src/app/_model/encuesta';
 import { environment } from 'src/environments/environment';
@@ -32,7 +33,8 @@ export class CvistaclienteComponent implements OnInit {
     private encuestaService : EncuestaService,
     private pregdinamicaService: PregdinamicaService,
     private EncrDecr: EncrDecrService,
-    private usuarioService : UsuarioService, 
+    private usuarioService : UsuarioService,
+    private confimService : ConfimService,
     
   ) { }
 
@@ -57,7 +59,7 @@ export class CvistaclienteComponent implements OnInit {
       
     });
     this.route.params.subscribe((data: Params)=>{
-debugger;
+//debugger;
       let id = (data["id"]==undefined)? 0:data["id"];
       let key = this.EncrDecr.get(id);
 
@@ -108,6 +110,7 @@ debugger;
             let compRpta = this.listaComponentes.find(e => e.curPregunta.nIdEncuestaPregunta === preg.nIdEncuestaPregunta)!;
             compRpta.setAnswers(preg.respuesta?.cRespuestaOpt, preg.respuesta?.cRespuestaObs);
           });
+          this.muestraExistente();
         }
         else{
           this.existeRespuesta = false;
@@ -168,4 +171,16 @@ debugger;
     });
   }
 
+  muestraExistente(){
+    let msg1: string = "Ya se ha registrado una respuesta en la encuesta con los siquientes datos:";
+    let msg2: string = "Cliente: " + this.clientUsu;
+    let msg3: string = "Usuario: " + this.nomUsu;
+    let msg4: string = "¿Desea volver a iniciar sesión?";
+    this.confimService.openConfirmDialog(msg1, msg2, msg3, msg4).afterClosed().subscribe(res =>{
+      if(res){
+        localStorage.clear();
+        this.router.navigate(['']);
+      }
+    });
+  }
 }
