@@ -4,16 +4,16 @@
 
     <div *ngSwitchCase="1"> <!-- Casillas -->
         <mat-list-item *ngFor="let el of options; let i = index">
-            <mat-checkbox [value]="i.toString()" [(ngModel)]="optionsCheckbox[i]">
+            <mat-checkbox [value]="i.toString()" [(ngModel)]="optionsCheckbox[i]" [disabled]="bloqueado">
               {{el}}
             </mat-checkbox>
         </mat-list-item>
         <div *ngIf="curPregunta.nRqObservacion" >
-            <mat-checkbox [value]="options.length.toString()" [(ngModel)]="optionsCheckbox[options.length]">
+            <mat-checkbox [value]="options.length.toString()" [(ngModel)]="optionsCheckbox[options.length]" [disabled]="bloqueado">
                 Otro
             </mat-checkbox>
             <mat-form-field>
-                <input matInput placeholder="Indique su opción" [(ngModel)]="inputText">
+                <input matInput placeholder="Indique su opción" [(ngModel)]="inputText" [disabled]="bloqueado">
             </mat-form-field>
         </div>
     </div>
@@ -22,7 +22,7 @@
         <mat-radio-group class="escala-lineal" [(ngModel)]="answerSelected">
             <mat-label>{{minScale}}</mat-label>
             <mat-list-item *ngFor="let el of scaleNumbers; let i = index">                    
-                <mat-radio-button [value]="i" (change)="updateAnswer($event.value)">
+                <mat-radio-button [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
                     {{el}}                    
                 </mat-radio-button>                    
             </mat-list-item>
@@ -31,16 +31,16 @@
     </div>
 
     <div *ngSwitchCase="3"> <!-- Respuesta corta -->
-        <textarea matInput placeholder="Escriba su respuesta" [(ngModel)]="inputText"></textarea>
+        <textarea matInput placeholder="Escriba su respuesta" [(ngModel)]="inputText" [disabled]="bloqueado"></textarea>
     </div>
 
     <div *ngSwitchCase="4"> <!-- Sí/No -->
         <mat-radio-group class="varias-opciones" [(ngModel)]="answerSelected">
-            <mat-radio-button [value]="0" (change)="updateAnswer($event.value)">Sí</mat-radio-button>
-            <mat-radio-button [value]="1" (change)="updateAnswer($event.value)">No</mat-radio-button>
+            <mat-radio-button [value]="0" (change)="updateAnswer($event.value)" [disabled]="bloqueado">Sí</mat-radio-button>
+            <mat-radio-button [value]="1" (change)="updateAnswer($event.value)" [disabled]="bloqueado">No</mat-radio-button>
             <div *ngIf="curPregunta.nRqObservacion">
                 <mat-form-field>
-                    <input matInput placeholder="Justifique su respuesta" [(ngModel)]="inputText">
+                    <input matInput placeholder="Justifique su respuesta" [(ngModel)]="inputText" [disabled]="bloqueado">
                 </mat-form-field>
             </div>
         </mat-radio-group>     
@@ -49,16 +49,16 @@
     <div *ngSwitchCase="5"> <!-- Varias opciones -->
         <mat-radio-group class="varias-opciones" [(ngModel)]="answerSelected">
             <mat-list-item *ngFor="let el of options; let i = index">
-                <mat-radio-button [value]="i" (change)="updateAnswer($event.value)">
+                <mat-radio-button [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
                     {{el}}
                 </mat-radio-button>
             </mat-list-item>
             <div *ngIf="curPregunta.nRqObservacion" >
-                <mat-radio-button [value]="options.length" (change)="updateAnswer($event.value)">
+                <mat-radio-button [value]="options.length" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
                     Otro
                 </mat-radio-button>
                 <mat-form-field>
-                    <input matInput placeholder="Indique su opción" [(ngModel)]="inputText">
+                    <input matInput placeholder="Indique su opción" [(ngModel)]="inputText" [disabled]="bloqueado">
                 </mat-form-field>
             </div>
         </mat-radio-group>         

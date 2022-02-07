@@ -16,8 +16,9 @@
             
           </mat-toolbar>
           <form id="ngForm" [formGroup]="form" #frmGrupo="ngForm" (ngSubmit)="enviar()">
-            
-           
+
+            <h3 class="headerencuesta">Cliente: {{nomUsu}}</h3>
+            <h3 class="headerencuesta">Nombre: {{nomUsu}}</h3>
             
             <h1 class="titleencuesta">
                 {{cTitulo}}
@@ -27,7 +28,7 @@
             
             <ul>
                 <li *ngFor="let item of listaEncuestaPregunta" value={{item.nIdPregunta}}; let i = index>
-                    <app-pregdinamica [curPregunta]="item" [edicion]="false"></app-pregdinamica>
+                    <app-pregdinamica [curPregunta]="item" [edicion]="false" [bloqueado]="existeRespuesta"></app-pregdinamica>
                 </li>
             </ul>           
 
