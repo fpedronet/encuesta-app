@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { dataCollection } from '../_model/dataCollection';
 
@@ -42,6 +43,19 @@ export class UsuarioService {
   isLogin() {
     let token = localStorage.getItem(environment.TOKEN_NAME);
     return token != null;
+  }
+
+  sessionUsuario(){
+    let helper = new JwtHelperService();
+    let token = localStorage.getItem(environment.TOKEN_NAME);
+
+    if (!helper.isTokenExpired(token!)){
+
+      let decodedToken = helper.decodeToken(token!);      
+      return decodedToken;
+    }else{
+      return null;
+    }
   }
 
   closeLogin(){
