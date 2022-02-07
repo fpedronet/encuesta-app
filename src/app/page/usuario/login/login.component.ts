@@ -64,9 +64,13 @@ export class LoginComponent implements OnInit {
     model.usuario = this.form.value['usuario'];
     model.cClave= this.form.value['clave'];
 
-    if(model.nIdCliente==null || model.cClave==""){
-
-      this.notifierService.showNotification(2,'Mensaje','Ingresa el cliente y la contraseña');
+    if(model.nIdCliente==null || model.cClave=="" || model.usuario==""){
+      if(model.nIdCliente==null || model.cClave==""){
+        this.notifierService.showNotification(2,'Mensaje','Ingresa el cliente y la contraseña');
+      }
+      else{
+        this.notifierService.showNotification(2,'Mensaje','Ingresa un nombre o acrónimo para identificarse en la encuesta');
+      }
       this.spinner.hideLoading();
 
     }else{

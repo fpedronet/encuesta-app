@@ -17,6 +17,9 @@ export class PregdinamicaComponent implements OnInit {
   @Input()
   edicion: boolean = false;
 
+  @Input()
+  bloqueado: boolean = false;
+
   constructor(private pregdinamica: PregdinamicaService) { 
     pregdinamica.pregDinamicaComp = this;
   }
@@ -129,7 +132,7 @@ export class PregdinamicaComponent implements OnInit {
     //Escala lineal, Sí/No, Varias opciones
     if(this.curPregunta.nTipo === 2 || this.curPregunta.nTipo === 4 || this.curPregunta.nTipo === 5){
       rptaOpt = this.answer;
-      if(this.curPregunta.nRqObservacion === 1){
+      if(this.curPregunta.nRqObservacion === 1 && this.curPregunta.nTipo !== 2){
         if(this.curPregunta.nTipo === 4 || this.answer === (this.options.length).toString()){
           rptaObs = this.inputText;
         }

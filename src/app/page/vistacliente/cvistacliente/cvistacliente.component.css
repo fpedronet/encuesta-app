@@ -8,6 +8,11 @@
     color: #003f94;
     font-weight: 450;
 }
+.headerencuesta{
+    color: #101444;
+    font-weight: 450;
+    height: 20px;
+}
 .toolbarencuesta{
     background:linear-gradient( 180deg,#1367ff,#045ed8); 
     color:#fff;

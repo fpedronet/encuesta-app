@@ -88,7 +88,7 @@ export class CencuestaComponent implements OnInit {
   obtener(){
 
     this.spinner.showLoading();
-    this.encuestaService.obtener(this.id, 0, 0).subscribe(data=>{
+    this.encuestaService.obtener(this.id, 0, 0, '').subscribe(data=>{
 
       let idencuesta = data.nIdEncuesta!;
 
@@ -311,8 +311,9 @@ export class CencuestaComponent implements OnInit {
     }    
   }
 
-  verVistaCliente(idCliente: number){
-    let value =  0 + '-' + this.id + '-' + idCliente;
+  verVistaCliente(idCliente: number, nomUsu: string){
+    let value =  0 + '-' + this.id + '-' + idCliente + '-' + nomUsu;
+    debugger;
     let key = this.EncrDecr.set(value);
 
     let url = '/page/vistacliente/'+ key;
