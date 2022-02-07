@@ -311,9 +311,10 @@ export class CencuestaComponent implements OnInit {
     }    
   }
 
-  verVistaCliente(idCliente: number, nomUsu: string){
-    let value =  0 + '-' + this.id + '-' + idCliente + '-' + nomUsu;
-    debugger;
+  verVistaCliente(idCliente: number, nomUsu: string, nomCliente: string ){
+    
+    let value =  0 + '-' + this.id + '-' + idCliente + '-' + nomUsu + '-' + nomCliente;
+
     let key = this.EncrDecr.set(value);
 
     let url = '/page/vistacliente/'+ key;
