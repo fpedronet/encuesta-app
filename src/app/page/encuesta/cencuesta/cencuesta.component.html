@@ -155,12 +155,12 @@
                                       
                                   <ng-container matColumnDef="frecuenciaAbs" >
                                     <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> Cantidad </mat-header-cell>
-                                    <mat-cell style="text-align: center" *matCellDef="let element" data-label="Cantidad"> {{element.frecuenciaAbs}} </mat-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Cantidad"> {{element.frecuenciaAbs}} </mat-cell>
                                   </ng-container>
   
                                   <ng-container matColumnDef="frecuenciaRel" >
                                     <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> Porcentaje </mat-header-cell>
-                                    <mat-cell style="text-align: center" *matCellDef="let element" data-label="Porcentaje"> {{(element.frecuenciaRel * 100).toFixed(2)}}% </mat-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Porcentaje"> {{(element.frecuenciaRel * 100).toFixed(2)}}% </mat-cell>
                                   </ng-container>
                                   
                                   <mat-header-row *matHeaderRowDef="displayedColumnsResuR"></mat-header-row>
