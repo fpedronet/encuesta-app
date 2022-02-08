@@ -1,4 +1,5 @@
 import { Component, OnInit,Inject } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -12,6 +13,15 @@ export class ConfirmComponent implements OnInit {
     public dialogRef: MatDialogRef<ConfirmComponent>
   ) { }
 
+  otrasLineas: boolean = true;
+
   ngOnInit(): void {
+    //Falta setear el valor de otras líneas según si la cadena msg2 es vacía
+    if(this.otrasLineas){
+      document.getElementById("otrasLineas")!.style.display = "block"
+    }
+    else{
+      document.getElementById("otrasLineas")!.style.display = "none"
+    }
   }
 }

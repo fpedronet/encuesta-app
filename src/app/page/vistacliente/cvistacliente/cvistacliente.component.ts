@@ -8,6 +8,7 @@ import { EncuestaService } from 'src/app/_service/encuesta.service';
 import { EncuestaPregunta } from 'src/app/_model/encuestaPregunta';
 import { PregdinamicaService } from '../../component/pregdinamica/pregdinamica.service';
 import { PregdinamicaComponent } from '../../component/pregdinamica/pregdinamica.component';
+import { ConfimService } from './../../component/confirm/confim.service';
 
 import { Encuesta } from 'src/app/_model/encuesta';
 import { environment } from 'src/environments/environment';
@@ -32,7 +33,8 @@ export class CvistaclienteComponent implements OnInit {
     private encuestaService : EncuestaService,
     private pregdinamicaService: PregdinamicaService,
     private EncrDecr: EncrDecrService,
-    private usuarioService : UsuarioService, 
+    private usuarioService : UsuarioService,
+    private confimService : ConfimService,
     
   ) { }
 
@@ -42,6 +44,7 @@ export class CvistaclienteComponent implements OnInit {
   idCli: number = 0;
   nomUsu: string = '';
   clientUsu: string = '';
+  fechaRegistro: string = '';
   listaEncuestaPregunta: EncuestaPregunta[] = [];
   
   nIdEncuesta: number = 0;
@@ -57,7 +60,6 @@ export class CvistaclienteComponent implements OnInit {
       
     });
     this.route.params.subscribe((data: Params)=>{
-
       let id = (data["id"]==undefined)? 0:data["id"];
       let key = this.EncrDecr.get(id);
 
@@ -101,11 +103,15 @@ export class CvistaclienteComponent implements OnInit {
 
       this.encuestaService.existeRespuesta(this.idEnc, this.idCli, this.nomUsu).subscribe(data=>{
         if(data.items.length > 0){
+          var listaRpta: Respuesta[] = data.items;
+          this.fechaRegistro = listaRpta[0].sFecha!;
           this.existeRespuesta = true;
           this.listaEncuestaPregunta.forEach(preg => {
             let compRpta = this.listaComponentes.find(e => e.curPregunta.nIdEncuestaPregunta === preg.nIdEncuestaPregunta)!;
             compRpta.setAnswers(preg.respuesta?.cRespuestaOpt, preg.respuesta?.cRespuestaObs);
           });
+          if(this.vistaCli === 1)
+            this.muestraExistente();
         }
         else{
           this.existeRespuesta = false;
@@ -166,4 +172,22 @@ export class CvistaclienteComponent implements OnInit {
     });
   }
 
+  muestraExistente(){
+    let msg1: string = "Se ha registrado una respuesta en la encuesta con los siquientes datos:";
+    let msg2: string = "Cliente: " + this.clientUsu;
+    let msg3: string = "Usuario: " + this.nomUsu;
+    let msg4: string = "¿Desea volver a iniciar sesión?";
+    this.confimService.openConfirmDialog(msg1, msg2, msg3, msg4).afterClosed().subscribe(res =>{
+      if(res){
+        localStorage.clear();
+        this.router.navigate(['']);
+      }
+    });
+  }
+
+  btnUndo(){
+    let undoRoute = '/page/encuesta/ver/' + this.idEnc.toString() + '/true';
+    this.router.navigate([undoRoute]);
+       //this.spinner.hideLoading();
+  }
 }

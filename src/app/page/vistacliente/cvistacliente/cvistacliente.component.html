@@ -2,9 +2,20 @@
     <span class="example-spacer"></span>
     <div class="example-button-row">
         <span>
+            <!--button *ngIf="vistaCli == 1" mat-raised-button color="warn" routerLink="/page/inicio">
+                <mat-icon>undo</mat-icon>
+                <span>Regresar</span>
+            </button-->
+            <button *ngIf="vistaCli == 0" mat-raised-button color="warn" (click)="btnUndo()">
+                <mat-icon>undo</mat-icon>
+                <span>Regresar</span>
+            </button>
             <button *ngIf="!existeRespuesta" mat-raised-button color="primary" type="submit" [disabled]="frmGrupo.invalid" form="ngForm">
                 <mat-icon>save as</mat-icon>
                 <span>Enviar</span>
+            </button>            
+            <button *ngIf="existeRespuesta" mat-button color="primary" [disabled]="true">
+                Fecha de registro: {{fechaRegistro}}
             </button> 
         </span>       
     </div>
