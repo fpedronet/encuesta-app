@@ -157,7 +157,6 @@ form{
   .mat-table .mat-cell:first-child {
     margin-top: 1%;
   }
-
   .mat-cell:first-of-type, .mat-header-cell:first-of-type, .mat-footer-cell:first-of-type{
     padding-left:2px;
   }
