@@ -16,7 +16,16 @@
     flex-direction: column-reverse;
 }
 
+.escala-lineal::ng-deep.mat-radio-label-content{
+    padding-left: 0;
+}
+
 .mat-radio-button{
     margin-left:6px;
     padding-top:3px;
+}
+
+.label-escala{
+    margin-block: auto;
+    margin: 8px;
 }

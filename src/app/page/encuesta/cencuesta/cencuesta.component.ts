@@ -172,10 +172,12 @@ export class CencuestaComponent implements OnInit {
         listaOpcs.forEach(opc => {
           resu.frecuencias?.push(new FrecuenciaOpcion(opc));
         });
-        //Casillas y varias opciones pueden tener una opción extra
-        if(resu.pregunta?.nRqObservacion === 1 &&
-          (resu.pregunta?.nTipo === 1 || resu.pregunta?.nTipo === 5)){
+        //Casillas, escala lineal varias opciones pueden tener una opción extra
+        if(resu.pregunta?.nRqObservacion === 1){
+          if(resu.pregunta?.nTipo === 1 || resu.pregunta?.nTipo === 5)
             resu.frecuencias?.push(new FrecuenciaOpcion("Otro"));
+          if(resu.pregunta?.nTipo === 2)
+            resu.frecuencias?.push(new FrecuenciaOpcion("No aplica"));
         }
 
         //Convierte la cadena de opciones marcadas a una lista
@@ -199,7 +201,14 @@ export class CencuestaComponent implements OnInit {
         //Calcula estadísticas para escala lineal
         if(resu.pregunta?.nTipo === 2){
           resu.promEst = 0;
-          var arrFrec:FrecuenciaOpcion[] = frecOpc.slice();
+          var arrFrec:FrecuenciaOpcion[];
+
+          //Elimina la opción de no aplica si existe
+          if(frecOpc[frecOpc.length - 1].opcion === "No aplica")
+            arrFrec = frecOpc.slice(0, -1);
+          else
+            arrFrec = frecOpc.slice();
+
           let indexLastZero = -1;
           arrFrec.sort(function(a, b){return a.frecuenciaAbs! - b.frecuenciaAbs!})
           let index = 0;
@@ -253,7 +262,7 @@ export class CencuestaComponent implements OnInit {
         listaOpciones = [];
         var init = preg.nRangoMinimo;
         var end = preg.nRangoMaximo;
-        if(init && end){
+        if(init !== undefined && end !== undefined){
           for(var i = init; i <= end; i++){
             listaOpciones.push(i.toString());
           }
