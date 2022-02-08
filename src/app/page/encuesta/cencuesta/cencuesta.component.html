@@ -47,42 +47,33 @@
 
                    <mat-divider></mat-divider>
 
-                    <mat-grid-list style="margin-top: 11px;" cols="2" rowHeight="360px">
-                        
-                        <mat-grid-tile>
-                            <div class="example-container mat-elevation-z0">
-                                <mat-table [dataSource]="listaPregunta" matSort>
-                                                              
-                                  <ng-container matColumnDef="cDescripcion">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> PREGUNTAS </mat-header-cell>
-                                    <mat-cell *matCellDef="let element"> {{element.cDescripcion}} </mat-cell>
-                                  </ng-container>                        
-                                      
-                                  <ng-container matColumnDef="nAccion" >
-                                      <mat-header-cell *matHeaderCellDef style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);"></mat-header-cell>
-                                      <mat-cell *matCellDef="let element" style="text-align: right;">                                       
-                                        <mat-checkbox [checked]="element.bMarcado" class="example-margin" (change)="checkPregunta(element, $event)"></mat-checkbox>
-                                      </mat-cell>
-                                    </ng-container>
-                                  
-                                  <mat-header-row *matHeaderRowDef="displayedColumnsP"></mat-header-row>
-                                  <mat-row *matRowDef="let row; columns: displayedColumnsP;"></mat-row>
-                                 
-                                </mat-table>
-                              </div>    
-                        </mat-grid-tile>
-
-                        <mat-grid-tile>
-                            <div class="mat-elevation-z0">                                
-                                <ul>
-                                    <li *ngFor="let item of listaEncuestaPregunta" value={{item.nIdPregunta}}>
-                                      {{item.cDescripcion}}
-                                    </li>
-                                  </ul>
-                              </div>                        
-                        </mat-grid-tile>
-
-                    </mat-grid-list>
+                      <div class="example-container mat-elevation-z0">
+                          <mat-table [dataSource]="listaPregunta" matSort>
+                                                        
+                            <ng-container matColumnDef="cDescripcion">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> PREGUNTAS </mat-header-cell>
+                              <mat-cell *matCellDef="let element"> {{element.cDescripcion}} </mat-cell>
+                            </ng-container>                        
+                                
+                            <ng-container matColumnDef="nAccion" >
+                                <mat-header-cell *matHeaderCellDef style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);"></mat-header-cell>
+                                <mat-cell *matCellDef="let element" style="text-align: right;">                                       
+                                  <mat-checkbox [checked]="element.bMarcado" class="example-margin" (change)="checkPregunta(element, $event)"></mat-checkbox>
+                                </mat-cell>
+                              </ng-container>
+                            
+                            <mat-header-row *matHeaderRowDef="displayedColumnsP"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumnsP;"></mat-row>
+                            
+                          </mat-table>
+                        </div>    
+                      <div class="mat-elevation-z0">                                
+                        <ul>
+                          <li *ngFor="let item of listaEncuestaPregunta" value={{item.nIdPregunta}}; let i = index>
+                              <app-pregdinamica [curPregunta]="item" [edicion]="false" [bloqueado]="false"></app-pregdinamica>
+                          </li>
+                        </ul>     
+                      </div>
                        
                 </mat-step>
                 

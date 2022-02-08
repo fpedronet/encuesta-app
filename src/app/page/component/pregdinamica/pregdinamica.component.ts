@@ -39,19 +39,8 @@ export class PregdinamicaComponent implements OnInit {
   defaultOptions = ['Opción 1', 'Opción 2', 'Opción 3'];
 
   ngOnInit(): void {
-    if(this.curPregunta !== undefined){
-      //Muestra valores para la escala
-      if(this.curPregunta.nTipo == 2){ //Escala lineal
-        var init = this.curPregunta.nRangoMinimo;
-        var end = this.curPregunta.nRangoMaximo;
-        if(init && end){
-          this.scaleNumbers = [];
-          for(var i = init; i <= end; i++){
-            this.scaleNumbers.push(i);
-          }
-        }        
-      }
-
+    //debugger;
+    if(this.curPregunta !== undefined){      
       //Asigna definición
       if(this.curPregunta.cDefinicion)
         this.setDefinicion(this.curPregunta.cDefinicion)
@@ -83,6 +72,18 @@ export class PregdinamicaComponent implements OnInit {
       //Opciones para escalas
       if(obj.minEscala !== '') this.minScale = obj.minEscala;
       if(obj.maxEscala !== '') this.maxScale = obj.maxEscala;
+      //Llena arreglo para escala lineal
+      if(this.curPregunta.nTipo === 2){
+        
+        var init = this.curPregunta.nRangoMinimo;
+        var end = this.curPregunta.nRangoMaximo;
+        if(init !== undefined && end !== undefined){
+          this.scaleNumbers = [];
+          for(var i = init; i <= end; i++){
+            this.scaleNumbers.push(i);
+          }
+        }        
+      }
 
       //Descripción que acompaña la observación
       if(obj.descObs !== '') this.descripcionObs = obj.descObs;
