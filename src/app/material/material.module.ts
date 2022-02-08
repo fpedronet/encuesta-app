@@ -37,6 +37,7 @@ import {NgApexchartsModule} from 'ng-apexcharts';
   declarations: [],
   imports: [
     CommonModule,
+    MatTableModule
   ],
   exports:[
     MatTableModule,

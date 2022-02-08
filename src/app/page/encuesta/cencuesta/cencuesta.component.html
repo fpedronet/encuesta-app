@@ -23,7 +23,7 @@
         <form id="ngForm" [formGroup]="form" #frmGrupo="ngForm" (ngSubmit)="guardar()">
 
             <mat-stepper labelPosition="bottom" #stepper>
-              
+            
                 <mat-step>
                     <ng-template matStepLabel>Encuesta</ng-template>
 
@@ -77,11 +77,81 @@
                        
                 </mat-step>
                 
-                <mat-step *ngIf="ver">                  
+                <mat-step *ngIf="ver">   
+                  <ng-template matStepLabel>Respuesta</ng-template>
+               
                   <mat-tab-group mat-align-tabs="center">
 
-                      <mat-tab label="Individual">
-                        <ng-template matStepLabel>Respuesta</ng-template>
+                    <mat-tab label="Resumen">
+                       
+                      <!-- <app-reporte></app-reporte> -->
+
+                      <mat-list-item *ngFor="let el of listaRespuestasResumen; let i = index">
+                        <ul>
+                        <mat-label style="margin-top: 20px;">
+                          {{el.pregunta?.nOrden}}. {{el.pregunta?.cDescripcion}}
+                        </mat-label>
+                        <div *ngIf="el.muestraOpt" class="mat-elevation-z0">
+
+                          <div id="contenedor">
+                            <div class="tableEncuesta">
+                              <mat-table [dataSource]="el.frecuencias!" matSort>
+                                                          
+                                <ng-container matColumnDef="opcion">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> Opción </mat-header-cell>
+                                  <mat-cell *matCellDef="let element" data-label="Opción"> {{element.opcion}} </mat-cell>
+                                </ng-container>                        
+                                    
+                                <ng-container matColumnDef="frecuenciaAbs" >
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> Cantidad </mat-header-cell>
+                                  <mat-cell *matCellDef="let element" data-label="Cantidad"> {{element.frecuenciaAbs}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="frecuenciaRel" >
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> Porcentaje </mat-header-cell>
+                                  <mat-cell *matCellDef="let element" data-label="Porcentaje"> {{(element.frecuenciaRel * 100).toFixed(2)}}% </mat-cell>
+                                </ng-container>
+                                
+                                <mat-header-row *matHeaderRowDef="displayedColumnsResuR"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumnsResuR;"></mat-row>
+                                
+                              </mat-table>
+                            </div>
+                            <div class="tableGrafico">
+                              <app-reporte [genReporte]="el.frecuencias"></app-reporte>
+                            </div>
+                          </div>                              
+
+                        </div>
+
+                          <div *ngIf="el.muestraObs && el.observaciones?.length! > 0" class="mat-elevation-z0">
+                            <mat-divider></mat-divider>
+                            <mat-label>
+                              {{el.tituloObs}} (Total: {{el.observaciones?.length}})
+                            </mat-label>
+                            <ul>
+                              <li *ngFor="let item of el.observaciones; let i = index" value="i">
+                                {{item}}
+                              </li>
+                            </ul>
+                          </div>
+
+                          <div *ngIf="el.muestraEst" class="mat-elevation-z0">
+                            <mat-divider></mat-divider>
+                            <mat-label>
+                              Promedio: {{el.promEst!.toFixed(2)}}
+                            </mat-label>
+                            <br>
+                            <mat-label>
+                              Mediana: {{el.medEst}}
+                            </mat-label>
+                          </div>
+                        </ul>
+                      </mat-list-item>
+                      
+                    </mat-tab> 
+                    
+                    <mat-tab label="Individual">
                         
                         <mat-label *ngIf="listaRespuesta.length === 0">No se registraron respuestas</mat-label>
 
@@ -133,78 +203,9 @@
                             aria-label="Select page of users">
                           </mat-paginator>
                         </div>
-                      </mat-tab>
+                    </mat-tab>                                                           
 
-                      <mat-tab label="Resumen" *ngIf="listaRespuesta.length > 0">
-
-                        <mat-list-item *ngFor="let el of listaRespuestasResumen; let i = index">
-                          <ul>
-                          <mat-label style="margin-top: 20px;">
-                            {{el.pregunta?.nOrden}}. {{el.pregunta?.cDescripcion}}
-                          </mat-label>
-                          <div *ngIf="el.muestraOpt" class="mat-elevation-z0">
-
-                            <div id="contenedor">
-                              <div>
-                                <mat-table [dataSource]="el.frecuencias!" matSort>
-                                                            
-                                  <ng-container matColumnDef="opcion">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> Opción </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" data-label="Opción"> {{element.opcion}} </mat-cell>
-                                  </ng-container>                        
-                                      
-                                  <ng-container matColumnDef="frecuenciaAbs" >
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> Cantidad </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" data-label="Cantidad"> {{element.frecuenciaAbs}} </mat-cell>
-                                  </ng-container>
-  
-                                  <ng-container matColumnDef="frecuenciaRel" >
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> Porcentaje </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" data-label="Porcentaje"> {{(element.frecuenciaRel * 100).toFixed(2)}}% </mat-cell>
-                                  </ng-container>
-                                  
-                                  <mat-header-row *matHeaderRowDef="displayedColumnsResuR"></mat-header-row>
-                                  <mat-row *matRowDef="let row; columns: displayedColumnsResuR;"></mat-row>
-                                  
-                                </mat-table>
-                              </div>
-                              <div>
-                                <app-chart [genReporte]="el.frecuencias"></app-chart>
-                              </div>
-                            </div>                              
-
-                          </div>
-
-                            <div *ngIf="el.muestraObs && el.observaciones?.length! > 0" class="mat-elevation-z0">
-                              <mat-divider></mat-divider>
-                              <mat-label>
-                                {{el.tituloObs}} (Total: {{el.observaciones?.length}})
-                              </mat-label>
-                              <ul>
-                                <li *ngFor="let item of el.observaciones; let i = index" value="i">
-                                  {{item}}
-                                </li>
-                              </ul>
-                            </div>
-
-                            <div *ngIf="el.muestraEst" class="mat-elevation-z0">
-                              <mat-divider></mat-divider>
-                              <mat-label>
-                                Promedio: {{el.promEst!.toFixed(2)}}
-                              </mat-label>
-                              <br>
-                              <mat-label>
-                                Mediana: {{el.medEst}}
-                              </mat-label>
-                            </div>
-                          </ul>
-                        </mat-list-item>
-
-                      </mat-tab>                    
-                      
-                  </mat-tab-group>                   
-                  
-
+                  </mat-tab-group>              
                 </mat-step>
 
                 <mat-step>

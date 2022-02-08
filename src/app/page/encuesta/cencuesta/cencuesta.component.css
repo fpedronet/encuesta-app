@@ -1,19 +1,27 @@
-/* .mat-header-row{
-background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);
-} */
-
 #contenedor {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
   }
-  
-  #contenedor > div {
-    width: 40%;
+
+  .tableEncuesta {
+    width: 25%;
+  }
+  .tableGrafico {
+    width: 50%;
   }
 
+  #chart {
+    max-width: 380px;
+    margin: 35px auto;
+    padding: 0;
+  } 
+  
   @media screen and (max-width: 960px) {
-    #contenedor > div {
-        width: 100%;
-      }
+    .tableEncuesta {
+      width: 100%;
+    }
+    .tableGrafico {
+      width: 100%;
+    }
   }

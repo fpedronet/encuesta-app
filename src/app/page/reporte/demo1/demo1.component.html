@@ -10,10 +10,17 @@
       <mat-icon>home</mat-icon>
      REPORTE
     </mat-toolbar>
-    <form>
-      
-      <apx-chart [series]="series" [chart]="chart" [title]="title"></apx-chart>
+    <form id="ngForm" [formGroup]="form" #frmGrupo="ngForm" (ngSubmit)="guardar()">
+      <div id="chart">
+        <apx-chart
+         [series]="chartOptions.series"
+         [chart]="chartOptions.chart"
+         [labels]="chartOptions.labels"
+         [responsive]="chartOptions.responsive"
+        ></apx-chart>
+      </div>
+    </form>
 
-    </form>    
+
   </mat-card>
 </div>
