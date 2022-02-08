@@ -50,25 +50,25 @@
                     <mat-grid-list style="margin-top: 11px;" cols="2" rowHeight="360px">
                         
                         <mat-grid-tile>
-                            <div class="mat-elevation-z0">
-                                <table mat-table [dataSource]="listaPregunta" matSort>
+                            <div class="example-container mat-elevation-z0">
+                                <mat-table [dataSource]="listaPregunta" matSort>
                                                               
                                   <ng-container matColumnDef="cDescripcion">
-                                    <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> PREGUNTAS </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.cDescripcion}} </td>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> PREGUNTAS </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.cDescripcion}} </mat-cell>
                                   </ng-container>                        
                                       
                                   <ng-container matColumnDef="nAccion" >
-                                      <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);" mat-header-cell *matHeaderCellDef></th>
-                                      <td mat-cell *matCellDef="let element" style="text-align: right;">                                       
+                                      <mat-header-cell *matHeaderCellDef style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);"></mat-header-cell>
+                                      <mat-cell *matCellDef="let element" style="text-align: right;">                                       
                                         <mat-checkbox [checked]="element.bMarcado" class="example-margin" (change)="checkPregunta(element, $event)"></mat-checkbox>
-                                      </td>
+                                      </mat-cell>
                                     </ng-container>
                                   
-                                  <tr mat-header-row *matHeaderRowDef="displayedColumnsP"></tr>
-                                  <tr mat-row *matRowDef="let row; columns: displayedColumnsP;"></tr>
+                                  <mat-header-row *matHeaderRowDef="displayedColumnsP"></mat-header-row>
+                                  <mat-row *matRowDef="let row; columns: displayedColumnsP;"></mat-row>
                                  
-                                </table>
+                                </mat-table>
                               </div>    
                         </mat-grid-tile>
 
@@ -94,47 +94,47 @@
                         
                         <mat-label *ngIf="listaRespuesta.length === 0">No se registraron respuestas</mat-label>
 
-                        <div class="mat-elevation-z0">
-                          <table style="width: 100%;" mat-table [dataSource]="listaRespuesta" matSort>
+                        <div class="example-container mat-elevation-z0">
+                          <mat-table style="width: 100%;" [dataSource]="listaRespuesta" matSort>
                         
                             <ng-container matColumnDef="nIdRespuesta">
-                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </th>
-                              <td mat-cell *matCellDef="let element"> {{element.nIdRespuesta}} </td>
+                              <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
+                              <mat-cell *matCellDef="let element" data-label="Código"> {{element.nIdRespuesta}} </mat-cell>
                             </ng-container>
                   
                             <ng-container matColumnDef="cDescripcion">
-                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
-                              <td mat-cell *matCellDef="let element"> {{element.cDescripcion}} </td>
+                              <mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </mat-header-cell>
+                              <mat-cell *matCellDef="let element" data-label="Descripción"> {{element.cDescripcion}} </mat-cell>
                             </ng-container>
                                         
                             <ng-container matColumnDef="cRuc">
-                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Ruc </th>
-                              <td mat-cell *matCellDef="let element"> {{element.cRuc}} </td>
+                              <mat-header-cell *matHeaderCellDef mat-sort-header> Ruc </mat-header-cell>
+                              <mat-cell *matCellDef="let element" data-label="Ruc"> {{element.cRuc}} </mat-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="dFecha">
-                              <th mat-header-cell *matHeaderCellDef mat-sort-header> F.Registro </th>
-                              <td mat-cell *matCellDef="let element"> {{element.sFecha}} </td>
+                              <mat-header-cell *matHeaderCellDef mat-sort-header> F.Registro </mat-header-cell>
+                              <mat-cell *matCellDef="let element" data-label="F.Registro"> {{element.sFecha}} </mat-cell>
                             </ng-container>
                             
                             <ng-container matColumnDef="cUsuario">
-                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
-                              <td mat-cell *matCellDef="let element"> {{element.cUsuario}} </td>
+                              <mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </mat-header-cell>
+                              <mat-cell *matCellDef="let element" data-label="Usuario"> {{element.cUsuario}} </mat-cell>
                             </ng-container>
                                 
                             <ng-container matColumnDef="nAccion">
-                                <th mat-header-cell *matHeaderCellDef></th>
-                                <td mat-cell *matCellDef="let element" style="text-align: right;">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell *matCellDef="let element" style="text-align: right;">
                                     <a class="pointer ver" matTooltip="Ver" (click)="verVistaCliente(element.nIdCliente, element.cUsuario,element.cDescripcion)">
                                       <mat-icon>visibility</mat-icon>
                                   </a>
-                                </td>
+                                </mat-cell>
                             </ng-container>
                             
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsR"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsR;"></tr>
+                            <mat-header-row *matHeaderRowDef="displayedColumnsR"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumnsR;"></mat-row>
                           
-                          </table>
+                          </mat-table>
                           <mat-paginator 
                             [length]="countRegistro" 
                             [pageSizeOptions]="[5, 10, 20]" 
@@ -153,27 +153,27 @@
                           </mat-label>
                           <div *ngIf="el.muestraOpt" class="mat-elevation-z0">
 
-                                <table mat-table [dataSource]="el.frecuencias!" matSort>
+                                <mat-table [dataSource]="el.frecuencias!" matSort>
                                                             
                                   <ng-container matColumnDef="opcion">
-                                    <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> Opción </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.opcion}} </td>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> Opción </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Opción"> {{element.opcion}} </mat-cell>
                                   </ng-container>                        
                                       
                                   <ng-container matColumnDef="frecuenciaAbs" >
-                                    <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
-                                    <td style="text-align: center" mat-cell *matCellDef="let element"> {{element.frecuenciaAbs}} </td>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> Cantidad </mat-header-cell>
+                                    <mat-cell style="text-align: center" *matCellDef="let element" data-label="Cantidad"> {{element.frecuenciaAbs}} </mat-cell>
                                   </ng-container>
   
                                   <ng-container matColumnDef="frecuenciaRel" >
-                                    <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> Porcentaje </th>
-                                    <td style="text-align: center" mat-cell *matCellDef="let element"> {{(element.frecuenciaRel * 100).toFixed(2)}}% </td>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;"> Porcentaje </mat-header-cell>
+                                    <mat-cell style="text-align: center" *matCellDef="let element" data-label="Porcentaje"> {{(element.frecuenciaRel * 100).toFixed(2)}}% </mat-cell>
                                   </ng-container>
                                   
-                                  <tr mat-header-row *matHeaderRowDef="displayedColumnsResuR"></tr>
-                                  <tr mat-row *matRowDef="let row; columns: displayedColumnsResuR;"></tr>
+                                  <mat-header-row *matHeaderRowDef="displayedColumnsResuR"></mat-header-row>
+                                  <mat-row *matRowDef="let row; columns: displayedColumnsResuR;"></mat-row>
                                   
-                                </table>
+                                </mat-table>
                               
                                 <app-chart [genReporte]="el.frecuencias"></app-chart>
 

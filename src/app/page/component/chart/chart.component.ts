@@ -62,10 +62,10 @@ export class ChartsComponent implements OnInit {
 
     this.responsive= [
       {
-        breakpoint: 600,
+        breakpoint: 800,
         options: {
           chart: {
-            width: 500
+            width: 200
           },
           legend: {
             position: "bottom"

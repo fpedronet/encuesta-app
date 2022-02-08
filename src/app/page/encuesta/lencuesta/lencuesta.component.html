@@ -55,55 +55,55 @@
         </div>
       </div>
 
-      <div class="mat-elevation-z0">
-        <table mat-table [dataSource]="dataSource" matSort>
+      <div class="example-container mat-elevation-z0">
+        <mat-table [dataSource]="dataSource" matSort>
       
           <ng-container matColumnDef="nIdEncuesta">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </th>
-            <td mat-cell *matCellDef="let element"> {{element.nIdEncuesta}} </td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="Código"> {{element.nIdEncuesta}} </mat-cell>
           </ng-container>
         
           <ng-container matColumnDef="cSistemas">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sistema </th>
-            <td mat-cell *matCellDef="let element"> {{element.cSistemas}} </td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Sistema </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="Sistema"> {{element.cSistemas}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="cTitulo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
-            <td mat-cell *matCellDef="let element"> {{element.cTitulo}} </td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="Titulo"> {{element.cTitulo}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="cDescripcion">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
-            <td mat-cell *matCellDef="let element"> {{element.cDescripcion}} </td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="Descripción"> {{element.cDescripcion}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="dFechaIni">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> F.Inicio </th>
-            <td mat-cell *matCellDef="let element"> {{element.sFechaIni}} </td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> F.Inicio </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="F.Inicio"> {{element.sFechaIni}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="dFechaFin">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> F.Fin </th>
-            <td mat-cell *matCellDef="let element"> {{element.sFechaFin}} </td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> F.Fin </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="F.Fin"> {{element.sFechaFin}} </mat-cell>
           </ng-container>
               
           <ng-container matColumnDef="nAccion">
-              <th mat-header-cell *matHeaderCellDef></th>
-              <td mat-cell *matCellDef="let element" style="text-align: right;">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let element" style="text-align: right;">
                   <a class="pointer ver" matTooltip="Ver" [routerLink]="['ver', element.nIdEncuesta, true]">
                     <mat-icon>visibility</mat-icon>
                  </a>
                  <a class="pointer edit" matTooltip="Editar" [routerLink]="['edit', element.nIdEncuesta]">
                    <mat-icon>edit</mat-icon>
                 </a>
-              </td>
+              </mat-cell>
             </ng-container>
           
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
          
-        </table>
+        </mat-table>
         <mat-paginator 
           [length]="countRegistro" 
           [pageSizeOptions]="[5, 10, 20]" 
