@@ -20,26 +20,32 @@
 
     <div *ngSwitchCase="2"> <!-- Escala lineal -->
 
-        <!-- Vista Normal -->
+        <!-- Vista Responsive -->        
         <mat-radio-group class="varias-opciones" [(ngModel)]="answerSelected" fxHide.gt-sm="true">
-            <mat-label>{{minScale}}</mat-label>
+            <mat-label class="label-escala">{{minScale}}</mat-label>
             <mat-list-item *ngFor="let el of scaleNumbers; let i = index">                    
                 <mat-radio-button [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
-                    {{el}}                    
-                </mat-radio-button>                    
+                    {{el}}
+                </mat-radio-button>  
             </mat-list-item>
-            <mat-label>{{maxScale}}</mat-label>
-        </mat-radio-group>
+            <mat-label class="label-escala">{{maxScale}}</mat-label>
+            <mat-radio-button *ngIf="curPregunta.nRqObservacion" [value]="scaleNumbers.length" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
+                No aplica
+            </mat-radio-button> 
+        </mat-radio-group>        
 
-        <!-- Vista Responsive -->
+        <!-- Vista Normal -->
         <mat-radio-group class="escala-lineal" [(ngModel)]="answerSelected" fxHide.lt-md="true">
-            <mat-label>{{minScale}}</mat-label>
+            <mat-label class="label-escala">{{minScale}}</mat-label>
             <mat-list-item *ngFor="let el of scaleNumbers; let i = index">                    
                 <mat-radio-button [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
                     {{el}}                    
                 </mat-radio-button>                    
             </mat-list-item>
-            <mat-label>{{maxScale}}</mat-label>
+            <mat-label class="label-escala">{{maxScale}}</mat-label>
+            <mat-radio-button *ngIf="curPregunta.nRqObservacion" [value]="scaleNumbers.length" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
+                No aplica
+            </mat-radio-button> 
         </mat-radio-group>   
     </div>
 
