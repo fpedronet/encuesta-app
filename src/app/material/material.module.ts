@@ -31,11 +31,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
+    CommonModule
   ],
   exports:[
     MatTableModule,
@@ -67,6 +68,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatStepperModule,
     MatListModule,
     MatTabsModule,
+    NgApexchartsModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },

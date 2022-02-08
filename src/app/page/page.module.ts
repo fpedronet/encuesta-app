@@ -24,7 +24,7 @@ import { LvistaclienteComponent } from './vistacliente/lvistacliente/lvistaclien
 import { CvistaclienteComponent } from './vistacliente/cvistacliente/cvistacliente.component';
 import { Not403Component } from './not403/not403.component';
 import { Demo1Component } from './reporte/demo1/demo1.component';
-import { ChartComponent } from './component/chart/chart.component';
+import { ChartsComponent } from './component/chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { ChartComponent } from './component/chart/chart.component';
     CvistaclienteComponent,
     Not403Component,
     Demo1Component,
-    ChartComponent,
+    ChartsComponent,
   ],
   imports: [
     MaterialModule,
