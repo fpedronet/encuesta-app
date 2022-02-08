@@ -144,6 +144,8 @@
                           </mat-label>
                           <div *ngIf="el.muestraOpt" class="mat-elevation-z0">
 
+                            <div id="contenedor">
+                              <div>
                                 <mat-table [dataSource]="el.frecuencias!" matSort>
                                                             
                                   <ng-container matColumnDef="opcion">
@@ -165,10 +167,13 @@
                                   <mat-row *matRowDef="let row; columns: displayedColumnsResuR;"></mat-row>
                                   
                                 </mat-table>
-                              
+                              </div>
+                              <div>
                                 <app-chart [genReporte]="el.frecuencias"></app-chart>
+                              </div>
+                            </div>                              
 
-                            </div>
+                          </div>
 
                             <div *ngIf="el.muestraObs && el.observaciones?.length! > 0" class="mat-elevation-z0">
                               <mat-divider></mat-divider>

@@ -36,7 +36,7 @@ import {NgApexchartsModule} from 'ng-apexcharts';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports:[
     MatTableModule,
@@ -68,7 +68,7 @@ import {NgApexchartsModule} from 'ng-apexcharts';
     MatStepperModule,
     MatListModule,
     MatTabsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },

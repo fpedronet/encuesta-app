@@ -1,15 +1,7 @@
 import { Component, Input, OnInit, ViewChild} from '@angular/core';
+import { ChartComponent } from "ng-apexcharts";
 import { FrecuenciaOpcion } from 'src/app/_model/frecuenciaOpcion';
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexTitleSubtitle,
-  ApexResponsive,
-  ApexNonAxisChartSeries
-} from "ng-apexcharts";
-
+import { ApexNonAxisChartSeries, ApexResponsive, ApexChart } from "ng-apexcharts";
 
 @Component({
   selector: 'app-chart',
@@ -19,8 +11,7 @@ import {
 export class ChartsComponent implements OnInit {
 
   @Input() genReporte?: FrecuenciaOpcion[] = [];
-  // public chartOptions: Partial<ChartOptions>;
-
+  
   constructor() { }
 
   series!: ApexNonAxisChartSeries;
@@ -51,18 +42,15 @@ export class ChartsComponent implements OnInit {
     });
 
 
-    this.labels = this.arrayOp;
-
     this.series = this.arraySer;
-
     this.chart = {
       width: 300,
       type: "pie"
      }
-
+    this.labels = this.arrayOp;
     this.responsive= [
       {
-        breakpoint: 800,
+        breakpoint: 480,
         options: {
           chart: {
             width: 200

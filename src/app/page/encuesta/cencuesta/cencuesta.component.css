@@ -1,3 +1,19 @@
 /* .mat-header-row{
 background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);
 } */
+
+#contenedor {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  #contenedor > div {
+    width: 40%;
+  }
+
+  @media screen and (max-width: 960px) {
+    #contenedor > div {
+        width: 100%;
+      }
+  }
