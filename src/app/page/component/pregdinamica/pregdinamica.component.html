@@ -53,7 +53,7 @@
             <mat-radio-button [value]="1" (change)="updateAnswer($event.value)" [disabled]="bloqueado">No</mat-radio-button>
             <div *ngIf="curPregunta.nRqObservacion">
                 <mat-form-field>
-                    <input matInput placeholder="Justifique su respuesta" [(ngModel)]="inputText" [disabled]="bloqueado">
+                    <input matInput placeholder={{descripcionObs}} [(ngModel)]="inputText" [disabled]="bloqueado">
                 </mat-form-field>
             </div>
         </mat-radio-group>     

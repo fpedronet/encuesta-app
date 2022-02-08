@@ -32,53 +32,45 @@ export class InicioComponent implements OnInit {
 
     this.usuario = this.usuarioService.sessionUsuario()?.usuario;
 
-    this.encuestaService.existeEncuesta().subscribe(data=>{
-
-    this.idEncuesta = this.usuarioService.sessionUsuario()?.idEncuesta;
-   
-    if(data.items.length >=2){
-        this.dialog.open(LvistaclienteComponent, {
-          width: '850px'
-        });
-    }
-    else if(data.items.length <= 1 && data.items.length>=1){
-
-        //El nombre de usuario y el id del cliente se obtendrán en el front
-        let id = parseInt(this.idEncuesta!);
-        let value =  1 + '-' + this.idEncuesta + '-' + 0 + '-' + ' '+ '-'+ ' ';
-        let key = this.EncrDecr.set(value);
-
-        let url = '/page/vistacliente/' + key;
-        this.router.navigate([url]);
-      }
-    });
+    this.obtieneEncuestasPendientes();
   }
 
   abrirListaEncuestaCliente() {
 
+    this.obtieneEncuestasPendientes();
+  }
+
+  obtieneEncuestasPendientes() {
     this.encuestaService.existeEncuesta().subscribe(data=>{
-
-    this.idEncuesta = this.usuarioService.sessionUsuario()?.idEncuesta;
-
-      if(data.items.length >=2){
-        this.dialog.open(LvistaclienteComponent, {
-          width: '850px'
-        });
-    }
-    else if(data.items.length <= 1 && data.items.length>=1){
-
-        //El nombre de usuario y el id del cliente se obtendrán en el front
-        let id = parseInt(this.idEncuesta!);
-        let value =  1 + '-' + id + '-' + 0 + '-' + ' '+ '-'+ ' ';
-        let key = this.EncrDecr.set(value);
-
-        let url = '/page/vistacliente/' + key;
-        this.router.navigate([url]);
-    }
+  
+      this.idEncuesta = this.usuarioService.sessionUsuario()?.idEncuesta;
+      
+      //Reconoce si es la primera vez que inicia sesión
+      let firstLogin = localStorage.getItem('first-time-login');
+  
+      if(data.items.length > 0){
+        if(data.items.length <= 1 && data.items.length >=1 && firstLogin == 'true'){
+          //Ya pasó la primera vez que inicia sesión en el login
+          localStorage.setItem('first-time-login', 'false');
+  
+          //El nombre de usuario y el id del cliente se obtendrán en el front
+          let id = parseInt(this.idEncuesta!);
+          let value =  1 + '-' + this.idEncuesta + '-' + 0 + '-' + ' '+ '-'+ ' ';
+          let key = this.EncrDecr.set(value);
+  
+          let url = '/page/vistacliente/' + key;
+          this.router.navigate([url]);
+        }
+        else{
+          this.dialog.open(LvistaclienteComponent, {
+            width: '850px'
+          });
+        }
+  
+      }
       else{
-        this.notifierService.showNotification(2,'Mensaje','No hay encuesta para esta fecha..!');
+        this.notifierService.showNotification(2,'Mensaje','No hay encuestas programadas para esta fecha');
       }
     });
   }
-
 }

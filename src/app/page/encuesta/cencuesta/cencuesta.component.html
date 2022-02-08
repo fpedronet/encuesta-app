@@ -46,6 +46,7 @@
                     </mat-form-field> 
 
                    <mat-divider></mat-divider>
+<<<<<<< HEAD
 
                     <mat-grid-list style="margin-top: 11px;" cols="2" rowHeight="360px">
                         
@@ -83,10 +84,39 @@
                         </mat-grid-tile>
 
                     </mat-grid-list>
+=======
+                    <div class="mat-elevation-z0">
+                        <table mat-table [dataSource]="listaPregunta" matSort>
+                                                      
+                          <ng-container matColumnDef="cDescripcion">
+                            <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);color: #09388e;" mat-header-cell *matHeaderCellDef mat-sort-header> PREGUNTAS </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cDescripcion}} </td>
+                          </ng-container>                        
+                              
+                          <ng-container matColumnDef="nAccion" >
+                              <th style="background: linear-gradient( 180deg,#a9bfe6,#e4ecf6);" mat-header-cell *matHeaderCellDef></th>
+                              <td mat-cell *matCellDef="let element" style="text-align: right;">                                       
+                                <mat-checkbox [checked]="element.bMarcado" class="example-margin" (change)="checkPregunta(element, $event)"></mat-checkbox>
+                              </td>
+                            </ng-container>
+                          
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsP"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsP;"></tr>
+                          
+                        </table>
+                      </div>    
+                      <div class="mat-elevation-z0">                                
+                        <ul>
+                          <li *ngFor="let item of listaEncuestaPregunta" value={{item.nIdPregunta}}; let i = index>
+                            <app-pregdinamica [curPregunta]="item" [edicion]="true" [bloqueado]="false"></app-pregdinamica>
+                          </li>
+                        </ul>
+                      </div>        
+>>>>>>> a3ffd810557906d5720438d8cc3d3935b8213b32
                        
                 </mat-step>
                 
-                <mat-step>                  
+                <mat-step *ngIf="ver">                  
                   <mat-tab-group mat-align-tabs="center">
 
                       <mat-tab label="Individual">
