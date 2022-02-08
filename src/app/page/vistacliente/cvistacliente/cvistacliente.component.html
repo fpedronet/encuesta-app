@@ -28,13 +28,22 @@
           </mat-toolbar>
           <form id="ngForm" [formGroup]="form" #frmGrupo="ngForm" (ngSubmit)="enviar()">
 
-            <h3 class="headerencuesta">Cliente: {{clientUsu}}</h3>
-            <h3 class="headerencuesta">Nombre: {{nomUsu}}</h3>
+            <div id="contenedor">
+                <div class="datoUsuario">
+                    <h3 class="headerencuesta">Cliente: {{clientUsu}}</h3>
+                    <h3 class="headerencuesta">Nombre: {{nomUsu}}</h3>
+                </div>
+                <div class="tituloEncuesta">
+                    <h1 class="titleencuesta">
+                        {{cTitulo}}
+                    </h1>
+                </div>
+                <div class="logoEncuesta">
+                    <img style="width: 164px;" src="../../../../assets/logo2.png" >
+                </div>
+            </div>
+           <br>
             
-            <h1 class="titleencuesta">
-                {{cTitulo}}
-                <!-- <img src="../../../../assets/logo.png" > -->
-            </h1>
             <h2 class="subtitleencuesta">{{cDescripcion}}</h2>
             
             <ul>
