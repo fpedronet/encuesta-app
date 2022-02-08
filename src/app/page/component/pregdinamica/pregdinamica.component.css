@@ -14,6 +14,7 @@
 
 .escala-lineal::ng-deep.mat-radio-label{
     flex-direction: column-reverse;
+    font-size: 2.2vh;
 }
 
 .escala-lineal::ng-deep.mat-radio-label-content{
@@ -28,4 +29,21 @@
 .label-escala{
     margin-block: auto;
     margin: 8px;
+    font-size: 2.2vh;
+}
+
+.label-responsive{
+    font-size: 2.2vh;
+}
+
+.option-responsive::ng-deep.mat-radio-label{
+    font-size: 2.2vh;
+}
+
+.option-responsive::ng-deep.mat-checkbox-label{
+    font-size: 2.2vh;
+}
+
+.input-responsive::ng-deep.mat-form-field-label{
+    font-size: 2.2vh;
 }

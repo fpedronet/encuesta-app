@@ -1,19 +1,19 @@
 <div [ngSwitch]="curPregunta.nTipo">
 
-    <mat-label>{{curPregunta.nOrden}}. {{curPregunta.cDescripcion}}</mat-label>
-
+    <mat-label class="label-responsive">{{curPregunta.nOrden}}. {{curPregunta.cDescripcion}}</mat-label>
+    
     <div *ngSwitchCase="1"> <!-- Casillas -->
         <mat-list-item *ngFor="let el of options; let i = index">
-            <mat-checkbox [value]="i.toString()" [(ngModel)]="optionsCheckbox[i]" [disabled]="bloqueado">
+            <mat-checkbox class="option-responsive" [value]="i.toString()" [(ngModel)]="optionsCheckbox[i]" [disabled]="bloqueado">
               {{el}}
             </mat-checkbox>
         </mat-list-item>
         <div *ngIf="curPregunta.nRqObservacion" >
-            <mat-checkbox [value]="options.length.toString()" [(ngModel)]="optionsCheckbox[options.length]" [disabled]="bloqueado">
+            <mat-checkbox class="option-responsive" [value]="options.length.toString()" [(ngModel)]="optionsCheckbox[options.length]" [disabled]="bloqueado">
                 Otro
             </mat-checkbox>
-            <mat-form-field *ngIf="optionsCheckbox[options.length]">
-                <input matInput placeholder="Indique su opción" [(ngModel)]="inputText" [disabled]="bloqueado">
+            <mat-form-field class="input-responsive" *ngIf="optionsCheckbox[options.length]">
+                <input style="height: 25px;" matInput placeholder="Indique su opción" [(ngModel)]="inputText" [disabled]="bloqueado">
             </mat-form-field>
         </div>
     </div>
@@ -24,12 +24,12 @@
         <mat-radio-group class="varias-opciones" [(ngModel)]="answerSelected" fxHide.gt-sm="true">
             <mat-label class="label-escala">{{minScale}}</mat-label>
             <mat-list-item *ngFor="let el of scaleNumbers; let i = index">                    
-                <mat-radio-button [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
+                <mat-radio-button class="option-responsive" [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
                     {{el}}
                 </mat-radio-button>  
             </mat-list-item>
             <mat-label class="label-escala">{{maxScale}}</mat-label>
-            <mat-radio-button *ngIf="curPregunta.nRqObservacion" [value]="scaleNumbers.length" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
+            <mat-radio-button class="option-responsive" *ngIf="curPregunta.nRqObservacion" class="option-responsive" [value]="scaleNumbers.length" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
                 No aplica
             </mat-radio-button> 
         </mat-radio-group>        
@@ -38,28 +38,28 @@
         <mat-radio-group class="escala-lineal" [(ngModel)]="answerSelected" fxHide.lt-md="true">
             <mat-label class="label-escala">{{minScale}}</mat-label>
             <mat-list-item *ngFor="let el of scaleNumbers; let i = index">                    
-                <mat-radio-button [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
+                <mat-radio-button class="option-responsive" [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
                     {{el}}                    
                 </mat-radio-button>                    
             </mat-list-item>
             <mat-label class="label-escala">{{maxScale}}</mat-label>
-            <mat-radio-button *ngIf="curPregunta.nRqObservacion" [value]="scaleNumbers.length" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
+            <mat-radio-button class="option-responsive" *ngIf="curPregunta.nRqObservacion" class="option-responsive" [value]="scaleNumbers.length" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
                 No aplica
             </mat-radio-button> 
         </mat-radio-group>   
     </div>
 
     <div *ngSwitchCase="3"> <!-- Respuesta corta -->
-        <textarea matInput placeholder="Escriba su respuesta" [(ngModel)]="inputText" [disabled]="bloqueado"></textarea>
+        <textarea class="label-responsive" matInput placeholder="Escriba su respuesta" [(ngModel)]="inputText" [disabled]="bloqueado"></textarea>
     </div>
 
     <div *ngSwitchCase="4"> <!-- Sí/No -->
         <mat-radio-group class="varias-opciones" [(ngModel)]="answerSelected">
-            <mat-radio-button [value]="0" (change)="updateAnswer($event.value)" [disabled]="bloqueado">Sí</mat-radio-button>
-            <mat-radio-button [value]="1" (change)="updateAnswer($event.value)" [disabled]="bloqueado">No</mat-radio-button>
+            <mat-radio-button class="option-responsive" [value]="0" (change)="updateAnswer($event.value)" [disabled]="bloqueado">Sí</mat-radio-button>
+            <mat-radio-button class="option-responsive" [value]="1" (change)="updateAnswer($event.value)" [disabled]="bloqueado">No</mat-radio-button>
             <div *ngIf="curPregunta.nRqObservacion">
-                <mat-form-field>
-                    <input matInput placeholder={{descripcionObs}} [(ngModel)]="inputText" [disabled]="bloqueado">
+                <mat-form-field class="input-responsive">
+                    <input style="height: 25px;" matInput placeholder={{descripcionObs}} [(ngModel)]="inputText" [disabled]="bloqueado">
                 </mat-form-field>
             </div>
         </mat-radio-group>     
@@ -68,16 +68,16 @@
     <div *ngSwitchCase="5"> <!-- Varias opciones -->
         <mat-radio-group class="varias-opciones" [(ngModel)]="answerSelected">
             <mat-list-item *ngFor="let el of options; let i = index">
-                <mat-radio-button [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
+                <mat-radio-button class="option-responsive" [value]="i" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
                     {{el}}
                 </mat-radio-button>
             </mat-list-item>
             <div *ngIf="curPregunta.nRqObservacion" >
-                <mat-radio-button [value]="options.length" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
+                <mat-radio-button class="option-responsive" [value]="options.length" (change)="updateAnswer($event.value)" [disabled]="bloqueado">
                     Otro
                 </mat-radio-button>
-                <mat-form-field *ngIf="answer == options.length.toString()">
-                    <input matInput placeholder="Indique su opción" [(ngModel)]="inputText" [disabled]="bloqueado">
+                <mat-form-field class="input-responsive" *ngIf="answer == options.length.toString()">
+                    <input style="height: 25px;" matInput placeholder="Indique su opción" [(ngModel)]="inputText" [disabled]="bloqueado">
                 </mat-form-field>
             </div>
         </mat-radio-group>         
