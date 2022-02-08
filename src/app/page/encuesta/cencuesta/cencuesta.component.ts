@@ -228,7 +228,10 @@ export class CencuestaComponent implements OnInit {
             else{
               resu.medEst = (Number(arrFrec[(arrFrec.length/2)-1].opcion!) + Number(arrFrec[(arrFrec.length/2)].opcion!))/2
             }
-          }          
+          }
+          else{
+            resu.medEst = -1000;
+          }
         }
 
         //Convierte la cadena de observaciones a una lista

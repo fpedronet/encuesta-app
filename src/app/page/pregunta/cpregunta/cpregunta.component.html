@@ -63,8 +63,8 @@
                 </mat-select>
             </mat-form-field>
 
-            <section class="example-section" [formGroup]="form">
-                <p><mat-checkbox *vIf="cRqObservacion.lenght > 0" formControlName="nRqObservacion">{{cRqObservacion}}</mat-checkbox></p>
+            <section [hidden]="cRqObservacion.length === 0" class="example-section" [formGroup]="form">
+                <p><mat-checkbox formControlName="nRqObservacion">{{cRqObservacion}}</mat-checkbox></p>
             </section>
             
             <div [hidden]="!otrosParametros">

@@ -142,7 +142,10 @@
                               Promedio: {{el.promEst!.toFixed(2)}}
                             </mat-label>
                             <br>
-                            <mat-label>
+                            <mat-label *ngIf="el.medEst === -1000">
+                              Mediana: No hay datos
+                            </mat-label>
+                            <mat-label *ngIf="el.medEst !== -1000">
                               Mediana: {{el.medEst}}
                             </mat-label>
                           </div>
