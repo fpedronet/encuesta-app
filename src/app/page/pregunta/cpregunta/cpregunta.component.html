@@ -46,7 +46,7 @@
         
             <mat-form-field hintLabel="Max 500 caracteres" appearance="outline">
                 <mat-label>Descripción</mat-label>
-                <input matInput #input placeholder="Descripción" minlength="1" maxlength="500" required formControlName="cDescripcion" autocomplete="off">
+                <input [ngModel]="curPregunta.cDescripcion" (ngModelChange)="cambioEnunciado($event)" matInput #input placeholder="Descripción" minlength="1" maxlength="500" required formControlName="cDescripcion" autocomplete="off">
                 <mat-hint align="end">{{input.value?.length || 0}}/500</mat-hint>
             </mat-form-field>
 
@@ -64,7 +64,7 @@
             </mat-form-field>
 
             <section class="example-section" [formGroup]="form">
-                <p><mat-checkbox formControlName="nRqObservacion">Requiere observación</mat-checkbox></p>
+                <p><mat-checkbox *vIf="cRqObservacion.lenght > 0" formControlName="nRqObservacion">{{cRqObservacion}}</mat-checkbox></p>
             </section>
             
             <div [hidden]="!otrosParametros">
@@ -89,7 +89,7 @@
                 <mat-divider></mat-divider>
                     <mat-label>Modelo de pregunta</mat-label>
                 <mat-divider></mat-divider>
-                <app-pregdinamica [edicion]="true"></app-pregdinamica>
+                <app-pregdinamica [curPregunta]="curPregunta" [edicion]="true" [bloqueado]="true"></app-pregdinamica>
             </div>
         </form>
     </mat-card>    

@@ -7,7 +7,7 @@ export class EncuestaPregunta{
         this.nIdPregunta = 0;
         this.nOrden = 1;
         this.nIdGrupo = 0;
-        this.cDescripcion = 'Enunciado de la pregunta';
+        this.cDescripcion = '';
         this.nTipo = 0;
         this.nRqObservacion = 0;
         this.nRangoMinimo = 0;
