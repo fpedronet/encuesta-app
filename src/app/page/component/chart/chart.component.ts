@@ -1,75 +1,78 @@
-import { Component, Input, OnInit} from '@angular/core';
-import { Chart } from 'chart.js';
+import { Component, Input, OnInit, ViewChild} from '@angular/core';
 import { FrecuenciaOpcion } from 'src/app/_model/frecuenciaOpcion';
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexTitleSubtitle,
+  ApexResponsive,
+  ApexNonAxisChartSeries
+} from "ng-apexcharts";
+
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit {
+export class ChartsComponent implements OnInit {
 
   @Input() genReporte?: FrecuenciaOpcion[] = [];
-  
+  // public chartOptions: Partial<ChartOptions>;
+
   constructor() { }
 
-  chart: any;
-  tipo: string = 'line';
-  label: string[] = [];
-  prueba?: string;
+  series!: ApexNonAxisChartSeries;
+  chart!: ApexChart;
+  responsive!: ApexResponsive[];
+  labels: any;
+  
+  arrayOp: string[] = [];
+  arraySer: number[] = [];
 
   ngOnInit(): void {
-    this.reporte();
+    this.initializeChartOptions();
   }
 
-  reporte(){
+  initializeChartOptions(){
+    let listaReporte = this.genReporte?.filter(y=>y.frecuenciaAbs! != 0);
 
-    debugger;
-    const labels =["Lunes","Marte","Miercole","Jueves","Vierne"]
-    const data =[65, 59, 80, 81, 56, 55, 40];
+    let opcion = listaReporte?.map(y=>y.opcion);
 
-    this.prueba ="Hola Mundo";    
+    let frecuencia = listaReporte?.map(y=>y.frecuenciaAbs);
 
-    this.chart = new Chart('canvas', {
-      type: this.tipo,
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Cantidad',
-            data: data,
-             borderColor: "#3cba9f",
-            fill: false,
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 0, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
-            ],
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        legend: {
-          display: true
-        },
-        scales: {
-          xAxes: [{
-            display: true
-          }],
-          yAxes: [{
-            display: true,
-            ticks: {
-              beginAtZero: true
-            }
-          }],
-        }
-      }
+    opcion?.forEach(x=>{
+      this.arrayOp.push(x!);
     });
 
-  }
+    frecuencia?.forEach(x=>{
+      this.arraySer.push(x!);
+    });
 
+
+    this.labels = this.arrayOp;
+
+    this.series = this.arraySer;
+
+    this.chart = {
+      width: 300,
+      type: "pie"
+     }
+
+    this.responsive= [
+      {
+        breakpoint: 600,
+        options: {
+          chart: {
+            width: 500
+          },
+          legend: {
+            position: "bottom"
+          }
+        }
+      }
+    ]
+
+  }
 }
