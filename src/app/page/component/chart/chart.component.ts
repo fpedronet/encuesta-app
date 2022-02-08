@@ -27,7 +27,6 @@ export class ChartsComponent implements OnInit {
   chart!: ApexChart;
   responsive!: ApexResponsive[];
   labels: any;
-  title!:ApexTitleSubtitle;
   
   arrayOp: string[] = [];
   arraySer: number[] = [];
@@ -52,23 +51,21 @@ export class ChartsComponent implements OnInit {
     });
 
 
-    this.title = {text: 'Reporte'};
-
     this.labels = this.arrayOp;
 
     this.series = this.arraySer;
 
     this.chart = {
-      width: 350,
+      width: 300,
       type: "pie"
      }
 
     this.responsive= [
       {
-        breakpoint: 480,
+        breakpoint: 600,
         options: {
           chart: {
-            width: 200
+            width: 500
           },
           legend: {
             position: "bottom"
