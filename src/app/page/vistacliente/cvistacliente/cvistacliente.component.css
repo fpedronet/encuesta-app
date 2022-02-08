@@ -6,12 +6,12 @@
 
 .subtitleencuesta{
     color: #003f94;
-    font-weight: 450;
+    font-weight: 390;
 }
 .headerencuesta{
-    color: #101444;
-    font-weight: 450;
-    height: 20px;
+    color: #003f94;
+    font-weight: 400;
+    height: 11px;
 }
 .toolbarencuesta{
     background:linear-gradient( 180deg,#1367ff,#045ed8); 
@@ -24,6 +24,23 @@
     margin-left:12em;
     margin-top:136px;
 }
+
+
+#contenedor {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .datoUsuario {
+    width: 30%;
+  }
+  .tituloEncuesta {
+    width: 50%;
+  }
+  .logoEncuesta {
+    width: 20%;
+    text-align:end
+  }
 
 @media (max-width:1200px){
     
@@ -41,6 +58,15 @@
         margin-right: 4em;
         margin-left: 4em;
     }
+    .logoEncuesta {
+        display: none;
+       }
+    .tituloEncuesta {
+        width: 100%;
+     }
+    .datoUsuario {
+        width: 100%;
+      }
 }
 
 @media (max-width:768px){
@@ -49,6 +75,15 @@
         margin-right: 2em;
         margin-left: 2em;
     }
+    .logoEncuesta {
+        display: none;
+       }
+    .tituloEncuesta {
+        width: 100%;
+     }
+    .datoUsuario {
+        width: 100%;
+      }
 
 }
 
@@ -65,4 +100,13 @@
         font-weight: 600;
         font-size: 18px;
     }
+    .logoEncuesta {
+       display: none;
+      }
+    .tituloEncuesta {
+        width: 100%;
+     }
+    .datoUsuario {
+        width: 100%;
+      }
 }
