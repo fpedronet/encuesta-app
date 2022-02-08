@@ -80,6 +80,7 @@ export class LoginComponent implements OnInit {
   
         if(data.typeResponse==environment.EXITO){
           localStorage.setItem(environment.TOKEN_NAME, data.access_token!);
+          localStorage.setItem('first-time-login', 'true');
   
           this.router.navigate(['/page/inicio']);
         }

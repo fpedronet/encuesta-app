@@ -65,6 +65,7 @@ export class CvistaclienteComponent implements OnInit {
 
       if(key!="" && key!=undefined){
         let split = key.split('-');
+        debugger;
 
         this.vistaCli = parseInt(split[0]);
         this.idEnc =  parseInt(split[1]);
@@ -186,7 +187,7 @@ export class CvistaclienteComponent implements OnInit {
   }
 
   btnUndo(){
-    let undoRoute = '/page/encuesta/ver/' + this.idEnc.toString() + '/true';
+    let undoRoute = '/page/encuesta/ver/' + this.idEnc?.toString() + '/true';
     this.router.navigate([undoRoute]);
        //this.spinner.hideLoading();
   }

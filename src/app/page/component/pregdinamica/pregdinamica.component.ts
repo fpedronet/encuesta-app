@@ -34,6 +34,7 @@ export class PregdinamicaComponent implements OnInit {
   minScale: string = 'Mínimo';
   maxScale: string = 'Máximo';
   scaleNumbers: number[] = [];
+  descripcionObs: string = 'Otro';
 
   defaultOptions = ['Opción 1', 'Opción 2', 'Opción 3'];
 
@@ -82,6 +83,9 @@ export class PregdinamicaComponent implements OnInit {
       //Opciones para escalas
       if(obj.minEscala !== '') this.minScale = obj.minEscala;
       if(obj.maxEscala !== '') this.maxScale = obj.maxEscala;
+
+      //Descripción que acompaña la observación
+      if(obj.descObs !== '') this.descripcionObs = obj.descObs;
     }
   }
 

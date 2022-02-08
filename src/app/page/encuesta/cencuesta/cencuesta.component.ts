@@ -294,6 +294,7 @@ export class CencuestaComponent implements OnInit {
     if(e.checked){
       let model =new EncuestaPregunta();
 
+      model.nOrden=this.listaEncuestaPregunta.length+1;
       model.nIdEncuestaPregunta=element.nIdEncuestaPregunta;
       model.nIdPregunta=element.nIdPregunta;
       model.nIdGrupo=element.nIdGrupo;
