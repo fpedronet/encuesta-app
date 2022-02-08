@@ -42,7 +42,9 @@ export class CpreguntaComponent implements OnInit {
 
   listaTipo?: TipoPregunta[] = [];
 
-  curPregunta?: EncuestaPregunta = new EncuestaPregunta();
+  curPregunta: EncuestaPregunta = new EncuestaPregunta();
+
+  cRqObservacion: string = '';
 
   ngOnInit(): void { 
     this.form = new FormGroup({
@@ -122,14 +124,28 @@ export class CpreguntaComponent implements OnInit {
 
   cambioTipoPregunta(newTipo: number){
     this.otrosParametros = false;
+    this.cRqObservacion = ''
+    //Escala lineal
     if(newTipo === 2){
       this.otrosParametros = true;
+      this.cRqObservacion = 'Incluye "No Aplica"';
+    }
+    //Sí/No
+    if(newTipo === 4){
+      this.cRqObservacion = 'Incluye texto adicional';
+    }
+    //Casillas y varias opciones
+    if(newTipo === 1 || newTipo === 5){
+      this.cRqObservacion = 'Incluye "Otro"';
     }
     if(this.curPregunta !== undefined){
       this.curPregunta.nTipo = newTipo;
-
-      this.pregdinamicaService.actualizaPregunta(this.curPregunta);
     }
-    //debugger;
+  }
+
+  cambioEnunciado(newDescripcion: string){
+    if(this.curPregunta !== undefined){
+      this.curPregunta.cDescripcion = newDescripcion;
+    }
   }
 }
