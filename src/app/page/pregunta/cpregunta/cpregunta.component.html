@@ -64,13 +64,14 @@
             </mat-form-field>
 
             <section [hidden]="cRqObservacion.length === 0" class="example-section" [formGroup]="form">
-                <p><mat-checkbox formControlName="nRqObservacion">{{cRqObservacion}}</mat-checkbox></p>
+                <p><mat-checkbox [ngModel]="curPregunta.nRqObservacion" (ngModelChange)="cambioObservacion($event)" formControlName="nRqObservacion">{{cRqObservacion}}</mat-checkbox></p>
             </section>
             
             <div [hidden]="!otrosParametros">
                 <mat-form-field appearance="outline">
                     <mat-label>Rango mínimo</mat-label>
-                    <input matInput placeholder="Rango mínimo" formControlName="nRangoMinimo">
+                    <input type="range" min="-15" max="15" oninput="this.nextElementSibling.value = this.value">
+                    <output matInput placeholder="Rango mínimo" formControlName="nRangoMinimo">0</output>
                 </mat-form-field>
     
                 <mat-form-field appearance="outline">

@@ -36,7 +36,7 @@ export class PregdinamicaComponent implements OnInit {
   scaleNumbers: number[] = [];
   descripcionObs: string = 'Otro';
 
-  defaultOptions = ['Opción 1', 'Opción 2', 'Opción 3'];
+  defaultOptions = ['Opción 1'];
 
   ngOnInit(): void {
     //debugger;

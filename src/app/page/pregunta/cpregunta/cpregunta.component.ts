@@ -6,6 +6,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
 import { PregdinamicaService } from '../../component/pregdinamica/pregdinamica.service';
+import { safeJsonParse, isDefinitionObj } from "../../component/pregdinamica/definitionObj";
 
 import { Pregunta } from 'src/app/_model/pregunta';
 import { PreguntaService } from 'src/app/_service/pregunta.service';
@@ -141,11 +142,32 @@ export class CpreguntaComponent implements OnInit {
     if(this.curPregunta !== undefined){
       this.curPregunta.nTipo = newTipo;
     }
+    this.pregdinamicaService.actualizaPregunta(this.curPregunta);
   }
 
   cambioEnunciado(newDescripcion: string){
     if(this.curPregunta !== undefined){
       this.curPregunta.cDescripcion = newDescripcion;
+      this.pregdinamicaService.actualizaPregunta(this.curPregunta);
+    }
+  }
+
+  cambioObservacion(newRqObservacion: boolean){
+    if(this.curPregunta !== undefined){
+      this.curPregunta.nRqObservacion = 0;
+      if(newRqObservacion)
+        this.curPregunta.nRqObservacion = 1;
+      this.pregdinamicaService.actualizaPregunta(this.curPregunta);
+    }
+  }
+
+  cambioRango(newRangoValor: number, isMin: boolean){
+    if(this.curPregunta !== undefined){
+      if(isMin)
+        this.curPregunta.nRangoMinimo = newRangoValor;
+      else
+        this.curPregunta.nRangoMaximo = newRangoValor;
+      this.pregdinamicaService.actualizaPregunta(this.curPregunta);
     }
   }
 }
