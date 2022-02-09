@@ -7,12 +7,12 @@ export class EncuestaPregunta{
         this.nIdPregunta = 0;
         this.nOrden = 1;
         this.nIdGrupo = 0;
-        this.cDescripcion = '';
+        this.cDescripcion = 'Enunciado de la pregunta';
         this.nTipo = 0;
         this.nRqObservacion = 0;
         this.nRangoMinimo = 0;
         this.nRangoMaximo = 0;
-        this.cDefinicion = '';
+        this.cDefinicion = '{"opciones":[],"minEscala":"","maxEscala":"","descObs":""}';
         this.nEstado = 0;
     }
     nIdEncuestaPregunta? :number;
