@@ -13,7 +13,6 @@ export const environment = {
   ERROR: 0,
   EXITO: 1,
   ALERT: 2,
-
   listaTipo: [{nIdTipo: 1, cDescripcion: 'Casillas'},
               {nIdTipo: 2, cDescripcion: 'Escala lineal'},              
               {nIdTipo: 3, cDescripcion: 'Respuesta corta'},
