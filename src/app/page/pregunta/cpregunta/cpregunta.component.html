@@ -70,8 +70,9 @@
             <div [hidden]="!otrosParametros">
                 <mat-form-field appearance="outline">
                     <mat-label>Rango mínimo</mat-label>
-                    <input type="range" min="-15" max="15" oninput="this.nextElementSibling.value = this.value">
-                    <output matInput placeholder="Rango mínimo" formControlName="nRangoMinimo">0</output>
+                    <input matInput placeholder="Rango mínimo" formControlName="nRangoMinimo">
+                    <!--input type="range" min="-15" max="15" oninput="this.nextElementSibling.value = this.value">
+                    <output matInput placeholder="Rango mínimo" formControlName="nRangoMinimo">0</output-->
                 </mat-form-field>
     
                 <mat-form-field appearance="outline">
