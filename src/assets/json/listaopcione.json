@@ -40,12 +40,5 @@
       "nombre":"Encuesta",
       "icon":"insert_drive_file",
       "admin":true
-      },
-      {
-         "url":"/page/reporte",
-         "nombre":"Reporte",
-         "icon":"insert_drive_file",
-         "admin":true
-      }
- 
+      } 
  ]

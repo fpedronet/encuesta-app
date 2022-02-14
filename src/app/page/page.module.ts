@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { ConfirmComponent } from './component/confirm/confirm.component';
 import { LayoutComponent } from './component/layout/layout.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { InicioComponent } from './inicio/inicio.component';
 import { PageRoutingModule } from './page-routing.module';
 import { InterceptorService } from '../_interceptors/interceptor.service';
@@ -62,7 +62,10 @@ import { ReporteComponent } from './component/reporte/reporte.component';
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true,
-    
+  },
+  {
+    provide:LocationStrategy,
+    useClass:HashLocationStrategy
   }
 ],
 })
