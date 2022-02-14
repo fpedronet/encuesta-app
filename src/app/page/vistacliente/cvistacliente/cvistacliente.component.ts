@@ -53,6 +53,8 @@ export class CvistaclienteComponent implements OnInit {
 
   existeRespuesta: boolean = true;
   
+  imgeencuesta?: string =environment.UrlImage + "logo2.png";
+
   @ViewChildren(PregdinamicaComponent) listaComponentes: QueryList<PregdinamicaComponent> = new QueryList<PregdinamicaComponent>();
 
   ngOnInit(): void {

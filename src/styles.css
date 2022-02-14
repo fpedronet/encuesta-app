@@ -98,6 +98,16 @@ form{
 }
 
 
+.container2 {
+  background-image: url("../src/assets/login2.jpeg");
+  position: relative;
+  width: 100%;
+  height: 100%;        
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  background-repeat:round;
+}
+
 @media screen and (max-width: 960px) {
   .mat-table {
     border: 0;

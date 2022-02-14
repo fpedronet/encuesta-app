@@ -27,6 +27,7 @@ export class InicioComponent implements OnInit {
 
   idEncuesta?: string;
   usuario?: string;
+  imgeinicio?: string =environment.UrlImage + "home-img.png";
 
   ngOnInit(): void {
 

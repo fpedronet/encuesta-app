@@ -36,8 +36,10 @@ export class LoginComponent implements OnInit {
   error?: string;
   opcionSeleccionado?: number  = 0;
   hidep?: boolean = true;
+  logologin?: string =environment.UrlImage + "logo.png";
 
   ngOnInit(): void {
+
     this.form = new FormGroup({
       'nIdCliente': new FormControl(),
       'usuario': new FormControl(''),

@@ -1,7 +1,12 @@
 export const environment = {
   production: true,
-  UrlApi:'http://localhost:48394/encuesta',
-  //UrlApi:'https://sitedev.poclab.pe/api',  
+
+  // UrlApi:'https://sitedev.poclab.pe/encuesta/api',  
+  // UrlImage:'assets/',
+
+  UrlApi:'http://localhost:48394/api',
+  UrlImage:'../../../../assets/',
+
   TOKEN_AUTH_USERNAME: 'mitomediapp',
   TOKEN_AUTH_PASSWORD: 'mito89codex',
   TOKEN_NAME: 'access_token',
