@@ -5,7 +5,10 @@
 export const environment = {
   production: true,
 
-  UrlApi:'https://sitedev.poclab.pe/encuesta/api',  
+  // UrlApi:'https://service.poclab.pe/encuesta/api',  
+  // UrlImage:'assets/',
+
+  UrlApi:'https://sitedev.poclab.pe/encuestap/api',  
   UrlImage:'assets/',
 
   // UrlApi:'http://localhost:48394/api',
