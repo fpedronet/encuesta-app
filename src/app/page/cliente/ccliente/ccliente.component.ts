@@ -63,6 +63,13 @@ export class CclienteComponent implements OnInit {
 
        this.listaIdSistema = data.listaIdSistema;
        this.listaSistema = data.listaSistema;
+       
+       //Pinta como seleccionados todos is es nuevo
+       if(this.id == 0){
+        this.listaSistema!.forEach(sis => {
+          this.listaIdSistema?.push(sis.nIdSistemas!)
+        });
+       }
 
        this.form = new FormGroup({
           'nIdCliente': new FormControl({ value: data.nIdCliente }),
