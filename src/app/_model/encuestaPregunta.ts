@@ -1,3 +1,4 @@
+import { definitionObj } from '../page/component/pregdinamica/definitionObj';
 import { Respuesta } from './respuesta';
 
 export class EncuestaPregunta{
@@ -12,7 +13,13 @@ export class EncuestaPregunta{
         this.nRqObservacion = 0;
         this.nRangoMinimo = 0;
         this.nRangoMaximo = 0;
-        this.cDefinicion = '{"opciones":[],"minEscala":"","maxEscala":"","descObs":""}';
+        //this.cDefinicion = '{"opciones":[],"minEscala":"","maxEscala":"","descObs":""}';
+        this.oDefinicion = {
+            opciones: ['Opción 1', 'Opción 2'],
+            minEscala: 'Mínimo',
+            maxEscala: 'Máximo',
+            descObs: 'Otro'
+        };
         this.nEstado = 0;
     }
     nIdEncuestaPregunta? :number;
@@ -26,6 +33,7 @@ export class EncuestaPregunta{
     nRangoMinimo? :number;
     nRangoMaximo? :number;
     cDefinicion? : string;
+    oDefinicion!: definitionObj;
     nEstado? :number;
     respuesta? : Respuesta;
 }

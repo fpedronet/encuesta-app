@@ -96,7 +96,15 @@ export class CencuestaComponent implements OnInit {
       this.listaCliente= data.listaCliente;
       this.listaIdCliente= data.listaIdCliente;
       this.listaPregunta= data.listaPregunta;
-      this.listaEncuestaPregunta= data.listaEncuestaPregunta;      
+      this.listaEncuestaPregunta= data.listaEncuestaPregunta;
+      this.listaEncuestaPregunta.forEach(p => {
+        p.oDefinicion = {
+          opciones: [],
+          minEscala: '',
+          maxEscala: '',
+          descObs: ''
+        };
+      });
 
       this.form = new FormGroup({
         'nIdEncuesta': new FormControl({ value: data.nIdEncuesta }),
