@@ -1,5 +1,6 @@
   .example-container {
     display: flex;
+    /* display: contents; */
     flex-direction: column;
     position: absolute;
     top: 0;
@@ -27,6 +28,8 @@ div {
     text-align:left;
     line-height:40px;
     padding:2px 30px;
+    color:#1b70c7;
+    font-family:initial;
 }
 
 button{

@@ -44,7 +44,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .container{
   margin-right: 2em;
   margin-left: 2em;
-  margin-top: 136px;
+  margin-top: 127px;
 }
 
 .overlay{
@@ -107,6 +107,10 @@ form{
   -webkit-font-smoothing: antialiased;
   background-repeat:round;
 }
+
+.toast-top-center {  
+  padding-top: 200px; 
+}  
 
 @media screen and (max-width: 960px) {
   .mat-table {
@@ -172,5 +176,19 @@ form{
 
   .mat-cell:last-of-type, .mat-header-cell:last-of-type, .mat-footer-cell:last-of-type{
     padding-right:2px;
+  }
+}
+
+@media (max-width:768px){
+  .container {
+    margin-right: 1em;
+    margin-left: 1em;
+  }
+}
+
+@media (max-width:450px){
+  .container {
+    margin-right: 0.8em;
+    margin-left: 0.8em;
   }
 }

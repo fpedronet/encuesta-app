@@ -1,5 +1,5 @@
 import { Pregunta } from './../../../_model/pregunta';
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Event, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
@@ -62,8 +62,11 @@ export class CvistaclienteComponent implements OnInit {
       
     });
     this.route.params.subscribe((data: Params)=>{
+      debugger;
+
       let id = (data["id"]==undefined)? 0:data["id"];
-      let key = this.EncrDecr.get(id);
+      // let key = this.EncrDecr.get(id);
+      let key = id;
 
       if(key!="" && key!=undefined){
         let split = key.split('-');

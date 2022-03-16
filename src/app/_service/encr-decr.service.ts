@@ -12,7 +12,7 @@ export class EncrDecrService {
     var keys="123456$#@$^@1ERF"
     var key = CryptoJS.enc.Utf8.parse(keys);
     var iv = CryptoJS.enc.Utf8.parse(keys);
-    var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(value.toString()), key,
+    var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(value.trim().toString()), key,
     {
         keySize: 128 / 8,
         iv: iv,
@@ -27,7 +27,7 @@ export class EncrDecrService {
     var keys="123456$#@$^@1ERF"
     var key = CryptoJS.enc.Utf8.parse(keys);
     var iv = CryptoJS.enc.Utf8.parse(keys);
-    var decrypted = CryptoJS.AES.decrypt(value, key, {
+    var decrypted = CryptoJS.AES.decrypt(value.trim(), key, {
         keySize: 128 / 8,
         iv: iv,
         mode: CryptoJS.mode.CBC,
