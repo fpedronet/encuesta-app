@@ -57,9 +57,9 @@ export class InicioComponent implements OnInit {
           //El nombre de usuario y el id del cliente se obtendrán en el front
           let id = parseInt(this.idEncuesta!);
           let value =  1 + '-' + this.idEncuesta + '-' + 0 + '-' + ' '+ '-'+ ' ';
-          // let key = this.EncrDecr.set(value);
+          let key = this.EncrDecr.set(value);
   
-          let url = '/page/vistacliente/' + value;
+          let url = '/page/vistacliente/' + key;
           this.router.navigate([url]);
         }
         else{

@@ -90,9 +90,9 @@ export class LvistaclienteComponent implements OnInit {
   verVistaCliente(id: number){
     //El nombre de usuario y el id del cliente se obtendrán en el front
     let value =  1 + '-' + id + '-' + 0 + '-' + ' '+ '-' + ' ';
-    // let key = this.EncrDecr.set(value);
+    let key = this.EncrDecr.set(value);
 
-    let url = '/page/vistacliente/' + value;
+    let url = '/page/vistacliente/' + key;
     this.router.navigate([url]);
     this.dialogRef.close();
   }
