@@ -6,7 +6,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NotifierService } from 'src/app/page/component/notifier/notifier.service';
 import { SpinnerService } from '../../component/spinner/spinner.service';
 import { PregdinamicaService } from '../../component/pregdinamica/pregdinamica.service';
-import { safeJsonParse, isDefinitionObj } from "../../component/pregdinamica/definitionObj";
+import { safeJsonParse, isDefinitionObj, StringParse } from "../../component/pregdinamica/definitionObj";
 
 import { Pregunta } from 'src/app/_model/pregunta';
 import { PreguntaService } from 'src/app/_service/pregunta.service';
@@ -14,6 +14,7 @@ import { EncuestaPregunta } from 'src/app/_model/encuestaPregunta';
 import { environment } from 'src/environments/environment';
 import { TipoPregunta } from 'src/app/_model/tipoPregunta';
 import { DateRange } from '@angular/material/datepicker';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -55,8 +56,8 @@ export class CpreguntaComponent implements OnInit {
       'cDescripcion': new FormControl({ value: '', disabled: false}),
       'nTipo': new FormControl({ value: 0, disabled: false }),
       'nRqObservacion': new FormControl({ value: 0, disabled: false }),
-      'nRangoMinimo': new FormControl({ value: 0, disabled: false }),
-      'nRangoMaximo': new FormControl({ value: 0, disabled: false }),
+      'nRangoMinimo': new FormControl({ value: 1, disabled: false }),
+      'nRangoMaximo': new FormControl({ value: 10, disabled: false }),
       'cDefinicion': new FormControl({ value: '', disabled: true})
     });
 
@@ -107,7 +108,7 @@ export class CpreguntaComponent implements OnInit {
     model.nRangoMinimo= this.form.value['nRangoMinimo'];
     model.nRangoMaximo= this.form.value['nRangoMaximo'];
     model.cDefinicion= this.form.value['cDefinicion'];
-    //model.cDefinicion= '';
+    model.cDefinicion= StringParse(this.curPregunta.oDefinicion);
 
     this.spinner.showLoading();
     this.preguntaService.guardar(model).subscribe(data=>{

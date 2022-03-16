@@ -4,11 +4,19 @@ export const environment = {
   UrlApi:'https://service.poclab.pe/encuesta/api',  
   UrlImage:'assets/',
 
+<<<<<<< HEAD
   // UrlApi:'https://sitedev.poclab.pe/encuestap/api',  
   // UrlImage:'assets/',
 
   // UrlApi:'http://localhost:48394/api',
   // UrlImage:'../../../../assets/',
+=======
+  //UrlApi:'https://sitedev.poclab.pe/encuestap/api',  
+  //UrlImage:'assets/',
+
+   UrlApi:'http://localhost:48394/api',
+   UrlImage:'../../../../assets/',
+>>>>>>> 920be283924433b7df9dff26eab947fe76c5c979
 
   TOKEN_AUTH_USERNAME: 'mitomediapp',
   TOKEN_AUTH_PASSWORD: 'mito89codex',

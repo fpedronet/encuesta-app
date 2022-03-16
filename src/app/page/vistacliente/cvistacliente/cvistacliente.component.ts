@@ -104,7 +104,17 @@ export class CvistaclienteComponent implements OnInit {
       this.nIdEncuesta= data.nIdEncuesta!;
       this.cTitulo=  data.cTitulo!;
       this.cDescripcion= data.cDescripcion!;
+      
       this.listaEncuestaPregunta = data.listaEncuestaPregunta;
+      //Inicializa objetos de definiciones
+      this.listaEncuestaPregunta.forEach(p => {
+        p.oDefinicion = {
+          opciones: [],
+          minEscala: '',
+          maxEscala: '',
+          descObs: ''
+        };
+      });
 
       this.encuestaService.existeRespuesta(this.idEnc, this.idCli, this.nomUsu).subscribe(data=>{
         if(data.items.length > 0){
