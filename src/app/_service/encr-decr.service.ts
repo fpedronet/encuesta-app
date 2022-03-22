@@ -9,9 +9,10 @@ export class EncrDecrService {
   constructor() { }
 
   set(value: string){
-    var keys="123456$#@$^@1ERF"
+    var keys="1234123412ABCDEF";
+    var ivs="ABCDEF1234123412";
     var key = CryptoJS.enc.Utf8.parse(keys);
-    var iv = CryptoJS.enc.Utf8.parse(keys);
+    var iv = CryptoJS.enc.Utf8.parse(ivs);
     var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(value.toString()), key,
     {
         keySize: 128 / 8,
@@ -20,13 +21,17 @@ export class EncrDecrService {
         padding: CryptoJS.pad.Pkcs7
     });
 
-    return encrypted.toString();
+    var encryString = encrypted.toString();
+    //encryString = encryString.replace(/\//g, 'bFbFb');
+
+    return encryString;
   }
 
   get(value: string){
-    var keys="123456$#@$^@1ERF"
+    var keys="1234123412ABCDEF";
+    var ivs="ABCDEF1234123412";
     var key = CryptoJS.enc.Utf8.parse(keys);
-    var iv = CryptoJS.enc.Utf8.parse(keys);
+    var iv = CryptoJS.enc.Utf8.parse(ivs);
     var decrypted = CryptoJS.AES.decrypt(value, key, {
         keySize: 128 / 8,
         iv: iv,
@@ -34,7 +39,10 @@ export class EncrDecrService {
         padding: CryptoJS.pad.Pkcs7
     });
 
-    return decrypted.toString(CryptoJS.enc.Utf8);
+    var decryString = decrypted.toString(CryptoJS.enc.Utf8);
+    //decryString = decryString.replace('bFbFb', '/');
+
+    return decryString;
   }
 
 }
