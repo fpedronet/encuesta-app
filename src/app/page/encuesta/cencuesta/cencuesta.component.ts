@@ -98,6 +98,7 @@ export class CencuestaComponent implements OnInit {
       this.listaPregunta= data.listaPregunta;
       this.listaEncuestaPregunta= data.listaEncuestaPregunta;
       this.listaEncuestaPregunta.forEach(p => {
+        //debugger;
         p.oDefinicion = {
           opciones: [],
           minEscala: '',

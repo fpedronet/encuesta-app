@@ -25,6 +25,12 @@
     margin-top:136px;
 }
 
+.button-center{
+    display: flex;  
+    justify-content: center;  
+    align-items: center;
+    padding-bottom: 5vw;
+}
 
 #contenedor {
     display: flex;

@@ -58,13 +58,11 @@ export class CvistaclienteComponent implements OnInit {
   @ViewChildren(PregdinamicaComponent) listaComponentes: QueryList<PregdinamicaComponent> = new QueryList<PregdinamicaComponent>();
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      
-    });
     this.route.params.subscribe((data: Params)=>{
       let id = (data["id"]==undefined)? 0:data["id"];
       let key = this.EncrDecr.get(id);
       // let key = id;
+      //debugger;
 
       if(key!="" && key!=undefined){
         let split = key.split('-');

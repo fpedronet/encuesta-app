@@ -49,7 +49,7 @@ export class PregdinamicaComponent implements OnInit {
       var obj = result.parsed;
 
       //Variable referente al arreglo de opciones
-      var curOpciones = this.curPregunta.oDefinicion.opciones;
+      var curOpciones = this.curPregunta.oDefinicion.opciones;      
 
       //Opciones para listas (checkbox y radiobutton)      
       curOpciones = obj.opciones;
@@ -64,6 +64,9 @@ export class PregdinamicaComponent implements OnInit {
       });
       if(this.curPregunta.nRqObservacion === 1) //Añade uno más si existe opción otro
         this.optionsCheckbox.push(false);
+
+      //Asigna arreglo de opciones procesado
+      this.curPregunta.oDefinicion.opciones = curOpciones;
 
       //Opciones para escalas
       if(obj.minEscala !== '') this.curPregunta.oDefinicion.minEscala! = obj.minEscala;

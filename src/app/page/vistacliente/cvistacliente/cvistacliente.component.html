@@ -50,7 +50,14 @@
                 <li style="margin-top: 10px;" *ngFor="let item of listaEncuestaPregunta" value={{item.nIdPregunta}}; let i = index>
                     <app-pregdinamica [curPregunta]="item" [edicion]="false" [bloqueado]="existeRespuesta"></app-pregdinamica>
                 </li>
-            </ul>           
+            </ul>
+
+            <div class="button-center">
+                <button *ngIf="!existeRespuesta" mat-raised-button color="primary" type="submit" [disabled]="frmGrupo.invalid" form="ngForm">
+                    <mat-icon>save as</mat-icon>
+                    <span>Enviar</span>
+                </button>
+            </div>            
 
         </form>
     </mat-card>    
