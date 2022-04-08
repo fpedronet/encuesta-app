@@ -22,12 +22,14 @@ export class EncrDecrService {
     });
 
     var encryString = encrypted.toString();
-    //encryString = encryString.replace(/\//g, 'bFbFb');
+    encryString = encryString.replace(/\+/g, 'aFaFa').replace(/\//g, 'bFbFb').replace(/=+$/, 'cFcFc');
 
     return encryString;
   }
 
   get(value: string){
+    value = value.replace('aFaFa', '+' ).replace('bFbFb', '/').replace('cFcFc', '=');;
+
     var keys="1234123412ABCDEF";
     var ivs="ABCDEF1234123412";
     var key = CryptoJS.enc.Utf8.parse(keys);
@@ -40,7 +42,6 @@ export class EncrDecrService {
     });
 
     var decryString = decrypted.toString(CryptoJS.enc.Utf8);
-    //decryString = decryString.replace('bFbFb', '/');
 
     return decryString;
   }
