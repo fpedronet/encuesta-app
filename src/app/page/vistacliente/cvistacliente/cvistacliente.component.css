@@ -12,6 +12,7 @@
     color: #003f94;
     font-weight: 400;
     height: 11px;
+    display: contents;
 }
 .toolbarencuesta{
     background:linear-gradient( 180deg,#1367ff,#045ed8); 

@@ -11,18 +11,18 @@
     <label for="email1">Cliente</label>
     <mat-form-field appearance="outline" class="textcliente">
       <mat-select placeholder="Seleccione Cliente" formControlName="nIdCliente">
-        <mat-option *ngFor="let c of cliente" [value]="c.nIdCliente">
-          {{c.cRuc}} {{c.cDescripcion}}
+        <mat-option style="font-size: 12px;" *ngFor="let c of cliente" [value]="c.nIdCliente">
+          {{c.cDescripcion}}
       </mat-option>
       </mat-select>
     </mat-form-field>
     <div class="inputGroup inputGroup2">
       <label for="password">Contraseña</label>
-      <input type="password" formControlName="clave" class="password" required minlength="8" maxlength="16"/>
+      <input type="password" #clave formControlName="clave" class="password" required minlength="8" maxlength="16" (keyup.enter)="focus(usuario,clave)"/>
     </div>
     <div class="inputGroup inputGroup1">
       <label for="email1">Nombre o acrónimo</label>
-      <input type="text" formControlName="usuario"  class="email" maxlength="256" required/>
+      <input type="text" #usuario formControlName="usuario"  class="email" maxlength="256" required (keyup.enter)="focus(clave,clave, 'btnlogin')"/>
     </div>
     <div class="inputGroup inputGroup3">
       <button id="login" type="button" (click)="login()" >Iniciar Sesión

@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   opcionSeleccionado?: number  = 0;
   hidep?: boolean = true;
   logologin?: string =environment.UrlImage + "logo.png";
+  input: any;
 
   ngOnInit(): void {
 
@@ -56,6 +57,16 @@ export class LoginComponent implements OnInit {
         this.cliente= data.items;
         this.spinner.hideLoading();
       });
+  }
+
+  focus(name:any, input: any, btn:string=""){
+    this.input = input;
+    if(btn=="btnlogin"){
+      this.login();
+    }else{
+      name.focus();
+      name.select();
+    }
   }
 
   login(){
@@ -89,6 +100,10 @@ export class LoginComponent implements OnInit {
               
         this.notifierService.showNotification(data.typeResponse!,'Mensaje',data.message!);
         this.spinner.hideLoading();
+        if(data.typeResponse!=environment.EXITO){
+          this.input.focus();
+          this.input.select();
+        }
       }); 
     }
   }
