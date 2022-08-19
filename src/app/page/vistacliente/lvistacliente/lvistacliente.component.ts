@@ -88,10 +88,10 @@ export class LvistaclienteComponent implements OnInit {
   }
 
   verVistaCliente(id: number){
-    debugger;
     //El nombre de usuario y el id del cliente se obtendrán en el front
     let value =  1 + '-' + id + '-' + 0 + '-' + ' '+ '-' + ' ';
-    let key = this.EncrDecr.set(value);
+    // let key = this.EncrDecr.set(value);
+    let key = value;
 
     let url = '/page/vistacliente/' + key;
     this.router.navigate([url]);

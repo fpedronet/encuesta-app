@@ -189,7 +189,7 @@
                             <ng-container matColumnDef="nAccion">
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell *matCellDef="let element" style="text-align: right;">
-                                    <a class="pointer ver" matTooltip="Ver" (click)="verVistaCliente(element.nIdCliente, element.cUsuario,element.cDescripcion)">
+                                    <a class="pointer ver" matTooltip="Ver" target="_blank" (click)="verVistaCliente(element.nIdCliente, element.cUsuario,element.cDescripcion)">
                                       <mat-icon>visibility</mat-icon>
                                   </a>
                                 </mat-cell>

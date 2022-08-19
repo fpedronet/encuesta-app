@@ -60,9 +60,8 @@ export class CvistaclienteComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((data: Params)=>{
       let id = (data["id"]==undefined)? 0:data["id"];
-      let key = this.EncrDecr.get(id);
-      // let key = id;
-      //debugger;
+      // let key = this.EncrDecr.get(id);
+      let key = id;
 
       if(key!="" && key!=undefined){
         let split = key.split('-');
